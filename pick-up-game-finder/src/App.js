@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import gameService from './services/games'
+import Map from './components/Map'
 
 function App() {
   const [games, setGames] = useState([])
@@ -11,7 +12,6 @@ function App() {
       })
   }, [])
 
-  console.log('games', games)
   return (
     <div>
       <h1>Pick up game finder</h1>
@@ -19,6 +19,7 @@ function App() {
         <h2 key={game.id}>
           {game.desc}
         </h2>)}
+      <Map games={games}/>
     </div>
   )
 }
