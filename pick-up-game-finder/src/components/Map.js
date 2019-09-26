@@ -1,22 +1,17 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 
-const Map = ({ games }) => {
-  console.log('games', games)
+const Map = ({ games, user }) => {
+  console.log(user)
   return (
     <LeafletMap
-      center={[60, 15]}
+      center={[user.lat, user.lng]}
       zoom={6}
       maxZoom={17}
-      attributionControl={true}
-      zoomControl={true}
-      doubleClickZoom={true}
-      scrollWheelZoom={true}
       dragging={true}
-      animate={true}
-      easeLinearity={0.35}
     >
       <TileLayer
+        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
       />
       {games.map(game =>

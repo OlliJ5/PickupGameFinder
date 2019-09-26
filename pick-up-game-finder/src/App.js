@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import gameService from './services/games'
 import Map from './components/Map'
+import { Button } from 'semantic-ui-react'
+
 
 function App() {
+  const initialUser = {
+    lat: 0,
+    lng: 0
+  }
   const [games, setGames] = useState([])
+  const [user, setUser] = useState(initialUser)
 
   useEffect(() => {
-    gameService.getAll()
+    gameService.getAllActive()
       .then(res => {
         setGames(res)
       })
   }, [])
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const newUser = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+      setUser(newUser)
+    })
+  }, [])
+
   return (
     <div>
-      <h1>Pick up game finder</h1>
       {games.map(game =>
         <h2 key={game.id}>
           {game.desc}
         </h2>)}
-      <Map games={games}/>
+      <Button primary>Create a game</Button>
+      <Map games={games} user={user} />
     </div>
   )
 }
