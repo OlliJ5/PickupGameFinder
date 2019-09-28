@@ -1,12 +1,11 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 
-const Map = ({ games, user }) => {
-  console.log(user)
+const Map = ({ games, location }) => {
   return (
     <LeafletMap
-      center={[user.lat, user.lng]}
-      zoom={6}
+      center={location === null ? [0, 0] : [location.lat, location.lng]}
+      zoom={location === null ? 2 : 13}
       maxZoom={17}
       dragging={true}
     >
@@ -21,6 +20,11 @@ const Map = ({ games, user }) => {
           </Popup>
         </Marker>
       )}
+      <Marker position={location === null ? [0, 0] : [location.lat, location.lng]}>
+        <Popup>
+          sijaintisi kartalla
+        </Popup>
+      </Marker>
     </LeafletMap>
   )
 }
