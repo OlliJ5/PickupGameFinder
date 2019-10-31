@@ -20,11 +20,6 @@ const Map = ({ games, location }) => {
           </Popup>
         </Marker>
       )}
-      <Marker position={location === null ? [0, 0] : [location.lat, location.lng]}>
-        <Popup>
-          sijaintisi kartalla
-        </Popup>
-      </Marker>
     </LeafletMap>
   )
 }

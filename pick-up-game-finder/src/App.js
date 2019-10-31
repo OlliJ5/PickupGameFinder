@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import gameService from './services/games'
 import loginService from './services/login'
 import Map from './components/Map'
-import { Button } from 'semantic-ui-react'
 import axios from 'axios'
 
 
@@ -13,6 +12,9 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [duration, setDuration] = useState(30)
+  const [desc, setDesc] = useState('')
+  const [maxParticipants, setmaxParticipants] = useState(10)
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -31,6 +33,28 @@ const App = () => {
     }
   }
 
+  const createNewGame = async (event) => {
+    event.preventDefault()
+    try{
+      console.log('lokaatio', location)
+      const newGame = {
+        durationMins: duration,
+        location: location,
+        desc,
+        maxParticipants
+      }
+      console.log('lähetetään', newGame)
+      const game = await gameService.create(newGame)
+
+      console.log('luotu', game)
+      setDuration(30)
+      setDesc('')
+      setmaxParticipants(10)
+    }catch(exception) {
+      console.log('something went wrong')
+    }
+  }
+
   const ipLookUp = async () => {
     const res = await axios.get('http://ip-api.com/json')
     return res.data
@@ -46,10 +70,10 @@ const App = () => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
 
-    if(loggedUserJSON) {
+    if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
       gameService.setToken(user.token)
+      setUser(user)
     }
   }, [])
 
@@ -119,7 +143,39 @@ const App = () => {
   }
   return (
     <div>
-      <Button primary>Create a game</Button>
+      <div>
+        <p>start a new game</p>
+        <form onSubmit={createNewGame}>
+          <div>
+            duration (in minutes)
+            <input
+              type="number"
+              value={duration}
+              name="duration"
+              onChange={({ target }) => setDuration(target.value)}
+            />
+          </div>
+          <div>
+            description for your game
+            <input
+              type="text"
+              value={desc}
+              name="desc"
+              onChange={({ target }) => setDesc(target.value)}
+            />
+          </div>
+          <div>
+            maximum amount of participants
+            <input
+              type="number"
+              value={maxParticipants}
+              name="maxParticipants"
+              onChange={({ target }) => setmaxParticipants(target.value)}
+            />
+          </div>
+          <button type="submit">create game</button>
+        </form>
+      </div>
       <Map games={games} location={location} />
     </div>
   )
