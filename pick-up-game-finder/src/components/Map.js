@@ -1,7 +1,14 @@
 import React from 'react'
+import playerService from '../services/players'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const Map = ({ games, location }) => {
+
+  const joinGame = (game) => {
+    console.log('painettu', game)
+    playerService.create({ game })
+  }
+
   return (
     <LeafletMap
       center={location === null ? [0, 0] : [location.lat, location.lng]}
@@ -16,6 +23,7 @@ const Map = ({ games, location }) => {
       {games.map(game =>
         <Marker key={game.id} position={[game.location.lat, game.location.long]}>
           <Popup>
+            <button onClick={() => joinGame(game.id)}>liity peliin</button>
             {game.desc}
           </Popup>
         </Marker>

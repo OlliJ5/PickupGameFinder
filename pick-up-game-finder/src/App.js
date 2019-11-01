@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import gameService from './services/games'
+import playerService from './services/players'
 import loginService from './services/login'
 import Map from './components/Map'
 import axios from 'axios'
@@ -12,7 +13,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [duration, setDuration] = useState(30)
+  const [duration, setDuration] = useState(1)
   const [desc, setDesc] = useState('')
   const [maxParticipants, setmaxParticipants] = useState(10)
 
@@ -24,6 +25,7 @@ const App = () => {
       setUser(user)
       window.localStorage.setItem('loggedInUser', JSON.stringify(user))
       gameService.setToken(user.token)
+      playerService.setToken(user.token)
       setPassword('')
       setUsername('')
     } catch (exception) {
@@ -36,17 +38,15 @@ const App = () => {
   const createNewGame = async (event) => {
     event.preventDefault()
     try{
-      console.log('lokaatio', location)
       const newGame = {
         durationMins: duration,
         location: location,
         desc,
         maxParticipants
       }
-      console.log('lähetetään', newGame)
       const game = await gameService.create(newGame)
 
-      console.log('luotu', game)
+      setGames(games.concat(game))
       setDuration(30)
       setDesc('')
       setmaxParticipants(10)
@@ -73,6 +73,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       gameService.setToken(user.token)
+      playerService.setToken(user.token)
       setUser(user)
     }
   }, [])
