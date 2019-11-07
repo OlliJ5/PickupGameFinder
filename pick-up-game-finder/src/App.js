@@ -9,7 +9,7 @@ import axios from 'axios'
 import LoginForm from './components/LoginForm'
 import CreateAccountForm from './components/CreateAccountForm'
 import NewGameForm from './components/NewGameForm'
-import { initializeGames, createGame } from './reducers/gameReducer'
+import { initializeGames } from './reducers/gameReducer'
 
 
 const App = (props) => {
@@ -20,9 +20,9 @@ const App = (props) => {
 
   const [user, setUser] = useState(null)
 
-  const [duration, setDuration] = useState(1)
-  const [desc, setDesc] = useState('')
-  const [maxParticipants, setmaxParticipants] = useState(10)
+  // const [duration, setDuration] = useState(1)
+  // const [desc, setDesc] = useState('')
+  // const [maxParticipants, setmaxParticipants] = useState(10)
 
   const [newUsername, setNewUsername] = useState('')
   const [newName, setNewName] = useState('')
@@ -47,20 +47,20 @@ const App = (props) => {
     }
   }
 
-  const createNewGame = async (event) => {
-    event.preventDefault()
-    const newGame = {
-      durationMins: duration,
-      location: location,
-      desc,
-      maxParticipants
-    }
+  // const createNewGame = async (event) => {
+  //   event.preventDefault()
+  //   const newGame = {
+  //     durationMins: duration,
+  //     location: location,
+  //     desc,
+  //     maxParticipants
+  //   }
 
-    props.createGame(newGame)
-    setDuration(30)
-    setDesc('')
-    setmaxParticipants(10)
-  }
+  //   props.createGame(newGame)
+  //   setDuration(30)
+  //   setDesc('')
+  //   setmaxParticipants(10)
+  // }
 
   const createAccount = async (event) => {
     event.preventDefault()
@@ -146,10 +146,10 @@ const App = (props) => {
   }
   return (
     <div>
-      <NewGameForm createNewGame={createNewGame} duration={duration} desc={desc} maxParticipants={maxParticipants} setDuration={setDuration} setDesc={setDesc} setmaxParticipants={setmaxParticipants} />
+      <NewGameForm location={location} />
       <Map location={location} />
     </div>
   )
 }
 
-export default connect(null, { initializeGames, createGame })(App)
+export default connect(null, { initializeGames })(App)

@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { createGame } from '../reducers/gameReducer'
 
-const NewGameForm = ({ createNewGame, duration, desc, maxParticipants, setDuration, setDesc, setmaxParticipants }) => {
+const NewGameForm = (props) => {
+  const [duration, setDuration] = useState(1)
+  const [desc, setDesc] = useState('')
+  const [maxParticipants, setmaxParticipants] = useState(10)
+
+  const createNewGame = async (event) => {
+    event.preventDefault()
+    const newGame = {
+      durationMins: duration,
+      location: props.location,
+      desc,
+      maxParticipants
+    }
+
+    props.createGame(newGame)
+    setDuration(30)
+    setDesc('')
+    setmaxParticipants(10)
+  }
+
   return (
     <div>
       <p>start a new game</p>
@@ -38,4 +59,4 @@ const NewGameForm = ({ createNewGame, duration, desc, maxParticipants, setDurati
   )
 }
 
-export default NewGameForm
+export default connect(null, { createGame })(NewGameForm)

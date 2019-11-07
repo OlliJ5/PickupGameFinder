@@ -1,7 +1,6 @@
 import gameService from '../services/games'
 
 const gameReducer = (state = [], action) => {
-  console.log('action', action)
   switch (action.type) {
     case 'INIT_GAMES':
       return action.data
