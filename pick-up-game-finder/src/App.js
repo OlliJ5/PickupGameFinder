@@ -1,66 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import gameService from './services/games'
-import playerService from './services/players'
 import userService from './services/users'
-import loginService from './services/login'
 import Map from './components/Map'
 import axios from 'axios'
 import LoginForm from './components/LoginForm'
 import CreateAccountForm from './components/CreateAccountForm'
 import NewGameForm from './components/NewGameForm'
 import { initializeGames } from './reducers/gameReducer'
+import { stayLoggedIn } from './reducers/loginReducer'
 
 
 const App = (props) => {
   const [location, setLocation] = useState(null)
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const [user, setUser] = useState(null)
-
-  // const [duration, setDuration] = useState(1)
-  // const [desc, setDesc] = useState('')
-  // const [maxParticipants, setmaxParticipants] = useState(10)
-
   const [newUsername, setNewUsername] = useState('')
   const [newName, setNewName] = useState('')
   const [newPassword, setNewPassword] = useState('')
-
-
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    try {
-      const user = await loginService.login({ username, password })
-
-      setUser(user)
-      window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-      gameService.setToken(user.token)
-      playerService.setToken(user.token)
-      setPassword('')
-      setUsername('')
-    } catch (exception) {
-      console.log('password or username incorrect')
-      setPassword('')
-      setUsername('')
-    }
-  }
-
-  // const createNewGame = async (event) => {
-  //   event.preventDefault()
-  //   const newGame = {
-  //     durationMins: duration,
-  //     location: location,
-  //     desc,
-  //     maxParticipants
-  //   }
-
-  //   props.createGame(newGame)
-  //   setDuration(30)
-  //   setDesc('')
-  //   setmaxParticipants(10)
-  // }
 
   const createAccount = async (event) => {
     event.preventDefault()
@@ -91,12 +46,11 @@ const App = (props) => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
-
+    console.log('json', loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      gameService.setToken(user.token)
-      playerService.setToken(user.token)
-      setUser(user)
+      console.log('useri', user)
+      props.stayLoggedIn(user)
     }
   }, [])
 
@@ -136,10 +90,10 @@ const App = (props) => {
     }
   }, [])
 
-  if (user === null) {
+  if (props.user === null) {
     return (
       <div>
-        <LoginForm handleLogin={handleLogin} username={username} password={password} setUsername={setUsername} setPassword={setPassword} />
+        <LoginForm />
         <CreateAccountForm createAccount={createAccount} newUsername={newUsername} newName={newName} newPassword={newPassword} setNewUsername={setNewUsername} setNewName={setNewName} setNewPassword={setNewPassword} />
       </div>
     )
@@ -152,4 +106,10 @@ const App = (props) => {
   )
 }
 
-export default connect(null, { initializeGames })(App)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, { initializeGames, stayLoggedIn })(App)

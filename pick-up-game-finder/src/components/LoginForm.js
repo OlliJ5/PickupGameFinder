@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { login } from '../reducers/loginReducer'
 
-const LoginForm = ({ handleLogin, username, password, setUsername, setPassword }) => {
+const LoginForm = (props) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    props.login(username, password)
+    setPassword('')
+    setUsername('')
+  }
+
   return (
     <div>
       <h2>login</h2>
@@ -29,4 +41,4 @@ const LoginForm = ({ handleLogin, username, password, setUsername, setPassword }
   )
 }
 
-export default LoginForm
+export default connect(null, { login })(LoginForm)
