@@ -5,11 +5,14 @@ import userService from './services/users'
 import loginService from './services/login'
 import Map from './components/Map'
 import axios from 'axios'
+import LoginForm from './components/LoginForm';
+import CreateAccountForm from './components/CreateAccountForm';
+import NewGameForm from './components/NewGameForm';
 
 
 const App = () => {
   const [games, setGames] = useState([])
-  //const [user, setUser] = useState(null)
+
   const [location, setLocation] = useState(null)
 
   const [username, setUsername] = useState('')
@@ -46,7 +49,7 @@ const App = () => {
 
   const createNewGame = async (event) => {
     event.preventDefault()
-    try{
+    try {
       const newGame = {
         durationMins: duration,
         location: location,
@@ -59,7 +62,7 @@ const App = () => {
       setDuration(30)
       setDesc('')
       setmaxParticipants(10)
-    }catch(exception) {
+    } catch (exception) {
       console.log('something went wrong')
     }
   }
@@ -77,7 +80,7 @@ const App = () => {
       setNewUsername('')
       setNewName('')
       setNewPassword('')
-    } catch(exception) {
+    } catch (exception) {
       console.log('something went wrong')
     }
   }
@@ -144,97 +147,14 @@ const App = () => {
   if (user === null) {
     return (
       <div>
-        <p>log in</p>
-        <form onSubmit={handleLogin}>
-          <div>
-            username
-            <input
-              type="text"
-              value={username}
-              name="username"
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </div>
-          <div>
-            password
-            <input
-              type="password"
-              value={password}
-              name="password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-          <button type="submit">login</button>
-        </form>
-        <p>or create an account</p>
-        <form onSubmit={createAccount}>
-          <div>
-          username
-            <input
-              type="text"
-              value={newUsername}
-              name="newUsername"
-              onChange={({ target }) => setNewUsername(target.value)}
-            />
-          </div>
-          <div>
-            name
-            <input
-              type="text"
-              value={newName}
-              name="name"
-              onChange={({ target }) => setNewName(target.value)}
-            />
-          </div>
-          <div>
-            password
-            <input
-              type="password"
-              value={newPassword}
-              name="newPassword"
-              onChange={({ target }) => setNewPassword(target.value)}
-            />
-          </div>
-          <button type="submit">create an account</button>
-        </form>
+        <LoginForm handleLogin={handleLogin} username={username} password={password} setUsername={setUsername} setPassword={setPassword} />
+        <CreateAccountForm createAccount={createAccount} newUsername={newUsername} newName={newName} newPassword={newPassword} setNewUsername={setNewUsername} setNewName={setNewName} setNewPassword={setNewPassword} />
       </div>
     )
   }
   return (
     <div>
-      <div>
-        <p>start a new game</p>
-        <form onSubmit={createNewGame}>
-          <div>
-            duration (in minutes)
-            <input
-              type="number"
-              value={duration}
-              name="duration"
-              onChange={({ target }) => setDuration(target.value)}
-            />
-          </div>
-          <div>
-            description for your game
-            <input
-              type="text"
-              value={desc}
-              name="desc"
-              onChange={({ target }) => setDesc(target.value)}
-            />
-          </div>
-          <div>
-            maximum amount of participants
-            <input
-              type="number"
-              value={maxParticipants}
-              name="maxParticipants"
-              onChange={({ target }) => setmaxParticipants(target.value)}
-            />
-          </div>
-          <button type="submit">create game</button>
-        </form>
-      </div>
+      <NewGameForm createNewGame={createNewGame} duration={duration} desc={desc} maxParticipants={maxParticipants} setDuration={setDuration} setDesc={setDesc} setmaxParticipants={setmaxParticipants} />
       <Map games={games} location={location} />
     </div>
   )
