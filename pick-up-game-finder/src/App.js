@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import gameService from './services/games'
 import playerService from './services/players'
 import userService from './services/users'
 import loginService from './services/login'
 import Map from './components/Map'
 import axios from 'axios'
-import LoginForm from './components/LoginForm';
-import CreateAccountForm from './components/CreateAccountForm';
-import NewGameForm from './components/NewGameForm';
+import LoginForm from './components/LoginForm'
+import CreateAccountForm from './components/CreateAccountForm'
+import NewGameForm from './components/NewGameForm'
+import { initializeGames, createGame } from './reducers/gameReducer'
 
 
-const App = () => {
-  const [games, setGames] = useState([])
-
+const App = (props) => {
   const [location, setLocation] = useState(null)
 
   const [username, setUsername] = useState('')
@@ -49,22 +49,17 @@ const App = () => {
 
   const createNewGame = async (event) => {
     event.preventDefault()
-    try {
-      const newGame = {
-        durationMins: duration,
-        location: location,
-        desc,
-        maxParticipants
-      }
-      const game = await gameService.create(newGame)
-
-      setGames(games.concat(game))
-      setDuration(30)
-      setDesc('')
-      setmaxParticipants(10)
-    } catch (exception) {
-      console.log('something went wrong')
+    const newGame = {
+      durationMins: duration,
+      location: location,
+      desc,
+      maxParticipants
     }
+
+    props.createGame(newGame)
+    setDuration(30)
+    setDesc('')
+    setmaxParticipants(10)
   }
 
   const createAccount = async (event) => {
@@ -91,10 +86,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    gameService.getAllActive()
-      .then(res => {
-        setGames(res)
-      })
+    props.initializeGames()
   }, [])
 
   useEffect(() => {
@@ -155,9 +147,9 @@ const App = () => {
   return (
     <div>
       <NewGameForm createNewGame={createNewGame} duration={duration} desc={desc} maxParticipants={maxParticipants} setDuration={setDuration} setDesc={setDesc} setmaxParticipants={setmaxParticipants} />
-      <Map games={games} location={location} />
+      <Map location={location} />
     </div>
   )
 }
 
-export default App
+export default connect(null, { initializeGames, createGame })(App)

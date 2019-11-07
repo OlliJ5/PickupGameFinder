@@ -8,9 +8,9 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`
 }
 
-const getAllActive = () => {
-  const request = axios.get(`${baseUrl}/active`)
-  return request.then(res => res.data)
+const getAllActive = async () => {
+  const response = await axios.get(`${baseUrl}/active`)
+  return response.data
 }
 
 const create = async (newGame) => {
