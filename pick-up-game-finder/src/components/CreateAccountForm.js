@@ -1,6 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import userService from '../services/users'
 
-const CreateAccountForm = ({ createAccount, newUsername, newName, newPassword, setNewUsername, setNewName, setNewPassword }) => {
+const CreateAccountForm = () => {
+  const [newUsername, setNewUsername] = useState('')
+  const [newName, setNewName] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+
+  const createAccount = async (event) => {
+    event.preventDefault()
+    try {
+      const newUser = {
+        username: newUsername,
+        name: newName,
+        password: newPassword
+      }
+      const user = await userService.create(newUser)
+      console.log('luotiin', user)
+      setNewUsername('')
+      setNewName('')
+      setNewPassword('')
+    } catch (exception) {
+      console.log('something went wrong')
+    }
+  }
+
   return (
     <div>
       <h2>or create an account</h2>

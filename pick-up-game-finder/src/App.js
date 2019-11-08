@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import userService from './services/users'
 import Map from './components/Map'
 import axios from 'axios'
 import LoginForm from './components/LoginForm'
@@ -13,28 +12,6 @@ import { stayLoggedIn } from './reducers/loginReducer'
 const App = (props) => {
   const [location, setLocation] = useState(null)
 
-  const [newUsername, setNewUsername] = useState('')
-  const [newName, setNewName] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-
-  const createAccount = async (event) => {
-    event.preventDefault()
-    try {
-      const newUser = {
-        username: newUsername,
-        name: newName,
-        password: newPassword
-      }
-      const user = await userService.create(newUser)
-      console.log('luotiin', user)
-      setNewUsername('')
-      setNewName('')
-      setNewPassword('')
-    } catch (exception) {
-      console.log('something went wrong')
-    }
-  }
-
   const ipLookUp = async () => {
     const res = await axios.get('http://ip-api.com/json')
     return res.data
@@ -46,10 +23,8 @@ const App = (props) => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
-    console.log('json', loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      console.log('useri', user)
       props.stayLoggedIn(user)
     }
   }, [])
@@ -94,7 +69,7 @@ const App = (props) => {
     return (
       <div>
         <LoginForm />
-        <CreateAccountForm createAccount={createAccount} newUsername={newUsername} newName={newName} newPassword={newPassword} setNewUsername={setNewUsername} setNewName={setNewName} setNewPassword={setNewPassword} />
+        <CreateAccountForm />
       </div>
     )
   }
