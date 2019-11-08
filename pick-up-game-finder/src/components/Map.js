@@ -34,7 +34,8 @@ const Map = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    games: state.games
+    games: state.games,
+    location: state.location
   }
 }
 

@@ -59,4 +59,10 @@ const NewGameForm = (props) => {
   )
 }
 
-export default connect(null, { createGame })(NewGameForm)
+const mapStateToProps = (state) => {
+  return {
+    location: state.location
+  }
+}
+
+export default connect(mapStateToProps, { createGame })(NewGameForm)

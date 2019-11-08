@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Map from './components/Map'
 import axios from 'axios'
@@ -7,11 +7,10 @@ import CreateAccountForm from './components/CreateAccountForm'
 import NewGameForm from './components/NewGameForm'
 import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
+import { changeLocation } from './reducers/locationReducer'
 
 
 const App = (props) => {
-  const [location, setLocation] = useState(null)
-
   const ipLookUp = async () => {
     const res = await axios.get('http://ip-api.com/json')
     return res.data
@@ -36,7 +35,7 @@ const App = (props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         }
-        setLocation(userLocation)
+        props.changeLocation(userLocation)
       },
       (message) => {
         console.log('failed to get location', message)
@@ -47,7 +46,7 @@ const App = (props) => {
             lat: res.lat,
             lng: res.lon
           }
-          setLocation(userLocation)
+          props.changeLocation(userLocation)
         })
       })
 
@@ -60,7 +59,7 @@ const App = (props) => {
           lat: res.lat,
           lng: res.lon
         }
-        setLocation(userLocation)
+        props.changeLocation(userLocation)
       })
     }
   }, [])
@@ -75,8 +74,8 @@ const App = (props) => {
   }
   return (
     <div>
-      <NewGameForm location={location} />
-      <Map location={location} />
+      <NewGameForm />
+      <Map />
     </div>
   )
 }
@@ -87,4 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { initializeGames, stayLoggedIn })(App)
+export default connect(mapStateToProps, { initializeGames, stayLoggedIn, changeLocation })(App)
