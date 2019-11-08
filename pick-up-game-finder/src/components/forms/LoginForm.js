@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { login } from '../reducers/loginReducer'
+import { login } from '../../reducers/loginReducer'
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('')

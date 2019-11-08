@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { createGame } from '../reducers/gameReducer'
+import { createGame } from '../../reducers/gameReducer'
 
 const NewGameForm = (props) => {
   const [duration, setDuration] = useState(1)

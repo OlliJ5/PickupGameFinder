@@ -5,7 +5,6 @@ import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const Map = (props) => {
   const joinGame = (game) => {
-    console.log('painettu', game)
     playerService.create({ game })
   }
 

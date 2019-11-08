@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import userService from '../services/users'
+import userService from '../../services/users'
 
-const CreateAccountForm = () => {
+const NewAccountForm = () => {
   const [newUsername, setNewUsername] = useState('')
   const [newName, setNewName] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -14,8 +14,7 @@ const CreateAccountForm = () => {
         name: newName,
         password: newPassword
       }
-      const user = await userService.create(newUser)
-      console.log('luotiin', user)
+      await userService.create(newUser)
       setNewUsername('')
       setNewName('')
       setNewPassword('')
@@ -61,4 +60,4 @@ const CreateAccountForm = () => {
   )
 }
 
-export default CreateAccountForm
+export default NewAccountForm
