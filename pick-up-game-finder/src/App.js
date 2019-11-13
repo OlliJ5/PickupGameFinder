@@ -30,7 +30,7 @@ const App = (props) => {
     return (
       <div>
         <LoginForm />
-        <NewAccountForm />
+        {/* <NewAccountForm /> */}
       </div>
     )
   }

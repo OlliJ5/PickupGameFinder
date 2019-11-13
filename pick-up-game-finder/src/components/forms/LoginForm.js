@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('')
@@ -14,30 +15,40 @@ const LoginForm = (props) => {
   }
 
   return (
-    <div>
-      <h2>login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </div>
+    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='blue' textAlign='center'>
+          Log in to Pickupgame finder
+        </Header>
+        <Form size='large' onSubmit={handleLogin}>
+          <Segment stacked>
+            <Form.Input
+              fluid icon='user'
+              iconPosition='left'
+              placeholder='username eg.basketballGod'
+              name="username"
+              onChange={({ target }) => setUsername(target.value)}
+            />
+            <Form.Input
+              fluid
+              icon='lock'
+              iconPosition='left'
+              placeholder='Password'
+              type='password'
+              name="password"
+              onChange={({ target }) => setPassword(target.value)}
+            />
+
+            <Button color='blue' fluid size='large'>
+              Login
+            </Button>
+          </Segment>
+        </Form>
+        <Message>
+          Or create an account
+        </Message>
+      </Grid.Column>
+    </Grid>
   )
 }
 
