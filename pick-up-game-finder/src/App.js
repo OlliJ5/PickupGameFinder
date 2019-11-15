@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Map from './components/Map'
-import LoginForm from './components/forms/LoginForm'
-import NewAccountForm from './components/forms/NewAccountForm'
 import NewGameForm from './components/forms/NewGameForm'
+import FrontPage from './components/FrontPage'
 import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
+import { Container } from 'semantic-ui-react'
 
 
 const App = (props) => {
@@ -28,10 +28,9 @@ const App = (props) => {
 
   if (props.user === null) {
     return (
-      <div>
-        <LoginForm />
-        {/* <NewAccountForm /> */}
-      </div>
+      <Container>
+        <FrontPage />
+      </Container>
     )
   }
   return (

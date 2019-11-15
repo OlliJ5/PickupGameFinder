@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import userService from '../../services/users'
+import { Grid, Form, Segment, Button, Header } from 'semantic-ui-react'
 
 const NewAccountForm = () => {
   const [newUsername, setNewUsername] = useState('')
@@ -24,39 +25,43 @@ const NewAccountForm = () => {
   }
 
   return (
-    <div>
-      <h2>or create an account</h2>
-      <form onSubmit={createAccount}>
-        <div>
-          username
-          <input
-            type="text"
-            value={newUsername}
-            name="newUsername"
-            onChange={({ target }) => setNewUsername(target.value)}
-          />
-        </div>
-        <div>
-          name
-          <input
-            type="text"
-            value={newName}
-            name="name"
-            onChange={({ target }) => setNewName(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={newPassword}
-            name="newPassword"
-            onChange={({ target }) => setNewPassword(target.value)}
-          />
-        </div>
-        <button type="submit">create an account</button>
-      </form>
-    </div>
+    <Grid>
+      <Grid.Column>
+        <Segment style={{ padding: '20px' }}>
+          <Form onSubmit={createAccount}>
+            <Header as='h2' color='blue'>
+              Sign up
+            </Header>
+            <Form.Input
+              label="Username"
+              placeholder="Username"
+              value={newUsername}
+              name="username"
+              onChange={({ target }) => setNewUsername(target.value)}
+            />
+            <Form.Input
+              label="Name"
+              placeholder="Name"
+              value={newName}
+              name="name"
+              onChange={({ target }) => setNewName(target.value)}
+            />
+            <Form.Input
+              label="Password"
+              placeholder='Password'
+              value={newPassword}
+              type='password'
+              name="password"
+              onChange={({ target }) => setNewPassword(target.value)}
+            />
+
+            <Button color='blue' fluid size='large'>
+              Sign up
+            </Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
   )
 }
 
