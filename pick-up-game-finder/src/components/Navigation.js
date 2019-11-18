@@ -13,7 +13,7 @@ const Navigation = () => {
         position='right'
         name='settings'
       >
-        Profile
+        Logout
       </Menu.Item>
     </Menu>
   )

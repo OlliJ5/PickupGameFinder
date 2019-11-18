@@ -21,12 +21,16 @@ const NewGameForm = (props) => {
     setDuration(30)
     setDesc('')
     setmaxParticipants(10)
+    props.toggler()
   }
 
   return (
-    <Grid style={{ position:'absolute', top:'0', right:'0', zIndex:'999', marginTop:'50px', marginRight:'50px' }}>
+    <Grid style={{ position:'absolute', top:'0', right:'0', zIndex:'999', marginTop:'35px', marginRight:'10px' }}>
       <Grid.Column>
         <Segment style={{ padding: '20px' }}>
+          <Button size='mini' onClick={props.toggler}>
+            x
+          </Button>
           <Form onSubmit={createNewGame}>
             <Header as='h2' color='blue'>
               Start a game!
