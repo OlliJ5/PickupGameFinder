@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
+import { logOut } from '../reducers/loginReducer'
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <Menu inverted style={{ marginBottom: '0' }}>
       <Menu.Item
@@ -12,6 +14,7 @@ const Navigation = () => {
       <Menu.Item
         position='right'
         name='settings'
+        onClick={() => props.logOut()}
       >
         Logout
       </Menu.Item>
@@ -19,4 +22,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default connect(null, { logOut })(Navigation)

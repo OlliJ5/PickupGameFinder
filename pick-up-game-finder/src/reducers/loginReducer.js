@@ -8,6 +8,8 @@ const loginReducer = (state = null, action) => {
       return action.user
     case 'STAY_LOGGED_IN':
       return action.user
+    case 'LOGOUT':
+      return null
     default:
       return state
   }
@@ -22,6 +24,15 @@ export const login = (username, password) => {
     dispatch({
       type: 'LOGIN',
       user
+    })
+  }
+}
+
+export const logOut = () => {
+  return async dispatch => {
+    window.localStorage.removeItem('loggedInUser')
+    dispatch({
+      type: 'LOGOUT'
     })
   }
 }
