@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import Map from './components/Map'
-import NewGameForm from './components/forms/NewGameForm'
 import FrontPage from './components/FrontPage'
+import MapPage from './components/MapPage'
 import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
@@ -35,8 +34,7 @@ const App = (props) => {
   }
   return (
     <div>
-      <NewGameForm />
-      <Map />
+      <MapPage />
     </div>
   )
 }

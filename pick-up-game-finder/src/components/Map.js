@@ -22,7 +22,7 @@ const Map = (props) => {
       {props.games.map(game =>
         <Marker key={game.id} position={[game.location.lat, game.location.long]}>
           <Popup>
-            <button onClick={() => joinGame(game.id)}>liity peliin</button>
+            <button onClick={() => joinGame(game.id)}>Join game</button>
             {game.desc}
           </Popup>
         </Marker>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createGame } from '../../reducers/gameReducer'
+import { Grid, Segment, Form, Header, Button } from 'semantic-ui-react'
 
 const NewGameForm = (props) => {
   const [duration, setDuration] = useState(1)
@@ -23,39 +24,46 @@ const NewGameForm = (props) => {
   }
 
   return (
-    <div>
-      <p>start a new game</p>
-      <form onSubmit={createNewGame}>
-        <div>
-          duration (in minutes)
-          <input
-            type="number"
-            value={duration}
-            name="duration"
-            onChange={({ target }) => setDuration(target.value)}
-          />
-        </div>
-        <div>
-          description for your game
-          <input
-            type="text"
-            value={desc}
-            name="desc"
-            onChange={({ target }) => setDesc(target.value)}
-          />
-        </div>
-        <div>
-          maximum amount of participants
-          <input
-            type="number"
-            value={maxParticipants}
-            name="maxParticipants"
-            onChange={({ target }) => setmaxParticipants(target.value)}
-          />
-        </div>
-        <button type="submit">create game</button>
-      </form>
-    </div>
+    <Grid style={{ position:'absolute', top:'0', right:'0', zIndex:'999', marginTop:'50px', marginRight:'50px' }}>
+      <Grid.Column>
+        <Segment style={{ padding: '20px' }}>
+          <Form onSubmit={createNewGame}>
+            <Header as='h2' color='blue'>
+              Start a game!
+            </Header>
+            <Form.Input
+              type='number'
+              max={180}
+              label="Duration"
+              placeholder="Duration"
+              value={duration}
+              name="Duration"
+              onChange={({ target }) => setDuration(target.value)}
+            />
+            <Form.Input
+              label="Description"
+              placeholder="Description"
+              value={desc}
+              name="Description"
+              onChange={({ target }) => setDesc(target.value)}
+            />
+            <Form.Input
+              type='number'
+              max={30}
+              label="Maximum amount of participants"
+              placeholder='Max amount of participants'
+              value={maxParticipants}
+              name="maxParticipants"
+              onChange={({ target }) => setmaxParticipants(target.value)}
+            />
+
+            <Button color='blue' fluid size='large'>
+              Create a game
+            </Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
   )
 }
 

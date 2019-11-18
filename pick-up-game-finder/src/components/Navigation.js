@@ -1,15 +1,21 @@
 import React from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 const Navigation = () => {
   return (
-    <Segment inverted>
-      <Menu inverted pointing secondary>
-        <Menu.Item
-          name='home'
-        />
-      </Menu>
-    </Segment>
+    <Menu inverted style={{ marginBottom: '0' }}>
+      <Menu.Item
+        name='home'
+      >
+        Home
+      </Menu.Item>
+      <Menu.Item
+        position='right'
+        name='settings'
+      >
+        Profile
+      </Menu.Item>
+    </Menu>
   )
 }
 
