@@ -17,14 +17,18 @@ const loginReducer = (state = null, action) => {
 
 export const login = (username, password) => {
   return async dispatch => {
-    const user = await loginService.login({ username, password })
-    window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-    gameService.setToken(user.token)
-    playerService.setToken(user.token)
-    dispatch({
-      type: 'LOGIN',
-      user
-    })
+    try {
+      const user = await loginService.login({ username, password })
+      window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+      gameService.setToken(user.token)
+      playerService.setToken(user.token)
+      dispatch({
+        type: 'LOGIN',
+        user
+      })
+    } catch (exception) {
+      return exception.response
+    }
   }
 }
 

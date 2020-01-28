@@ -3,6 +3,7 @@ import userService from '../../services/users'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
 import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 const NewAccountForm = (props) => {
   const [newUsername, setNewUsername] = useState('')
@@ -24,6 +25,9 @@ const NewAccountForm = (props) => {
       setNewPassword('')
       setNotification('')
       props.login(newUser.username, newUser.password)
+      toast.info(`Welcome ${newUser.username}`, {
+        position: toast.POSITION.TOP_CENTER
+      })
     } catch (exception) {
       setNotification(exception.response.data.error)
     }

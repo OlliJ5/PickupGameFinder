@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createGame } from '../../reducers/gameReducer'
 import { Grid, Segment, Form, Header, Button, Message } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 const NewGameForm = (props) => {
   const [duration, setDuration] = useState('')
@@ -11,27 +12,30 @@ const NewGameForm = (props) => {
 
   const createNewGame = async (event) => {
     event.preventDefault()
-      const newGame = {
-        durationMins: duration,
-        location: props.location,
-        desc,
-        maxParticipants
-      }
-      const exception = await props.createGame(newGame)
+    const newGame = {
+      durationMins: duration,
+      location: props.location,
+      desc,
+      maxParticipants
+    }
+    const exception = await props.createGame(newGame)
 
-      if(exception) {
-        setNotification(exception.data.error)
-      } else {
-        setDuration('')
-        setDesc('')
-        setmaxParticipants(10)
-        setNotification('')
-        props.toggler()
-      }
+    if (exception) {
+      setNotification(exception.data.error)
+    } else {
+      toast.info(`Succesfully created a game for ${maxParticipants} people in your location`, {
+        position: toast.POSITION.TOP_CENTER
+      })
+      setDuration('')
+      setDesc('')
+      setmaxParticipants(10)
+      setNotification('')
+      props.toggler()
+    }
   }
 
   return (
-    <Grid style={{ position:'absolute', top:'0', right:'0', zIndex:'999', marginTop:'35px', marginRight:'10px' }}>
+    <Grid style={{ position: 'absolute', top: '0', right: '0', zIndex: '999', marginTop: '35px', marginRight: '10px' }}>
       <Grid.Column>
         <Segment style={{ padding: '20px' }}>
           <Button size='mini' onClick={props.toggler}>
@@ -41,7 +45,7 @@ const NewGameForm = (props) => {
             <Header as='h2' color='blue'>
               Start a game!
             </Header>
-            {notification !== '' &&(
+            {notification !== '' && (
               <Message>
                 {notification}
               </Message>

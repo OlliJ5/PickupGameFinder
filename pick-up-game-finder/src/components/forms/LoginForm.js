@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Message } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [notification, setNotification] = useState('')
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    props.login(username, password)
-    toast.info(`Welcome ${username}`, {
-      position: toast.POSITION.TOP_CENTER
-    })
-    setPassword('')
-    setUsername('')
+    const exception = await props.login(username, password)
+
+    if (exception) {
+      setPassword('')
+      setNotification(exception.data.error)
+    } else {
+      toast.info(`Welcome ${username}`, {
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
   }
 
   return (
@@ -40,6 +46,11 @@ const LoginForm = (props) => {
           Login
         </Button>
       </Form.Group>
+      {notification !== '' && (
+        <Message>
+          {notification}
+        </Message>
+      )}
     </Form>
   )
 }
