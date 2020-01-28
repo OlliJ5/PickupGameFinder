@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import userService from '../../services/users'
+import { connect } from 'react-redux'
+import { login } from '../../reducers/loginReducer'
 import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react'
 
-const NewAccountForm = () => {
+const NewAccountForm = (props) => {
   const [newUsername, setNewUsername] = useState('')
   const [newName, setNewName] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -21,7 +23,7 @@ const NewAccountForm = () => {
       setNewName('')
       setNewPassword('')
       setNotification('')
-      console.log('luotiin', newUser)
+      props.login(newUser.username, newUser.password)
     } catch (exception) {
       setNotification(exception.response.data.error)
     }
@@ -78,4 +80,4 @@ const NewAccountForm = () => {
   )
 }
 
-export default NewAccountForm
+export default connect(null, { login })(NewAccountForm)
