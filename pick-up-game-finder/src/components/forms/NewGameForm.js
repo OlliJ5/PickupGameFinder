@@ -1,27 +1,33 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createGame } from '../../reducers/gameReducer'
-import { Grid, Segment, Form, Header, Button } from 'semantic-ui-react'
+import { Grid, Segment, Form, Header, Button, Message } from 'semantic-ui-react'
 
 const NewGameForm = (props) => {
-  const [duration, setDuration] = useState(1)
+  const [duration, setDuration] = useState('')
   const [desc, setDesc] = useState('')
   const [maxParticipants, setmaxParticipants] = useState(10)
+  const [notification, setNotification] = useState('')
 
   const createNewGame = async (event) => {
     event.preventDefault()
-    const newGame = {
-      durationMins: duration,
-      location: props.location,
-      desc,
-      maxParticipants
-    }
+      const newGame = {
+        durationMins: duration,
+        location: props.location,
+        desc,
+        maxParticipants
+      }
+      const exception = await props.createGame(newGame)
 
-    props.createGame(newGame)
-    setDuration(30)
-    setDesc('')
-    setmaxParticipants(10)
-    props.toggler()
+      if(exception) {
+        setNotification(exception.data.error)
+      } else {
+        setDuration('')
+        setDesc('')
+        setmaxParticipants(10)
+        setNotification('')
+        props.toggler()
+      }
   }
 
   return (
@@ -35,21 +41,26 @@ const NewGameForm = (props) => {
             <Header as='h2' color='blue'>
               Start a game!
             </Header>
+            {notification !== '' &&(
+              <Message>
+                {notification}
+              </Message>
+            )}
             <Form.Input
               type='number'
               // min={1}
               // max={180}
               label="Duration"
-              placeholder="Duration"
+              placeholder="Duration in minutes (1-180 mins)"
               value={duration}
               name="Duration"
               onChange={({ target }) => setDuration(target.value)}
             />
             <Form.Input
-              // minLength="10"
+              // minLength="5"
               // maxLength="140"
               label="Description"
-              placeholder="Description"
+              placeholder="Description (5-140 characters)"
               value={desc}
               name="Description"
               onChange={({ target }) => setDesc(target.value)}
@@ -59,7 +70,7 @@ const NewGameForm = (props) => {
               // min={1}
               // max={30}
               label="Maximum amount of participants"
-              placeholder='Max amount of participants'
+              placeholder='Max amount of participants (1-30 participants)'
               value={maxParticipants}
               name="maxParticipants"
               onChange={({ target }) => setmaxParticipants(target.value)}

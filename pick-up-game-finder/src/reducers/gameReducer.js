@@ -23,11 +23,15 @@ export const initializeGames = () => {
 
 export const createGame = (game) => {
   return async dispatch => {
-    const newGame = await gameService.create(game)
-    dispatch({
-      type: 'ADD_GAME',
-      data: newGame
-    })
+    try {
+      const newGame = await gameService.create(game)
+      dispatch({
+        type: 'ADD_GAME',
+        data: newGame
+      })
+    } catch (exception) {
+      return exception.response
+    }
   }
 }
 
