@@ -37,7 +37,8 @@ const NewGameForm = (props) => {
             </Header>
             <Form.Input
               type='number'
-              max={180}
+              // min={1}
+              // max={180}
               label="Duration"
               placeholder="Duration"
               value={duration}
@@ -45,6 +46,8 @@ const NewGameForm = (props) => {
               onChange={({ target }) => setDuration(target.value)}
             />
             <Form.Input
+              // minLength="10"
+              // maxLength="140"
               label="Description"
               placeholder="Description"
               value={desc}
@@ -53,7 +56,8 @@ const NewGameForm = (props) => {
             />
             <Form.Input
               type='number'
-              max={30}
+              // min={1}
+              // max={30}
               label="Maximum amount of participants"
               placeholder='Max amount of participants'
               value={maxParticipants}

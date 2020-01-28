@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import userService from '../../services/users'
-import { Grid, Form, Segment, Button, Header } from 'semantic-ui-react'
+import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react'
 
 const NewAccountForm = () => {
   const [newUsername, setNewUsername] = useState('')
   const [newName, setNewName] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [notification, setNotification] = useState('')
 
   const createAccount = async (event) => {
     event.preventDefault()
@@ -19,8 +20,10 @@ const NewAccountForm = () => {
       setNewUsername('')
       setNewName('')
       setNewPassword('')
+      setNotification('')
+      console.log('luotiin', newUser)
     } catch (exception) {
-      console.log('something went wrong')
+      setNotification(exception.response.data.error)
     }
   }
 
@@ -32,23 +35,33 @@ const NewAccountForm = () => {
             <Header as='h2' color='blue'>
               Sign up
             </Header>
+            {notification !== '' &&(
+              <Message>
+                {notification}
+              </Message>
+            )}
             <Form.Input
+              // minLength={3}
+              // maxLength={15}
               label="Username"
-              placeholder="Username"
+              placeholder="Username (3-15 characters)"
               value={newUsername}
               name="username"
               onChange={({ target }) => setNewUsername(target.value)}
             />
             <Form.Input
+              // minLength={2}
+              // maxLength={30}
               label="Name"
-              placeholder="Name"
+              placeholder="Name (2-30 characters)"
               value={newName}
               name="name"
               onChange={({ target }) => setNewName(target.value)}
             />
             <Form.Input
+              // minLength={5}
               label="Password"
-              placeholder='Password'
+              placeholder='Password (min. 5 characters)'
               value={newPassword}
               type='password'
               name="password"
