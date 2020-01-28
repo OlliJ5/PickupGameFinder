@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
 import { Button, Form } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('')
@@ -10,6 +11,9 @@ const LoginForm = (props) => {
   const handleLogin = async (event) => {
     event.preventDefault()
     props.login(username, password)
+    toast.info(`Welcome ${username}`, {
+      position: toast.POSITION.TOP_CENTER
+    })
     setPassword('')
     setUsername('')
   }

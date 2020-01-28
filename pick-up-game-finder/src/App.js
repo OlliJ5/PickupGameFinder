@@ -6,7 +6,10 @@ import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
 import { Container } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
+toast.configure()
 
 const App = (props) => {
   useEffect(() => {
