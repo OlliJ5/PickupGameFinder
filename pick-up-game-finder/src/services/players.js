@@ -1,8 +1,14 @@
 import axios from 'axios'
 
-const baseUrl = '/api/players'
-
 let token = null
+let baseUrl = ''
+
+if(process.env.NODE_ENV === 'production') {
+  baseUrl = 'https://pickupgamefinder.herokuapp.com'
+}
+
+const apiUrl = '/api/players'
+
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`
@@ -13,9 +19,7 @@ const create = async (game) => {
     headers: { Authorization: token }
   }
 
-  console.log('lähtetään', game)
-
-  const response = await axios.post(baseUrl, game, config)
+  const response = await axios.post(`${baseUrl}${apiUrl}`, game, config)
   return response.data
 }
 

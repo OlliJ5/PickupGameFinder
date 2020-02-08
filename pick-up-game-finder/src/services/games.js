@@ -1,15 +1,20 @@
 import axios from 'axios'
 
-const baseUrl = '/api/games'
-
 let token = null
+let baseUrl = ''
+
+if(process.env.NODE_ENV === 'production') {
+  baseUrl = 'https://pickupgamefinder.herokuapp.com'
+}
+
+const apiUrl = '/api/games'
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`
 }
 
 const getAllActive = async () => {
-  const response = await axios.get(`${baseUrl}/active`)
+  const response = await axios.get(`${baseUrl}${apiUrl}/active`)
   return response.data
 }
 
@@ -18,7 +23,7 @@ const create = async (newGame) => {
     headers: { Authorization: token }
   }
 
-  const response = await axios.post(baseUrl, newGame, config)
+  const response = await axios.post(`${baseUrl}${apiUrl}`, newGame, config)
   return response.data
 }
 

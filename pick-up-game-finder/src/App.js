@@ -12,21 +12,25 @@ import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
 
 const App = (props) => {
+  const initGames = props.initializeGames
+  const keepUserLogged = props.stayLoggedIn
+  const setLocation = props.changeLocation
+
   useEffect(() => {
-    props.initializeGames()
-  }, [])
+    initGames()
+  }, [initGames])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      props.stayLoggedIn(user)
+      keepUserLogged(user)
     }
-  }, [])
+  }, [keepUserLogged])
 
   useEffect(() => {
-    props.changeLocation()
-  }, [])
+    setLocation()
+  }, [setLocation])
 
   if (props.user === null) {
     return (
