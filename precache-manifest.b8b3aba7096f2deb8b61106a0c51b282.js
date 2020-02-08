@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c20423f4336824e2c58d084bd1376666",
+    "revision": "16daf10ef6c39d11e4d18222b10cba78",
     "url": "/PickupGameFinder/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PickupGameFinder/static/js/2.10d4a50d.chunk.js"
   },
   {
-    "revision": "d591be6bae37a1f03b76",
-    "url": "/PickupGameFinder/static/js/main.d80d7e63.chunk.js"
+    "revision": "1c6ca7a76c6c437ef05c",
+    "url": "/PickupGameFinder/static/js/main.dbb7e962.chunk.js"
   },
   {
     "revision": "819b278a9b50ed9dd9d1",
