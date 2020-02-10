@@ -2,10 +2,7 @@ import axios from 'axios'
 
 let baseUrl = ''
 
-console.log('envi', process.env.NODE_ENV)
-
 if(process.env.NODE_ENV === 'production') {
-  console.log('mentiin tänne')
   baseUrl = 'https://pickupgamefinder.herokuapp.com'
 }
 
