@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import FrontPage from './components/FrontPage'
-import MapPage from './components/MapPage'
+import Map from './components/Map'
 import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
@@ -41,7 +41,7 @@ const App = (props) => {
   }
   return (
     <div>
-      <MapPage />
+      <Map />
     </div>
   )
 }

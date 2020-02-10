@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'semantic-ui-react'
 import playerService from '../services/players'
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL from 'react-map-gl'
+import Game from './Game'
+import GameInfo from './GameInfo'
+import Navigation from './Navigation'
+import NewGameForm from './forms/NewGameForm'
+import { Button } from 'semantic-ui-react'
+
 
 const Map = (props) => {
   const [viewport, setViewport] = useState({
@@ -14,6 +19,11 @@ const Map = (props) => {
   })
 
   const [selected, setSelected] = useState(null)
+  const [formVisible, setFormVisible] = useState(false)
+
+  const toggleVisibility = () => {
+    setFormVisible(!formVisible)
+  }
 
   useEffect(() => {
     setViewport({
@@ -27,8 +37,8 @@ const Map = (props) => {
 
 
   const joinGame = (game) => {
-    console.log('täällä näin')
     playerService.create({ game })
+    setSelected(null)
   }
 
   return (
@@ -41,28 +51,32 @@ const Map = (props) => {
       }}
       onClick={() => setSelected(null)}
     >
-      {props.games.map(game =>
-        <Marker
-          key={game.id}
-          latitude={game.location.lat}
-          longitude={game.location.long}
-        >
-          <button style={{ border: '0', background: 'transparent' }} onClick={() => setSelected(game)}>
-            <img src='/bball.svg' alt='basketballgame here' style={{ height: '25px', width: '25px' }} />
-          </button>
-        </Marker>
+      <Navigation />
+      {formVisible && (
+        <NewGameForm toggler={toggleVisibility} />
       )}
-      {selected && (
-        <Popup
-          latitude={selected.location.lat}
-          longitude={selected.location.long}
-          onClose={() => setSelected(null)}
-          offsetLeft={18}
-          offsetTop={-7}
+      {!formVisible && (
+        <Button
+          primary
+          style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '999' }}
+          onClick={toggleVisibility}
         >
-          <Button onClick={() => joinGame(selected.id)}>Join game</Button>
-          {selected.desc}
-        </Popup>
+          New Game
+        </Button>
+      )}
+      {props.games.map(game => (
+        <Game
+          key={game.id}
+          game={game}
+          setSelected={setSelected}
+        />
+      ))}
+      {selected && (
+        <GameInfo
+          selectedGame={selected}
+          setSelected={setSelected}
+          joinGame={joinGame}
+        />
       )}
     </ReactMapGL>
   )
