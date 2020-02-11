@@ -36,44 +36,52 @@ const NewAccountForm = (props) => {
   return (
     <Grid>
       <Grid.Column>
-        <Segment style={{ padding: '20px' }}>
+        <Segment style={{ padding: '20px', backgroundColor: '#1c2836' }}>
           <Form onSubmit={createAccount}>
-            <Header as='h2' color='blue'>
+            <Header as='h2' inverted>
               Sign up
             </Header>
-            {notification !== '' &&(
+            {notification !== '' && (
               <Message>
                 {notification}
               </Message>
             )}
-            <Form.Input
-              // minLength={3}
-              // maxLength={15}
-              label="Username"
-              placeholder="Username (3-15 characters)"
-              value={newUsername}
-              name="username"
-              onChange={({ target }) => setNewUsername(target.value)}
-            />
-            <Form.Input
-              // minLength={2}
-              // maxLength={30}
-              label="Name"
-              placeholder="Name (2-30 characters)"
-              value={newName}
-              name="name"
-              onChange={({ target }) => setNewName(target.value)}
-            />
-            <Form.Input
-              // minLength={5}
-              label="Password"
-              placeholder='Password (min. 5 characters)'
-              value={newPassword}
-              type='password'
-              name="password"
-              onChange={({ target }) => setNewPassword(target.value)}
-            />
-
+            <div className='field'>
+              <label style={{ color: 'white' }}>Username</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='text'
+                  placeholder='Username (3-15 characters)'
+                  value={newUsername}
+                  onChange={({ target }) => setNewUsername(target.value)}
+                />
+              </div>
+            </div>
+            <div className='field'>
+              <label style={{ color: 'white' }}>Name</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='text'
+                  placeholder='Name (2-30 characters)'
+                  value={newName}
+                  onChange={({ target }) => setNewName(target.value)}
+                />
+              </div>
+            </div>
+            <div className='field'>
+              <label style={{ color: 'white' }}>Password</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='password'
+                  placeholder='Password (min. 5 characters)'
+                  value={newPassword}
+                  onChange={({ target }) => setNewPassword(target.value)}
+                />
+              </div>
+            </div>
             <Button color='blue' fluid size='large'>
               Sign up
             </Button>

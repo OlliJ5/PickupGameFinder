@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Button, Form, Message, Header } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 
 
@@ -26,22 +26,32 @@ const LoginForm = (props) => {
 
   return (
     <Form onSubmit={handleLogin}>
-      <Form.Group inline>
-        <Form.Input
-          icon='user'
-          iconPosition='left'
-          placeholder='Username'
-          name="username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-        <Form.Input
-          icon='lock'
-          iconPosition='left'
-          placeholder='Password'
-          type='password'
-          name="password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
+      <Header as='h2' inverted>
+        Login
+      </Header>
+      <Form.Group inline widths='equal'>
+        <div className='field'>
+          <div className='ui fluid input'>
+            <input
+              style={{ color: 'white', backgroundColor: '#243447' }}
+              type='text'
+              placeholder='Username'
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </div>
+        </div>
+        <div className='field'>
+          <div className='ui fluid input'>
+            <input
+              style={{ color: 'white', backgroundColor: '#243447' }}
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </div>
+        </div>
         <Button color='blue'>
           Login
         </Button>
