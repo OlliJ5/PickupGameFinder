@@ -70,7 +70,7 @@ const Map = (props) => {
       {!formVisible && (
         <Button
           primary
-          style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '999' }}
+          style={{ position: 'absolute', top: '50px', right: '10px' }}
           onClick={toggleVisibility}
         >
           New Game

@@ -8,6 +8,10 @@ import gameReducer from './reducers/gameReducer'
 import loginReducer from './reducers/loginReducer'
 import locationReducer from './reducers/locationReducer'
 
+// used colors:
+// darkes: #141d26
+// mid: #1c2836
+// lightest: #243447
 
 const reducer = combineReducers({
   games: gameReducer,

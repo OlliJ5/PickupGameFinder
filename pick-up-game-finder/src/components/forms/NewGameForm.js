@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createGame } from '../../reducers/gameReducer'
-import { Grid, Segment, Form, Header, Button, Message } from 'semantic-ui-react'
+import { Grid, Segment, Form, Header, Button, Message, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 
 const NewGameForm = (props) => {
@@ -35,14 +35,17 @@ const NewGameForm = (props) => {
   }
 
   return (
-    <Grid style={{ position: 'absolute', top: '0', right: '0', zIndex: '999', marginTop: '35px', marginRight: '10px' }}>
+    <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px' }}>
       <Grid.Column>
-        <Segment style={{ padding: '20px' }}>
-          <Button size='mini' onClick={props.toggler}>
-            x
+        <Segment style={{ padding: '20px', backgroundColor: '#141d26' }}>
+          <Button size='mini'
+            onClick={props.toggler}
+            style={{ border: '0', background: 'transparent', position: 'absolute', right: '0', top: '0' }}
+          >
+            <Icon name='close' size='small' inverted />
           </Button>
           <Form onSubmit={createNewGame}>
-            <Header as='h2' color='blue'>
+            <Header as='h2' inverted>
               Start a game!
             </Header>
             {notification !== '' && (
@@ -50,35 +53,58 @@ const NewGameForm = (props) => {
                 {notification}
               </Message>
             )}
-            <Form.Input
-              type='number'
-              // min={1}
-              // max={180}
-              label="Duration"
-              placeholder="Duration in minutes (1-180 mins)"
-              value={duration}
-              name="Duration"
-              onChange={({ target }) => setDuration(target.value)}
-            />
-            <Form.Input
-              // minLength="5"
-              // maxLength="140"
+            <div className='field'>
+              <label style={{ color: 'white' }}>Duration</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='number'
+                  placeholder='Duration in mins (1-180)'
+                  value={duration}
+                  onChange={({ target }) => setDuration(target.value)}
+                />
+              </div>
+            </div>
+            <div className='field'>
+              <label style={{ color: 'white' }}>Description</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='text'
+                  placeholder='Description (5-140 chars)'
+                  value={desc}
+                  onChange={({ target }) => setDesc(target.value)}
+                />
+              </div>
+            </div>
+            <div className='field'>
+              <label style={{ color: 'white' }}>Maximum amount of participants</label>
+              <div className='ui fluid input'>
+                <input
+                  style={{ color: 'white', backgroundColor: '#243447' }}
+                  type='number'
+                  placeholder='Max amount of participants (1-30)'
+                  value={maxParticipants}
+                  onChange={({ target }) => setmaxParticipants(target.value)}
+                />
+              </div>
+            </div>
+
+            {/* <Form.Input
               label="Description"
               placeholder="Description (5-140 characters)"
               value={desc}
               name="Description"
               onChange={({ target }) => setDesc(target.value)}
-            />
-            <Form.Input
+            /> */}
+            {/* <Form.Input
               type='number'
-              // min={1}
-              // max={30}
               label="Maximum amount of participants"
               placeholder='Max amount of participants (1-30 participants)'
               value={maxParticipants}
               name="maxParticipants"
               onChange={({ target }) => setmaxParticipants(target.value)}
-            />
+            /> */}
 
             <Button color='blue' fluid size='large'>
               Create a game
