@@ -9,7 +9,10 @@ import { Container } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-toast.configure()
+toast.configure({
+  autoClose: 3500,
+  hideProgressBar: true
+})
 
 const App = (props) => {
   const initGames = props.initializeGames

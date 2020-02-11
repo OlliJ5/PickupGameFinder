@@ -7,6 +7,7 @@ import GameInfo from './GameInfo'
 import Navigation from './Navigation'
 import NewGameForm from './forms/NewGameForm'
 import { Button } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 
 const Map = (props) => {
@@ -36,9 +37,18 @@ const Map = (props) => {
   }, [props.location])
 
 
-  const joinGame = (game) => {
-    playerService.create({ game })
-    setSelected(null)
+  const joinGame = async (game) => {
+    try {
+      await playerService.create({ game })
+      toast.info('Joined the game successfully', {
+        position: toast.POSITION.TOP_CENTER
+      })
+      setSelected(null)
+    } catch(exception) {
+      toast.warn(exception.response.data.error, {
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
   }
 
   return (
