@@ -8,6 +8,7 @@ import Navigation from './Navigation'
 import NewGameForm from './forms/NewGameForm'
 import { Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import { addPlayer } from '../reducers/gameReducer'
 
 
 const Map = (props) => {
@@ -39,12 +40,13 @@ const Map = (props) => {
 
   const joinGame = async (game) => {
     try {
-      await playerService.create({ game })
+      const response = await playerService.create({ game })
       toast.info('Joined the game successfully', {
         position: toast.POSITION.TOP_CENTER
       })
-      setSelected(null)
-    } catch(exception) {
+      props.addPlayer(response.user, response.game)
+
+    } catch (exception) {
       toast.warn(exception.response.data.error, {
         position: toast.POSITION.TOP_CENTER
       })
@@ -99,4 +101,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Map)
+export default connect(mapStateToProps, { addPlayer })(Map)

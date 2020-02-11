@@ -6,6 +6,11 @@ const gameReducer = (state = [], action) => {
       return action.data
     case 'ADD_GAME':
       return state.concat(action.data)
+    case 'ADD_PLAYER': {
+      const updatedGame = state.find(game => game.id === action.gameId)
+      updatedGame.participants = updatedGame.participants.concat(action.userId)
+      return state.map(game => game.id === action.gameId ? updatedGame : game)
+    }
     default:
       return state
   }
@@ -18,6 +23,14 @@ export const initializeGames = () => {
       type: 'INIT_GAMES',
       data: games
     })
+  }
+}
+
+export const addPlayer = (userId, gameId) => {
+  return {
+    type: 'ADD_PLAYER',
+    userId,
+    gameId
   }
 }
 
