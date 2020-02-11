@@ -89,23 +89,6 @@ const NewGameForm = (props) => {
                 />
               </div>
             </div>
-
-            {/* <Form.Input
-              label="Description"
-              placeholder="Description (5-140 characters)"
-              value={desc}
-              name="Description"
-              onChange={({ target }) => setDesc(target.value)}
-            /> */}
-            {/* <Form.Input
-              type='number'
-              label="Maximum amount of participants"
-              placeholder='Max amount of participants (1-30 participants)'
-              value={maxParticipants}
-              name="maxParticipants"
-              onChange={({ target }) => setmaxParticipants(target.value)}
-            /> */}
-
             <Button color='blue' fluid size='large'>
               Create a game
             </Button>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Marker } from 'react-map-gl'
+import bball from '../bball.svg'
 
 const Game = ({ game, setSelected }) => (
   <Marker
@@ -9,7 +10,7 @@ const Game = ({ game, setSelected }) => (
     <button style={{ border: '0', background: 'transparent' }}
       onClick={() => setSelected(game)}
     >
-      <img src='/bball.svg' alt='basketballgame here' style={{ height: '25px', width: '25px' }} />
+      <img src={bball} alt='basketballgame here' style={{ height: '25px', width: '25px' }} />
     </button>
   </Marker>
 )
