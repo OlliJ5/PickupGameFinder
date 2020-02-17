@@ -24,3 +24,38 @@ This starts the frontend.
 
 You also need to start the backend locally for the app to work.
 Check out the [backend repository](https://github.com/OlliJ5/PickupGameFinder-back) for information on how to do that.
+
+## Tests
+
+### Configuring
+
+To run cypress tests locally
+
+Start the backend in test env
+
+```
+npm run start:test
+```
+
+Start the frontend with
+
+```
+npm start
+```
+
+### Running tests option 1
+
+Start Cypress with
+
+```
+npm run cypress:open
+```
+
+and run all the specs
+
+### Running tests option 2
+
+Run the command
+```
+npm run test:e2e
+```
