@@ -33,6 +33,7 @@ const LoginForm = (props) => {
         <div className='field'>
           <div className='ui fluid input'>
             <input
+              id='login-username'
               style={{ color: 'white', backgroundColor: '#243447' }}
               type='text'
               placeholder='Username'
@@ -44,6 +45,7 @@ const LoginForm = (props) => {
         <div className='field'>
           <div className='ui fluid input'>
             <input
+              id='login-password'
               style={{ color: 'white', backgroundColor: '#243447' }}
               type='password'
               placeholder='Password'
@@ -52,7 +54,7 @@ const LoginForm = (props) => {
             />
           </div>
         </div>
-        <Button color='blue'>
+        <Button color='blue' id='login-button'>
           Login
         </Button>
       </Form.Group>

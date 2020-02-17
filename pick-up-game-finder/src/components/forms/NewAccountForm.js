@@ -50,6 +50,7 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Username</label>
               <div className='ui fluid input'>
                 <input
+                  id='username'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='text'
                   placeholder='Username (3-15 characters)'
@@ -62,6 +63,7 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Name</label>
               <div className='ui fluid input'>
                 <input
+                  id='name'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='text'
                   placeholder='Name (2-30 characters)'
@@ -74,6 +76,7 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Password</label>
               <div className='ui fluid input'>
                 <input
+                  id='password'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='password'
                   placeholder='Password (min. 5 characters)'
@@ -82,7 +85,7 @@ const NewAccountForm = (props) => {
                 />
               </div>
             </div>
-            <Button color='blue' fluid size='large'>
+            <Button color='blue' fluid size='large' id='accountCreation-button'>
               Sign up
             </Button>
           </Form>

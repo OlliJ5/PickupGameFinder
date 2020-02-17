@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 const NewGameForm = (props) => {
   const [duration, setDuration] = useState('')
   const [desc, setDesc] = useState('')
-  const [maxParticipants, setmaxParticipants] = useState(10)
+  const [maxParticipants, setmaxParticipants] = useState('')
   const [notification, setNotification] = useState('')
 
   const createNewGame = async (event) => {
@@ -23,7 +23,7 @@ const NewGameForm = (props) => {
     if (exception) {
       setNotification(exception.data.error)
     } else {
-      toast.info(`Succesfully created a game for ${maxParticipants} people in your location`, {
+      toast.info(`Successfully created a game for ${maxParticipants} people in your location`, {
         position: toast.POSITION.TOP_CENTER
       })
       setDuration('')
@@ -57,6 +57,7 @@ const NewGameForm = (props) => {
               <label style={{ color: 'white' }}>Duration</label>
               <div className='ui fluid input'>
                 <input
+                  id='duration'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='number'
                   placeholder='Duration in mins (1-180)'
@@ -69,6 +70,7 @@ const NewGameForm = (props) => {
               <label style={{ color: 'white' }}>Description</label>
               <div className='ui fluid input'>
                 <input
+                  id='description'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='text'
                   placeholder='Description (5-140 chars)'
@@ -81,6 +83,7 @@ const NewGameForm = (props) => {
               <label style={{ color: 'white' }}>Maximum amount of participants</label>
               <div className='ui fluid input'>
                 <input
+                  id='participants'
                   style={{ color: 'white', backgroundColor: '#243447' }}
                   type='number'
                   placeholder='Max amount of participants (1-30)'
@@ -89,7 +92,7 @@ const NewGameForm = (props) => {
                 />
               </div>
             </div>
-            <Button color='blue' fluid size='large'>
+            <Button color='blue' fluid size='large' id='gamecreation-button'>
               Create a game
             </Button>
           </Form>
