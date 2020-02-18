@@ -1,6 +1,8 @@
 # PickupGameFinder
 A web app for finding pick-up basketball games. This app is still a work in progress.
 
+[Backlog](https://docs.google.com/spreadsheets/d/1VMyOqbmccVdbq__0r0rGO4KeEypxb-fd2tGXDbRVQhc/edit#gid=0)
+
 The app is up and running [here](https://ollij5.github.io/PickupGameFinder/).
 
 The backend code of this application can be found in this [repository](https://github.com/OlliJ5/PickupGameFinder-back).
