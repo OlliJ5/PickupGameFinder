@@ -49,5 +49,11 @@ describe('Pick-up game finder', function () {
 
       cy.contains('Successfully created a game for 2 people in your location')
     })
+
+    it('User can logout', function () {
+      cy.contains('Logout').click()
+
+      cy.contains('Pickupgame finder')
+    })
   })
 })
