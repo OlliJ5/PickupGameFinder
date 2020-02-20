@@ -1,20 +1,17 @@
 name: End-to-end tests
 on: [push]
+
 jobs:
-  cypress-run:
+  job1:
+    name: cypress-test
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: echo
-        run: ls
-        
-      - name: cd
-        run: cd pick-up-game-finder
-      
-      - name: echo2
-        run: ls
-
       - name: Cypress run
+        run: | 
+          cd pick-up-game-finder
+          ls
         uses: cypress-io/github-action@v1
