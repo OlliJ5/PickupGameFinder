@@ -17,6 +17,10 @@ jobs:
           path: backend
 
       - name: Start-backend
+        env:
+          PORT: 6969
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         working-directory: ./backend
         run: |
           ls
