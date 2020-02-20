@@ -7,6 +7,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: echo
+        run: echo ls
+
       - name: Cypress run
-        working-directory: ./pick-up-game-finder
         uses: cypress-io/github-action@v1
