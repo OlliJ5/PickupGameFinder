@@ -8,4 +8,5 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Cypress run
+        working-directory: ./pick-up-game-finder
         uses: cypress-io/github-action@v1
