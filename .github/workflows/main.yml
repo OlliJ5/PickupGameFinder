@@ -11,7 +11,7 @@ jobs:
         run: ls
         
       - name: cd
-        run: cd
+        run: cd pick-up-game-finder
       
       - name: echo2
         run: ls
