@@ -11,13 +11,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Get-backend
-        - uses: actions/checkout@v2
-          with: OlliJ5/PickupGameFinder-back
+        uses: actions/checkout@v2
+        with: 
+          repository: OlliJ5/PickupGameFinder-back
           path: backend
 
       - name: Start-backend
-        - working-directory: ./backend
-        - run: |
+        working-directory: ./backend
+        run: |
           ls
           npm ci
           npm run start:test
