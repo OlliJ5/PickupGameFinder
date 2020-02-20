@@ -16,6 +16,11 @@ jobs:
           repository: OlliJ5/PickupGameFinder-back
           path: backend
 
+      - name: setup-node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
       - name: Start-backend
         env:
           PORT: 6969
