@@ -16,11 +16,6 @@ jobs:
           repository: OlliJ5/PickupGameFinder-back
           path: backend
 
-      - name: setup-node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-
       - name: Start-backend
         env:
           PORT: 6969
@@ -32,6 +27,7 @@ jobs:
           npm ci
           npm run start:test
           echo started the test server
+          ^C
 
       - name: Cypress run
         uses: cypress-io/github-action@v1
