@@ -9,6 +9,12 @@ jobs:
 
       - name: echo
         run: ls
+        
+      - name: cd
+        run: cd
+      
+      - name: echo2
+        run: ls
 
       - name: Cypress run
         uses: cypress-io/github-action@v1
