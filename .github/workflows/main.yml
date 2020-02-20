@@ -25,9 +25,8 @@ jobs:
         run: |
           ls
           npm ci
-          npm run start:test
+          # npm run start:test
           echo started the test server
-          ^C
 
       - name: Cypress run
         uses: cypress-io/github-action@v1
