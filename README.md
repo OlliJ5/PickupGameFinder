@@ -1,4 +1,7 @@
 # PickupGameFinder
+
+![](https://github.com/OlliJ5/PickupGameFinder/workflows/Run%20linter,%20tests%20and%20deploy/badge.svg)
+
 A web app for finding pick-up basketball games. This app is still a work in progress.
 
 [Backlog](https://docs.google.com/spreadsheets/d/1VMyOqbmccVdbq__0r0rGO4KeEypxb-fd2tGXDbRVQhc/edit#gid=0)
