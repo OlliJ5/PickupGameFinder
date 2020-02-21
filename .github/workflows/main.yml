@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Frontend-install
+        run: npm ci
+
       - name: Get-backend
         uses: actions/checkout@v2
         with: 
