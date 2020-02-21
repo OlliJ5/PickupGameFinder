@@ -63,6 +63,6 @@ jobs:
         run: |
           git config --global user.email "olli.rousu@hotmail.com"
           git config --global user.name "Olli Rousu"
-          git remote set-url origin git@github.com:OlliJ5/PickupGameFinder.git
+          git remote set-url origin https://${{ secrets.ACCESS_TOKEN }}@github.com/OlliJ5/PickupGameFinder.git
           npm run deploy
 
