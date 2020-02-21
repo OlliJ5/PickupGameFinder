@@ -21,6 +21,10 @@ jobs:
         run: npm ci
 
       - name: Start-backend
+        env:
+          PORT: 3003
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         run: npm run actions-backend
 
       - name: Cypress run
