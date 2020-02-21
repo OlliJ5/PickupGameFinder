@@ -10,9 +10,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Frontend-install
-        run: npm ci
-
       - name: Get-backend
         uses: actions/checkout@v2
         with: 
@@ -38,5 +35,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get-frontend
+        uses: actions/checkout@v2
+
       - name: ESLint
         run: npm run eslint
