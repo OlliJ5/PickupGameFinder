@@ -25,14 +25,14 @@ jobs:
 
       - name: Start-backend
         env:
-          PORT: 6969
+          BACK_PORT: 6969
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
         run: npm run actions-start
 
       - name: Cypress run
         env:
-          PORT: 6969
+          BACK_PORT: 6969
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
         uses: cypress-io/github-action@v1
