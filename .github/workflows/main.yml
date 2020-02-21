@@ -1,4 +1,4 @@
-name: End-to-end tests
+name: Run linter, tests and deploy
 on: [push]
 
 jobs:
@@ -46,3 +46,19 @@ jobs:
 
       - name: ESLint
         run: npm run eslint
+
+  job3:
+    name: Deploy to GH-pages
+    runs-on: ubuntu-latest
+    needs: [job1, job2]
+
+    steps:
+      - name: Get frontend
+        uses: actions/checkout@v2
+
+      - name: Frontends install
+        run: npm ci
+
+      - name: deploy
+        run: npm run deploy
+

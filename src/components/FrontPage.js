@@ -19,7 +19,7 @@ const FrontPage = () => {
           <Header as='h1' inverted>
             Pickupgame finder
             <Header.Subheader>
-              Find local pickupgames and start balling
+              Find local pickupgames and start playing
             </Header.Subheader>
           </Header>
           <img src={kobe} alt="Basketball legend Kobe Bryant" style={{ maxWidth: '60%', maxHeight: '60%' }} />
