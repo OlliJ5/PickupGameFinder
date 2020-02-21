@@ -6,7 +6,7 @@ import Game from './Game'
 import GameInfo from './GameInfo'
 import Navigation from './Navigation'
 import NewGameForm from './forms/NewGameForm'
-import { Button } from 'semantic-ui-react'
+import { Button, Container, Message, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import { addPlayer } from '../reducers/gameReducer'
 
@@ -51,6 +51,20 @@ const Map = (props) => {
         position: toast.POSITION.TOP_CENTER
       })
     }
+  }
+
+  if (props.location === null) {
+    return (
+      <Container>
+        <Message icon warning>
+          <Icon name='location arrow'/>
+          <Message.Content>
+            <Message.Header>Pls, give location</Message.Header>
+            Please accept or deny the use of your location to continue using the app
+          </Message.Content>
+        </Message>
+      </Container>
+    )
   }
 
   return (
