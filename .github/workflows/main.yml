@@ -23,12 +23,12 @@ jobs:
         working-directory: ./backend
         run: npm ci
 
-      - name: Start-backend
-        env:
-          BACK_PORT: 6969
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
-        run: npm run actions-start
+      # - name: Start-backend
+      #   env:
+      #     BACK_PORT: 6969
+      #     TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+      #     SECRET: ${{ secrets.SECRET }}
+      #   run: npm run actions-start
 
       - name: Cypress run
         env:
