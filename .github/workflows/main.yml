@@ -7,20 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout
+      - name: Get frontend
         uses: actions/checkout@v2
 
-      - name: Get-backend
+      - name: Frontend install
+        run: npm ci
+
+      - name: Get backend
         uses: actions/checkout@v2
         with: 
           repository: OlliJ5/PickupGameFinder-back
           path: backend
 
-      - name: Backend-install
+      - name: Backend install
         working-directory: ./backend
         run: npm ci
 
-      - name: Cypress run
+      - name: Run Cypress
         env:
           BACK_PORT: 6969
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
@@ -35,8 +38,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get-frontend
+      - name: Get frontend
         uses: actions/checkout@v2
+
+      - name: Frontend install
+        run: npm ci
 
       - name: ESLint
         run: npm run eslint
