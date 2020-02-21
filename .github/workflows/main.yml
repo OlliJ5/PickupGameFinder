@@ -13,6 +13,9 @@ jobs:
       - name: Frontend-install
         run: npm ci
 
+      - name: ESLint
+        run: npm run eslint
+
       - name: Get-backend
         uses: actions/checkout@v2
         with: 
@@ -22,13 +25,6 @@ jobs:
       - name: Backend-install
         working-directory: ./backend
         run: npm ci
-
-      # - name: Start-backend
-      #   env:
-      #     BACK_PORT: 6969
-      #     TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-      #     SECRET: ${{ secrets.SECRET }}
-      #   run: npm run actions-start
 
       - name: Cypress run
         env:
