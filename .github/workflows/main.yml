@@ -13,9 +13,6 @@ jobs:
       - name: Frontend-install
         run: npm ci
 
-      - name: ESLint
-        run: npm run eslint
-
       - name: Get-backend
         uses: actions/checkout@v2
         with: 
@@ -35,3 +32,11 @@ jobs:
         with:
           start: npm run actions-start
           wait-on: 'http://localhost:3000'
+
+  job2:
+    name: ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ESLint
+        run: npm run eslint
