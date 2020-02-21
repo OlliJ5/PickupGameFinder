@@ -16,8 +16,11 @@ jobs:
           repository: OlliJ5/PickupGameFinder-back
           path: backend
 
+      - name: debug
+        run: |
+          ls
+
       - name: Start-backend
-        run: ls
         env:
           PORT: 6969
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
