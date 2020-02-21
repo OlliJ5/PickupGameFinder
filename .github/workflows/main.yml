@@ -20,20 +20,24 @@ jobs:
         run: |
           ls
 
-      - name: Start-backend
-        env:
-          PORT: 6969
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
+      - name: Backend-install
+        # env:
+        #   PORT: 6969
+        #   TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+        #   SECRET: ${{ secrets.SECRET }}
         working-directory: ./backend
         run: |
           ls
           npm ci
           # npm run start:test
-          echo started the test server
+          ls
 
       - name: Cypress run
+        env:
+          PORT: 6969
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         uses: cypress-io/github-action@v1
         with:
-          start: npm start
+          start: npm actions-test
           wait-on: 'http://localhost:3000'
