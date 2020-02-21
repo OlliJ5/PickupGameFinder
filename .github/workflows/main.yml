@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   job1:
-    name: cypress-test
+    name: Cypress
     runs-on: ubuntu-latest
     
     steps:
