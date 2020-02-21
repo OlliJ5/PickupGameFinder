@@ -26,8 +26,7 @@
     "eslint": "eslint .",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
-    "actions-test": "start-server-and-test actions-start http://localhost:3000 test:e2e",
-    "actions-start": "npm run actions-backend && npm start",
+    "actions-start": "npm run actions-backend & npm start",
     "actions-backend": "cd backend && npm run start:test"
   },
   "eslintConfig": {

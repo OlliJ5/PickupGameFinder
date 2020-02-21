@@ -39,5 +39,5 @@ jobs:
           SECRET: ${{ secrets.SECRET }}
         uses: cypress-io/github-action@v1
         with:
-          start: npm actions-test
+          start: npm run actions-start
           wait-on: 'http://localhost:3000'
