@@ -17,6 +17,7 @@ jobs:
           path: backend
 
       - name: Start-backend
+        run: ls
         env:
           PORT: 6969
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
@@ -30,3 +31,6 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v1
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
