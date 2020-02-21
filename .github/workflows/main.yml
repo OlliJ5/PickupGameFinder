@@ -16,21 +16,12 @@ jobs:
           repository: OlliJ5/PickupGameFinder-back
           path: backend
 
-      - name: debug
-        run: |
-          ls
-
       - name: Backend-install
-        # env:
-        #   PORT: 6969
-        #   TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-        #   SECRET: ${{ secrets.SECRET }}
         working-directory: ./backend
-        run: |
-          ls
-          npm ci
-          # npm run start:test
-          ls
+        run: npm ci
+
+      - name: Start-backend
+        run: npm run actions-backend
 
       - name: Cypress run
         env:
