@@ -10,7 +10,7 @@ const locationReducer = (state = null, action) => {
 }
 
 const ipLookUp = async () => {
-  const res = await axios.get('http://ip-api.com/json')
+  const res = await axios.get('https://ipapi.co/json/')
   return res.data
 }
 
@@ -31,9 +31,10 @@ export const changeLocation = () => {
         console.log('failed to get location', message)
         const response = ipLookUp()
         response.then(res => {
+          console.log('response', res)
           const userLocation = {
-            lat: res.lat,
-            lng: res.lon
+            lat: res.latitude,
+            lng: res.longitude
           }
           dispatch({
             type: 'CHANGE_LOCATION',
@@ -47,8 +48,8 @@ export const changeLocation = () => {
       const response = ipLookUp()
       response.then(res => {
         const userLocation = {
-          lat: res.lat,
-          lng: res.lon
+          lat: res.latitude,
+          lng: res.longitude
         }
         dispatch({
           type: 'CHANGE_LOCATION',
