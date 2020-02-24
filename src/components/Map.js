@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import playerService from '../services/players'
-import ReactMapGL from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
+import useSupercluster from 'use-supercluster'
 import Game from './Game'
 import GameInfo from './GameInfo'
 import Navigation from './Navigation'
@@ -15,10 +16,11 @@ const Map = (props) => {
   const [viewport, setViewport] = useState({
     latitude: 0,
     longitude: 0,
-    zoom: 3,
+    zoom: 0,
     height: '100vh',
     width: '100vw'
   })
+  const mapRef = useRef()
 
   const [selected, setSelected] = useState(null)
   const [formVisible, setFormVisible] = useState(false)
@@ -53,11 +55,35 @@ const Map = (props) => {
     }
   }
 
+  const points = props.games.map(game => ({
+    type: 'Feature',
+    properties: {
+      cluster: false,
+      ...game
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [
+        game.location.long,
+        game.location.lat
+      ]
+    }
+  }))
+
+  const mapBounds = mapRef.current ? mapRef.current.getMap().getBounds().toArray().flat() : null
+
+  const { clusters } = useSupercluster({
+    points,
+    zoom: viewport.zoom,
+    bounds: mapBounds,
+    options: { radius: 75, maxZoom: 20 }
+  })
+
   if (props.location === null) {
     return (
       <Container>
         <Message icon warning>
-          <Icon name='location arrow'/>
+          <Icon name='location arrow' />
           <Message.Content>
             <Message.Header>Pls, give location</Message.Header>
             Please accept or deny the use of your location to continue using the app
@@ -69,6 +95,7 @@ const Map = (props) => {
 
   return (
     <ReactMapGL
+      ref={mapRef}
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       mapStyle='mapbox://styles/ogrousu/ck6g74as70kw51io8h0ceo6h3'
@@ -90,13 +117,30 @@ const Map = (props) => {
           New Game
         </Button>
       )}
-      {props.games.map(game => (
-        <Game
-          key={game.id}
-          game={game}
-          setSelected={setSelected}
-        />
-      ))}
+      {clusters.map(cluster => {
+        const [longitude, latitude] = cluster.geometry.coordinates
+
+        if (cluster.properties.cluster) {
+          return (
+            <Marker
+              key={cluster.id}
+              latitude={latitude}
+              longitude={longitude}>
+              <div style={{ 'color': 'black', 'backgroundColor': '#cc5500', 'borderRadius': '50%', 'width': '25px', 'height': '25px', 'textAlign': 'center', 'lineHeight': '25px' }}>
+                {cluster.properties.point_count}
+              </div>
+            </Marker>
+          )
+        }
+
+        return (
+          <Game
+            key={cluster.properties.id}
+            game={cluster.properties}
+            setSelected={setSelected}
+          />
+        )
+      })}
       {selected && (
         <GameInfo
           selectedGame={selected}
