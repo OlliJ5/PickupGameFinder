@@ -9,6 +9,7 @@ const NewGameForm = (props) => {
   const [desc, setDesc] = useState('')
   const [maxParticipants, setmaxParticipants] = useState('')
   const [notification, setNotification] = useState('')
+  const [formVisible, setFormVisible] = useState(false)
 
   const createNewGame = async (event) => {
     event.preventDefault()
@@ -30,8 +31,20 @@ const NewGameForm = (props) => {
       setDesc('')
       setmaxParticipants(10)
       setNotification('')
-      props.toggler()
+      setFormVisible(false)
     }
+  }
+
+  if (!formVisible) {
+    return (
+      <Button
+        primary
+        style={{ position: 'absolute', top: '50px', right: '10px' }}
+        onClick={() => setFormVisible(true)}
+      >
+        New Game
+      </Button>
+    )
   }
 
   return (
@@ -39,7 +52,7 @@ const NewGameForm = (props) => {
       <Grid.Column>
         <Segment style={{ padding: '20px', backgroundColor: '#141d26' }}>
           <Button size='mini'
-            onClick={props.toggler}
+            onClick={() => setFormVisible(false)}
             style={{ border: '0', background: 'transparent', position: 'absolute', right: '0', top: '0' }}
           >
             <Icon name='close' size='small' inverted />

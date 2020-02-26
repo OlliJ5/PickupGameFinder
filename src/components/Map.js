@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import playerService from '../services/players'
-import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl'
+import ReactMapGL, { FlyToInterpolator } from 'react-map-gl'
 import useSupercluster from 'use-supercluster'
-import Game from './Game'
-import GameInfo from './GameInfo'
+import Markers from './Markers'
+import MarkerInfo from './MarkerInfo'
 import Navigation from './Navigation'
 import NewGameForm from './forms/NewGameForm'
 import NoLocation from './NoLocation'
-import { Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import { addPlayer } from '../reducers/gameReducer'
 
@@ -16,7 +15,6 @@ import { addPlayer } from '../reducers/gameReducer'
 const Map = (props) => {
   const [viewport, setViewport] = useState({})
   const [selected, setSelected] = useState(null)
-  const [formVisible, setFormVisible] = useState(false)
 
   useEffect(() => {
     //after user location is fetched, we initialize the map
@@ -40,10 +38,6 @@ const Map = (props) => {
     bounds: mapBounds,
     options: { radius: 100, maxZoom: 15 }
   })
-
-  const toggleVisibility = () => {
-    setFormVisible(!formVisible)
-  }
 
   const joinGame = async (game) => {
     try {
@@ -97,50 +91,15 @@ const Map = (props) => {
       }}
     >
       <Navigation />
-      {formVisible && (
-        <NewGameForm toggler={toggleVisibility} />
-      )}
-      {!formVisible && (
-        <Button
-          primary
-          style={{ position: 'absolute', top: '50px', right: '10px' }}
-          onClick={toggleVisibility}
-        >
-          New Game
-        </Button>
-      )}
-      {clusters.map(cluster => {
-        const [longitude, latitude] = cluster.geometry.coordinates
-
-        if (cluster.properties.cluster) {
-          //console.log('klusteri', cluster)
-          return (
-            <Marker
-              key={cluster.id}
-              latitude={latitude}
-              longitude={longitude}>
-              <div onClick={() => zoom(cluster)} style={{ 'color': 'black', 'backgroundColor': '#cc5500', 'borderRadius': '50%', 'width': '25px', 'height': '25px', 'textAlign': 'center', 'lineHeight': '25px' }}>
-                {cluster.properties.point_count}
-              </div>
-            </Marker>
-          )
-        }
-
-        return (
-          <Game
-            key={cluster.properties.id}
-            cluster={cluster}
-            zoom={zoom}
-          />
-        )
-      })}
-      {/* {selected && (
-        <GameInfo
-          selectedGame={selected}
+      <NewGameForm />
+      <Markers clusters={clusters} zoom={zoom} />
+      {selected && (
+        <MarkerInfo
+          selectedCluster={selected}
           setSelected={setSelected}
           joinGame={joinGame}
         />
-      )} */}
+      )}
     </ReactMapGL>
   )
 }
