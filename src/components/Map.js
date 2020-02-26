@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import playerService from '../services/players'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl'
 import useSupercluster from 'use-supercluster'
 import Game from './Game'
 import GameInfo from './GameInfo'
@@ -72,12 +72,43 @@ const Map = (props) => {
 
   const mapBounds = mapRef.current ? mapRef.current.getMap().getBounds().toArray().flat() : null
 
-  const { clusters } = useSupercluster({
+  const { clusters, supercluster } = useSupercluster({
     points,
     zoom: viewport.zoom,
     bounds: mapBounds,
-    options: { radius: 75, maxZoom: 20 }
+    options: { radius: 100, maxZoom: 15 }
   })
+
+  const zoomCluster = (id, latitude, longitude) => {
+    console.log('zoomataan id', id)
+    const zoomLevel = Math.min(supercluster.getClusterExpansionZoom(id), 15)
+
+    setViewport({
+      ...viewport,
+      latitude,
+      longitude,
+      zoom: zoomLevel,
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 1
+      }),
+      transitionDuration: 'auto'
+    })
+  }
+
+  const zoomGame = (latitude, longitude) => {
+    setViewport({
+      ...viewport,
+      latitude,
+      longitude,
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({
+        speed: 1
+      }),
+      transitionDuration: 'auto'
+    })
+  }
+
+  console.log('klusterit', clusters)
 
   if (props.location === null) {
     return (
@@ -95,6 +126,7 @@ const Map = (props) => {
 
   return (
     <ReactMapGL
+      maxZoom={15}
       ref={mapRef}
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -126,7 +158,7 @@ const Map = (props) => {
               key={cluster.id}
               latitude={latitude}
               longitude={longitude}>
-              <div style={{ 'color': 'black', 'backgroundColor': '#cc5500', 'borderRadius': '50%', 'width': '25px', 'height': '25px', 'textAlign': 'center', 'lineHeight': '25px' }}>
+              <div onClick={() => zoomCluster(cluster.id, latitude, longitude)} style={{ 'color': 'black', 'backgroundColor': '#cc5500', 'borderRadius': '50%', 'width': '25px', 'height': '25px', 'textAlign': 'center', 'lineHeight': '25px' }}>
                 {cluster.properties.point_count}
               </div>
             </Marker>
@@ -138,6 +170,7 @@ const Map = (props) => {
             key={cluster.properties.id}
             game={cluster.properties}
             setSelected={setSelected}
+            zoom={zoomGame}
           />
         )
       })}
