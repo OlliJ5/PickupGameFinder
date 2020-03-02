@@ -91,13 +91,14 @@ const Map = (props) => {
       }}
     >
       <Navigation />
-      <NewGameForm />
       <Markers clusters={clusters} zoom={zoom} />
+      <NewGameForm />
       {selected && (
         <MarkerInfo
           selectedCluster={selected}
           setSelected={setSelected}
           joinGame={joinGame}
+          supercluster={supercluster}
         />
       )}
     </ReactMapGL>

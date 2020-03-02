@@ -1,10 +1,11 @@
 import React from 'react'
 import GameInfo from './GameInfo'
+import ClusterInfo from './ClusterInfo'
 
-const MarkerInfo = ({ selectedCluster, setSelected, joinGame }) => {
+const MarkerInfo = ({ selectedCluster, setSelected, joinGame, supercluster }) => {
   if (selectedCluster.properties.cluster) {
     return (
-      <></>
+      <ClusterInfo clusterInfo={selectedCluster} supercluster={supercluster} setSelected={setSelected} />
     )
   } else {
     return (
