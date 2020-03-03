@@ -1,5 +1,9 @@
 .gameList {
-    width: 200px;
+    width: 250px;
+    height: 100vh;
+    background-color: #141d26;
+    position: absolute;
+    left: 0px;
 }
 
 .gameListDiv {
@@ -7,8 +11,18 @@
     color: white;
     display: block;
     padding: 12px;
+    word-wrap: break-word;
 }
 
 .gameListDiv:hover {
     background-color: #243447;
+}
+
+.gameInfo {
+    width: 250px;
+    height: 100vh;
+    background-color: #141d26;
+    color: white;
+    position: absolute;
+    left: 0px;
 }

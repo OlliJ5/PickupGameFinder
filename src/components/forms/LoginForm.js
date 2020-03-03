@@ -25,13 +25,25 @@ const LoginForm = (props) => {
   }
 
   return (
-    <Form onSubmit={handleLogin}>
-      <Header as='h2' inverted>
+    <Form
+      onSubmit={handleLogin}
+    >
+      <Header
+        as='h2'
+        inverted
+      >
         Login
       </Header>
-      <Form.Group inline widths='equal'>
-        <div className='field'>
-          <div className='ui fluid input'>
+      <Form.Group
+        inline
+        widths='equal'
+      >
+        <div
+          className='field'
+        >
+          <div
+            className='ui fluid input'
+          >
             <input
               id='login-username'
               style={{ color: 'white', backgroundColor: '#243447' }}
@@ -42,8 +54,12 @@ const LoginForm = (props) => {
             />
           </div>
         </div>
-        <div className='field'>
-          <div className='ui fluid input'>
+        <div
+          className='field'
+        >
+          <div
+            className='ui fluid input'
+          >
             <input
               id='login-password'
               style={{ color: 'white', backgroundColor: '#243447' }}
@@ -54,7 +70,10 @@ const LoginForm = (props) => {
             />
           </div>
         </div>
-        <Button color='blue' id='login-button'>
+        <Button
+          color='blue'
+          id='login-button'
+        >
           Login
         </Button>
       </Form.Group>
