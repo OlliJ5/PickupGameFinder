@@ -10,6 +10,7 @@ import NewGameForm from './forms/NewGameForm'
 import NoLocation from './NoLocation'
 import { toast } from 'react-toastify'
 import { addPlayer } from '../reducers/gameReducer'
+import UserLocation from './UserLocation'
 
 
 const Map = (props) => {
@@ -91,6 +92,7 @@ const Map = (props) => {
       }}
     >
       <Navigation />
+      <UserLocation location={props.location} />
       <Markers clusters={clusters} zoom={zoom} />
       <NewGameForm />
       {selected && (
