@@ -55,7 +55,6 @@ const Map = (props) => {
     }
   }
 
-
   const zoom = (cluster) => {
     //if no id, we are zooming to a single game
     const zoomLevel = !cluster.id ? 15 : Math.min(supercluster.getClusterExpansionZoom(cluster.id), 15)
@@ -74,6 +73,10 @@ const Map = (props) => {
     })
   }
 
+  const mapClick = (click) => {
+    console.log('mappi', click.lngLat)
+  }
+
   if (props.location === null) {
     return (
       <NoLocation />
@@ -90,6 +93,7 @@ const Map = (props) => {
       onViewportChange={viewport => {
         setViewport(viewport)
       }}
+      onClick={mapClick}
     >
       <Navigation />
       <UserLocation location={props.location} />

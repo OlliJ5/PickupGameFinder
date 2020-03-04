@@ -9,6 +9,7 @@ const NewGameForm = (props) => {
   const [desc, setDesc] = useState('')
   const [maxParticipants, setmaxParticipants] = useState('')
   const [notification, setNotification] = useState('')
+  const [radioValue, setRadioValue] = useState('curr')
   const [formVisible, setFormVisible] = useState(false)
 
   const createNewGame = async (event) => {
@@ -66,6 +67,23 @@ const NewGameForm = (props) => {
                 {notification}
               </Message>
             )}
+            <Form.Group inline>
+              <label style={{ color: 'white' }}>Location</label>
+              <Form.Radio
+                style={{ color: 'white' }}
+                label='Select'
+                value='select'
+                checked={radioValue === 'select'}
+                onChange={() => setRadioValue('select')}
+              />
+              <Form.Radio
+                style={{ color: 'white' }}
+                label='Current'
+                value='curr'
+                checked={radioValue === 'curr'}
+                onChange={() => setRadioValue('curr')}
+              />
+            </Form.Group>
             <div className='field'>
               <label style={{ color: 'white' }}>Duration</label>
               <div className='ui fluid input'>
