@@ -1,24 +1,33 @@
 import React from 'react'
 import { Modal, Icon, Header, List, Divider, Button } from 'semantic-ui-react'
 
-const GameInfo = ({ gameInfo, setSelected, joinGame }) => {
+const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGame }) => {
 
   const goBack = () => {
+    setSelected(prevSelected)
+  }
+
+  const close = () => {
+    setPrevSelected(null)
     setSelected(null)
   }
 
-  console.log('info', gameInfo)
+  const showPrevIcon = prevSelected !== null ? true : false
+
+  //console.log('info', gameInfo)
   const date = gameInfo.endTime.slice(0, 10)
   const time = gameInfo.endTime.slice(11, 16)
   return (
-    <Modal open={true}>
+    <Modal defaultOpen={true} onClose={close} closeOnDimmerClick={false} closeIcon>
       <Modal.Header>
-        <Icon link name='arrow left' onClick={goBack} />
+        {showPrevIcon && (
+          <Icon link name='arrow left' onClick={goBack} />
+        )}
+      </Modal.Header>
+      <Modal.Content>
         <Button floated='right' primary onClick={() => joinGame(gameInfo.id)}>
           Join
         </Button>
-      </Modal.Header>
-      <Modal.Content>
         <Modal.Description>
           <Header>Game by {gameInfo.owner}</Header>
           <p>{gameInfo.desc}</p>

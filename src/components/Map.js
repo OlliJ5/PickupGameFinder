@@ -16,6 +16,7 @@ import UserLocation from './UserLocation'
 const Map = (props) => {
   const [viewport, setViewport] = useState({})
   const [selected, setSelected] = useState(null)
+  const [prevSelected, setPrevSelected] = useState(null)
 
   useEffect(() => {
     //after user location is fetched, we initialize the map
@@ -93,7 +94,7 @@ const Map = (props) => {
       onViewportChange={viewport => {
         setViewport(viewport)
       }}
-      //onClick={mapClick}
+    //onClick={mapClick}
     >
       <Navigation />
       <UserLocation location={props.location} />
@@ -102,7 +103,9 @@ const Map = (props) => {
       {selected && (
         <MarkerInfo
           selectedCluster={selected}
+          prevSelected={prevSelected}
           setSelected={setSelected}
+          setPrevSelected={setPrevSelected}
           joinGame={joinGame}
           supercluster={supercluster}
         />

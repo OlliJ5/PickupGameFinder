@@ -1,15 +1,21 @@
 import React from 'react'
 import { Modal, Card } from 'semantic-ui-react'
 
-const ClusterInfo = ({ clusterInfo, supercluster, setSelected }) => {
+const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected }) => {
   const games = supercluster.getLeaves(clusterInfo.id)
-  console.log('pelit', games)
+  //console.log('pelit', games)
+
+  const close = () => {
+    setPrevSelected(null)
+    setSelected(null)
+  }
+
   return (
-    <Modal open={true}>
+    <Modal defaultOpen={true} onClose={close} closeOnDimmerClick={false} closeIcon>
       <Modal.Header>Games in this location</Modal.Header>
       <Modal.Content>
         {games.map((game, i) =>
-          <Card fluid onClick={() => setSelected(game)} key={game.properties.id}>
+          <Card fluid onClick={() => { setPrevSelected(clusterInfo); setSelected(game) }} key={game.properties.id}>
             <Card.Content>
               <Card.Header>
                 Game {i}
