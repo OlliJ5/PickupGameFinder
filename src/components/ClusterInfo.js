@@ -1,24 +1,30 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Modal, Card } from 'semantic-ui-react'
 
 const ClusterInfo = ({ clusterInfo, supercluster, setSelected }) => {
   const games = supercluster.getLeaves(clusterInfo.id)
+  console.log('pelit', games)
   return (
-    <div className='gameList' >
-      <Button
-        size='mini'
-        onClick={() => setSelected(null)}
-        style={{ border: '0', background: 'transparent', position: 'absolute', top: '0px', right: '0px' }}
-      >
-        <Icon name='close' size='small' inverted />
-      </Button>
-      <h2 style={{ color: 'white', padding: '12px' }}>Games</h2>
-      {games.map(game =>
-        <div onClick={() => setSelected(game)} className='gameListDiv' key={game.properties.id}>
-          {game.properties.desc}
-        </div>
-      )}
-    </div>
+    <Modal open={true}>
+      <Modal.Header>Games in this location</Modal.Header>
+      <Modal.Content>
+        {games.map((game, i) =>
+          <Card fluid onClick={() => setSelected(game)} key={game.properties.id}>
+            <Card.Content>
+              <Card.Header>
+                Game {i}
+              </Card.Header>
+              <Card.Meta>
+                Created by {game.owner}
+              </Card.Meta>
+              <Card.Description>
+                {game.properties.desc}
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        )}
+      </Modal.Content>
+    </Modal>
   )
 }
 

@@ -73,9 +73,9 @@ const Map = (props) => {
     })
   }
 
-  const mapClick = (click) => {
-    console.log('mappi', click.lngLat)
-  }
+  // const mapClick = (click) => {
+  //   console.log('mappi', click.lngLat)
+  // }
 
   if (props.location === null) {
     return (
@@ -93,7 +93,7 @@ const Map = (props) => {
       onViewportChange={viewport => {
         setViewport(viewport)
       }}
-      onClick={mapClick}
+      //onClick={mapClick}
     >
       <Navigation />
       <UserLocation location={props.location} />
