@@ -49,6 +49,14 @@ const Map = (props) => {
       })
       props.addPlayer(response.user, response.game)
 
+      const updatedParticipants = selected.properties.participants.concat(response.user)
+      const updatedProperties = { ...selected.properties, participants: updatedParticipants }
+      const updatedSelected = {
+        geometry: selected.geometry,
+        properties: updatedProperties,
+        type: selected.type
+      }
+      setSelected(updatedSelected)
     } catch (exception) {
       toast.warn(exception.response.data.error, {
         position: toast.POSITION.TOP_CENTER

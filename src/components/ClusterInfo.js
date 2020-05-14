@@ -3,7 +3,6 @@ import { Modal, Card } from 'semantic-ui-react'
 
 const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected }) => {
   const games = supercluster.getLeaves(clusterInfo.id)
-  //console.log('pelit', games)
 
   const close = () => {
     setPrevSelected(null)
@@ -21,7 +20,7 @@ const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected }
                 Game {i}
               </Card.Header>
               <Card.Meta>
-                Created by {game.owner}
+                Created by {game.properties.owner.username}
               </Card.Meta>
               <Card.Description>
                 {game.properties.desc}

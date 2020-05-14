@@ -29,13 +29,13 @@ const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGa
           Join
         </Button>
         <Modal.Description>
-          <Header>Game by {gameInfo.owner}</Header>
+          <Header>Game by {gameInfo.owner.username}</Header>
           <p>{gameInfo.desc}</p>
           <p>Participants: ({gameInfo.participants.length}/{gameInfo.maxParticipants})</p>
           <List bulleted>
             {gameInfo.participants.map(participant =>
-              <List.Item key={participant}>
-                {participant}
+              <List.Item key={participant.id}>
+                {participant.username}
               </List.Item>
             )}
           </List>
