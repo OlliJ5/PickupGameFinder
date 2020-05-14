@@ -1,18 +1,16 @@
 {
   "files": {
-    "main.css": "/PickupGameFinder/static/css/main.8d2930ea.chunk.css",
-    "main.js": "/PickupGameFinder/static/js/main.5085ba22.chunk.js",
-    "main.js.map": "/PickupGameFinder/static/js/main.5085ba22.chunk.js.map",
+    "main.js": "/PickupGameFinder/static/js/main.ae471f3d.chunk.js",
+    "main.js.map": "/PickupGameFinder/static/js/main.ae471f3d.chunk.js.map",
     "runtime~main.js": "/PickupGameFinder/static/js/runtime~main.72c2aaa2.js",
     "runtime~main.js.map": "/PickupGameFinder/static/js/runtime~main.72c2aaa2.js.map",
     "static/css/2.5dbdccff.chunk.css": "/PickupGameFinder/static/css/2.5dbdccff.chunk.css",
-    "static/js/2.cea70ebc.chunk.js": "/PickupGameFinder/static/js/2.cea70ebc.chunk.js",
-    "static/js/2.cea70ebc.chunk.js.map": "/PickupGameFinder/static/js/2.cea70ebc.chunk.js.map",
+    "static/js/2.60ee4bc6.chunk.js": "/PickupGameFinder/static/js/2.60ee4bc6.chunk.js",
+    "static/js/2.60ee4bc6.chunk.js.map": "/PickupGameFinder/static/js/2.60ee4bc6.chunk.js.map",
     "index.html": "/PickupGameFinder/index.html",
-    "precache-manifest.567b2987e64b42807651dd045e8dd463.js": "/PickupGameFinder/precache-manifest.567b2987e64b42807651dd045e8dd463.js",
+    "precache-manifest.5ea7aab74a771aabe485d4789fe995d4.js": "/PickupGameFinder/precache-manifest.5ea7aab74a771aabe485d4789fe995d4.js",
     "service-worker.js": "/PickupGameFinder/service-worker.js",
     "static/css/2.5dbdccff.chunk.css.map": "/PickupGameFinder/static/css/2.5dbdccff.chunk.css.map",
-    "static/css/main.8d2930ea.chunk.css.map": "/PickupGameFinder/static/css/main.8d2930ea.chunk.css.map",
     "static/media/bball.svg": "/PickupGameFinder/static/media/bball.527662f6.svg",
     "static/media/kobe.jpg": "/PickupGameFinder/static/media/kobe.4b4fdbac.jpg"
   }
