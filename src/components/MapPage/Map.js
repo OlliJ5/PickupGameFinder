@@ -7,16 +7,18 @@ import Markers from './Markers/Markers'
 import MarkerInfo from './MarkerInfo/MarkerInfo'
 import Navigation from '../NavigationBar'
 import NewGameForm from './NewGameForm'
+import NewGameLocation from './Markers/NewGameLocation'
 import NoLocation from './NoLocation'
 import { toast } from 'react-toastify'
 import { addPlayer } from '../../reducers/gameReducer'
-import UserLocation from './Markers/UserLocation'
-
 
 const Map = (props) => {
   const [viewport, setViewport] = useState({})
   const [selected, setSelected] = useState(null)
   const [prevSelected, setPrevSelected] = useState(null)
+  const [latestClick, setLatestClick] = useState({ lat: 0, lng: 0 })
+  const [formVisible, setFormVisible] = useState(false)
+  const [newGameLocation, setNewGameLocation] = useState({ lat: 0, lng: 0 })
 
   useEffect(() => {
     //after user location is fetched, we initialize the map
@@ -82,9 +84,10 @@ const Map = (props) => {
     })
   }
 
-  // const mapClick = (click) => {
-  //   console.log('mappi', click.lngLat)
-  // }
+  const mapClick = (click) => {
+    //console.log('mappi', click.lngLat)
+    setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
+  }
 
   if (props.location === null) {
     return (
@@ -93,32 +96,42 @@ const Map = (props) => {
   }
 
   return (
-    <ReactMapGL
-      maxZoom={15}
-      ref={mapRef}
-      {...viewport}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      mapStyle='mapbox://styles/ogrousu/ck6g74as70kw51io8h0ceo6h3'
-      onViewportChange={viewport => {
-        setViewport(viewport)
-      }}
-    //onClick={mapClick}
-    >
-      <Navigation />
-      <UserLocation location={props.location} />
-      <Markers clusters={clusters} zoom={zoom} />
-      <NewGameForm />
-      {selected && (
-        <MarkerInfo
-          selectedCluster={selected}
-          prevSelected={prevSelected}
-          setSelected={setSelected}
-          setPrevSelected={setPrevSelected}
-          joinGame={joinGame}
-          supercluster={supercluster}
-        />
-      )}
-    </ReactMapGL>
+    <div>
+      <NewGameForm
+        latestClick={latestClick}
+        formVisible={formVisible}
+        setFormVisible={setFormVisible}
+        newGameLocation={newGameLocation}
+        setNewGameLocation={setNewGameLocation}
+      />
+      <ReactMapGL
+        maxZoom={15}
+        ref={mapRef}
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle='mapbox://styles/ogrousu/ck6g74as70kw51io8h0ceo6h3'
+        onViewportChange={viewport => {
+          setViewport(viewport)
+        }}
+        onClick={mapClick}
+      >
+        <Navigation />
+        {formVisible && (
+          <NewGameLocation location={newGameLocation} />
+        )}
+        <Markers clusters={clusters} zoom={zoom} />
+        {selected && (
+          <MarkerInfo
+            selectedCluster={selected}
+            prevSelected={prevSelected}
+            setSelected={setSelected}
+            setPrevSelected={setPrevSelected}
+            joinGame={joinGame}
+            supercluster={supercluster}
+          />
+        )}
+      </ReactMapGL>
+    </div>
   )
 }
 

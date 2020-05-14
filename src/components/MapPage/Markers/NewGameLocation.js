@@ -3,7 +3,7 @@ import { Marker } from 'react-map-gl'
 import { Icon } from 'semantic-ui-react'
 
 
-const UserLocation = ({ location }) => (
+const NewGameLocation = ({ location }) => (
   <Marker
     latitude={location.lat}
     longitude={location.lng}
@@ -16,4 +16,4 @@ const UserLocation = ({ location }) => (
   </Marker>
 )
 
-export default UserLocation
+export default NewGameLocation

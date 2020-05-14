@@ -47,7 +47,7 @@ describe('Pick-up game finder', function () {
       cy.get('#participants').type(2)
       cy.get('#gamecreation-button').click()
 
-      cy.contains('Successfully created a game for 2 people in your location')
+      cy.contains('Created a game for 2 players!')
     })
 
     it('User can logout', function () {
