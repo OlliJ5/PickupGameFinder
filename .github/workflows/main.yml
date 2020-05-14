@@ -45,7 +45,7 @@ jobs:
         run: npm ci
 
       - name: ESLint
-        run: npm run eslint
+        run: npm run lint
 
   job3:
     name: Deploy to GH-pages
