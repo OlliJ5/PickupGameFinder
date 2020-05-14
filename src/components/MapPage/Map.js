@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import playerService from '../services/players'
+import playerService from '../../services/players'
 import ReactMapGL, { FlyToInterpolator } from 'react-map-gl'
 import useSupercluster from 'use-supercluster'
-import Markers from './Markers'
-import MarkerInfo from './MarkerInfo'
-import Navigation from './Navigation'
-import NewGameForm from './forms/NewGameForm'
+import Markers from './Markers/Markers'
+import MarkerInfo from './MarkerInfo/MarkerInfo'
+import Navigation from '../NavigationBar'
+import NewGameForm from './NewGameForm'
 import NoLocation from './NoLocation'
 import { toast } from 'react-toastify'
-import { addPlayer } from '../reducers/gameReducer'
-import UserLocation from './UserLocation'
+import { addPlayer } from '../../reducers/gameReducer'
+import UserLocation from './Markers/UserLocation'
 
 
 const Map = (props) => {

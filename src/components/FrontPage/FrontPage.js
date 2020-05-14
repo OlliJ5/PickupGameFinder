@@ -1,8 +1,8 @@
 import React from 'react'
 import { Grid, Header } from 'semantic-ui-react'
-import NewAccountForm from './forms/NewAccountForm'
-import LoginForm from './forms/LoginForm'
-import kobe from '../kobe.jpg'
+import NewAccountForm from './NewAccountForm'
+import LoginForm from './LoginForm'
+import kobe from '../../resources/kobe.jpg'
 
 const FrontPage = () => {
   return (
@@ -31,9 +31,5 @@ const FrontPage = () => {
     </Grid>
   )
 }
-
-
-
-
 
 export default FrontPage
