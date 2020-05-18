@@ -92,6 +92,13 @@ const Map = (props) => {
     }
   }
 
+  const getCursorStyle = ({ isDragging }) => {
+    if (radioValue === 'select') {
+      return 'crosshair'
+    }
+    return isDragging ? 'grabbing' : 'grab'
+  }
+
   if (props.location === null) {
     return (
       <NoLocation />
@@ -111,6 +118,7 @@ const Map = (props) => {
         setRadioValue={setRadioValue}
       />
       <ReactMapGL
+        getCursor={getCursorStyle}
         maxZoom={15}
         ref={mapRef}
         {...viewport}
