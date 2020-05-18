@@ -9,8 +9,9 @@ const NewGameForm = (props) => {
   const [desc, setDesc] = useState('')
   const [maxParticipants, setmaxParticipants] = useState('')
   const [notification, setNotification] = useState('')
-  const [radioValue, setRadioValue] = useState('curr')
 
+  const radioValue = props.radioValue
+  const setRadioValue = props.setRadioValue
   const location = props.location
   const latestClick = props.latestClick
   const setNewGameLocation = props.setNewGameLocation
@@ -41,6 +42,8 @@ const NewGameForm = (props) => {
       setmaxParticipants(10)
       setNotification('')
       setRadioValue('curr')
+      props.setNewGameLocation({ lat: 0, lng: 0 })
+      props.setLatestClick({ lat: 0, lng: 0 })
       props.setFormVisible(false)
     }
   }

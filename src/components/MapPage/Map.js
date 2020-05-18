@@ -19,6 +19,7 @@ const Map = (props) => {
   const [latestClick, setLatestClick] = useState({ lat: 0, lng: 0 })
   const [formVisible, setFormVisible] = useState(false)
   const [newGameLocation, setNewGameLocation] = useState({ lat: 0, lng: 0 })
+  const [radioValue, setRadioValue] = useState('curr')
 
   useEffect(() => {
     //after user location is fetched, we initialize the map
@@ -86,7 +87,9 @@ const Map = (props) => {
 
   const mapClick = (click) => {
     //console.log('mappi', click.lngLat)
-    setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
+    if (radioValue === 'select') {
+      setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
+    }
   }
 
   if (props.location === null) {
@@ -99,10 +102,13 @@ const Map = (props) => {
     <div>
       <NewGameForm
         latestClick={latestClick}
+        setLatestClick={setLatestClick}
         formVisible={formVisible}
         setFormVisible={setFormVisible}
         newGameLocation={newGameLocation}
         setNewGameLocation={setNewGameLocation}
+        radioValue={radioValue}
+        setRadioValue={setRadioValue}
       />
       <ReactMapGL
         maxZoom={15}
