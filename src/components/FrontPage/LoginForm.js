@@ -45,8 +45,8 @@ const LoginForm = (props) => {
             className='ui fluid input'
           >
             <input
+              className='inputDark'
               id='login-username'
-              style={{ color: 'white', backgroundColor: '#243447' }}
               type='text'
               placeholder='Username'
               value={username}
@@ -61,8 +61,8 @@ const LoginForm = (props) => {
             className='ui fluid input'
           >
             <input
+              className='inputDark'
               id='login-password'
-              style={{ color: 'white', backgroundColor: '#243447' }}
               type='password'
               placeholder='Password'
               value={password}

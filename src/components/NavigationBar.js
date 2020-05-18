@@ -1,9 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Dropdown } from 'semantic-ui-react'
 import { logOut } from '../reducers/loginReducer'
+import { changeColor } from '../reducers/colorSchemeReducer'
 
 const Navigation = (props) => {
+
+  const toggleColor = () => {
+    const color = props.colorScheme === 'light' ? 'dark' : 'light'
+    props.changeColor(color)
+  }
+
   return (
     <Menu inverted style={{ marginBottom: '0' }}>
       <Menu.Item
@@ -11,15 +18,24 @@ const Navigation = (props) => {
       >
         Home
       </Menu.Item>
-      <Menu.Item
-        position='right'
-        name='settings'
-        onClick={() => props.logOut()}
-      >
-        Logout
-      </Menu.Item>
+      <Menu.Menu position='right'>
+        <Dropdown item text='ogrousu'>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={toggleColor}>
+              {props.colorScheme === 'light' ? 'Use Darkmode' : 'Use lightmode'}
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => props.logOut()}>Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Menu>
     </Menu>
   )
 }
 
-export default connect(null, { logOut })(Navigation)
+const mapStateToProps = (state) => {
+  return {
+    colorScheme: state.colorScheme
+  }
+}
+
+export default connect(mapStateToProps, { logOut, changeColor })(Navigation)

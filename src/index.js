@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import gameReducer from './reducers/gameReducer'
 import loginReducer from './reducers/loginReducer'
 import locationReducer from './reducers/locationReducer'
+import colorSchemeReducer from './reducers/colorSchemeReducer'
 
 // used colors:
 // darkes: #141d26
@@ -16,7 +17,8 @@ import locationReducer from './reducers/locationReducer'
 const reducer = combineReducers({
   games: gameReducer,
   user: loginReducer,
-  location: locationReducer
+  location: locationReducer,
+  colorScheme: colorSchemeReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

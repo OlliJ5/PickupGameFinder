@@ -5,9 +5,11 @@ import Map from './components/MapPage/Map'
 import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
+import { changeColor } from './reducers/colorSchemeReducer'
 import { Container } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import './App.css'
 
 toast.configure({
   autoClose: 3500,
@@ -18,6 +20,7 @@ const App = (props) => {
   const initGames = props.initializeGames
   const keepUserLogged = props.stayLoggedIn
   const setLocation = props.changeLocation
+  const changeColor = props.changeColor
 
   useEffect(() => {
     initGames()
@@ -34,6 +37,15 @@ const App = (props) => {
   useEffect(() => {
     setLocation()
   }, [setLocation])
+
+  useEffect(() => {
+    const colorScheme = window.localStorage.getItem('colorScheme')
+    if (colorScheme) {
+      changeColor(colorScheme)
+    } else {
+      changeColor('light')
+    }
+  }, [changeColor])
 
   if (props.user === null) {
     return (
@@ -55,4 +67,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { initializeGames, stayLoggedIn, changeLocation })(App)
+export default connect(mapStateToProps, { initializeGames, stayLoggedIn, changeLocation, changeColor })(App)

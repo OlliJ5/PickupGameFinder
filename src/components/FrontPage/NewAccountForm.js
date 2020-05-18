@@ -36,7 +36,7 @@ const NewAccountForm = (props) => {
   return (
     <Grid>
       <Grid.Column>
-        <Segment style={{ padding: '20px', backgroundColor: '#1c2836' }}>
+        <Segment className='segmentDark'>
           <Form onSubmit={createAccount}>
             <Header as='h2' inverted>
               Sign up
@@ -50,8 +50,8 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Username</label>
               <div className='ui fluid input'>
                 <input
+                  className='inputDark'
                   id='username'
-                  style={{ color: 'white', backgroundColor: '#243447' }}
                   type='text'
                   placeholder='Username (3-15 characters)'
                   value={newUsername}
@@ -63,8 +63,8 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Name</label>
               <div className='ui fluid input'>
                 <input
+                  className='inputDark'
                   id='name'
-                  style={{ color: 'white', backgroundColor: '#243447' }}
                   type='text'
                   placeholder='Name (2-30 characters)'
                   value={newName}
@@ -76,8 +76,8 @@ const NewAccountForm = (props) => {
               <label style={{ color: 'white' }}>Password</label>
               <div className='ui fluid input'>
                 <input
+                  className='inputDark'
                   id='password'
-                  style={{ color: 'white', backgroundColor: '#243447' }}
                   type='password'
                   placeholder='Password (min. 5 characters)'
                   value={newPassword}
