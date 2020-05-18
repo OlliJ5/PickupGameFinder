@@ -49,9 +49,11 @@ const App = (props) => {
 
   if (props.user === null) {
     return (
-      <Container>
-        <FrontPage />
-      </Container>
+      <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
+        <Container>
+          <FrontPage colorScheme={props.colorScheme} />
+        </Container>
+      </div>
     )
   }
   return (
@@ -63,7 +65,8 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    colorScheme: state.colorScheme
   }
 }
 

@@ -11,6 +11,10 @@ const NewAccountForm = (props) => {
   const [newPassword, setNewPassword] = useState('')
   const [notification, setNotification] = useState('')
 
+  const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
+  const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
+  const segmentClass = props.colorScheme === 'dark' ? 'segmentDark' : ''
+
   const createAccount = async (event) => {
     event.preventDefault()
     try {
@@ -36,9 +40,9 @@ const NewAccountForm = (props) => {
   return (
     <Grid>
       <Grid.Column>
-        <Segment className='segmentDark'>
+        <Segment className={segmentClass}>
           <Form onSubmit={createAccount}>
-            <Header as='h2' inverted>
+            <Header as='h2' style={{ color: textColor }}>
               Sign up
             </Header>
             {notification !== '' && (
@@ -47,10 +51,10 @@ const NewAccountForm = (props) => {
               </Message>
             )}
             <div className='field'>
-              <label style={{ color: 'white' }}>Username</label>
+              <label style={{ color: textColor }}>Username</label>
               <div className='ui fluid input'>
                 <input
-                  className='inputDark'
+                  className={inputClass}
                   id='username'
                   type='text'
                   placeholder='Username (3-15 characters)'
@@ -60,10 +64,10 @@ const NewAccountForm = (props) => {
               </div>
             </div>
             <div className='field'>
-              <label style={{ color: 'white' }}>Name</label>
+              <label style={{ color: textColor }}>Name</label>
               <div className='ui fluid input'>
                 <input
-                  className='inputDark'
+                  className={inputClass}
                   id='name'
                   type='text'
                   placeholder='Name (2-30 characters)'
@@ -73,10 +77,10 @@ const NewAccountForm = (props) => {
               </div>
             </div>
             <div className='field'>
-              <label style={{ color: 'white' }}>Password</label>
+              <label style={{ color: textColor }}>Password</label>
               <div className='ui fluid input'>
                 <input
-                  className='inputDark'
+                  className={inputClass}
                   id='password'
                   type='password'
                   placeholder='Password (min. 5 characters)'

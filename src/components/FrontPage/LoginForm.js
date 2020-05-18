@@ -10,6 +10,9 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState('')
   const [notification, setNotification] = useState('')
 
+  const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
+  const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
+
   const handleLogin = async (event) => {
     event.preventDefault()
     const exception = await props.login(username, password)
@@ -30,7 +33,7 @@ const LoginForm = (props) => {
     >
       <Header
         as='h2'
-        inverted
+        style={{ color: textColor }}
       >
         Login
       </Header>
@@ -45,7 +48,7 @@ const LoginForm = (props) => {
             className='ui fluid input'
           >
             <input
-              className='inputDark'
+              className={inputClass}
               id='login-username'
               type='text'
               placeholder='Username'
@@ -61,7 +64,7 @@ const LoginForm = (props) => {
             className='ui fluid input'
           >
             <input
-              className='inputDark'
+              className={inputClass}
               id='login-password'
               type='password'
               placeholder='Password'
