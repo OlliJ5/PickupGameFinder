@@ -21,6 +21,8 @@ const Map = (props) => {
   const [newGameLocation, setNewGameLocation] = useState({ lat: 0, lng: 0 })
   const [radioValue, setRadioValue] = useState('curr')
 
+  const mapStyle = props.colorScheme === 'dark' ? 'mapbox://styles/ogrousu/ck6g74as70kw51io8h0ceo6h3' : 'mapbox://styles/ogrousu/ckae1dzbv0fvc1ilbhpvgy23t'
+
   useEffect(() => {
     //after user location is fetched, we initialize the map
     setViewport({
@@ -86,7 +88,6 @@ const Map = (props) => {
   }
 
   const mapClick = (click) => {
-    //console.log('mappi', click.lngLat)
     if (radioValue === 'select') {
       setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
     }
@@ -123,7 +124,7 @@ const Map = (props) => {
         ref={mapRef}
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle='mapbox://styles/ogrousu/ck6g74as70kw51io8h0ceo6h3'
+        mapStyle={mapStyle}
         onViewportChange={viewport => {
           setViewport(viewport)
         }}
@@ -168,7 +169,8 @@ const mapStateToProps = (state) => {
 
   return {
     points,
-    location: state.location
+    location: state.location,
+    colorScheme: state.colorScheme
   }
 }
 

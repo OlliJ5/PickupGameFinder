@@ -10,6 +10,10 @@ const NewGameForm = (props) => {
   const [maxParticipants, setmaxParticipants] = useState('')
   const [notification, setNotification] = useState('')
 
+  const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
+  const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
+  const segmentClass = props.colorScheme === 'dark' ? 'segmentDarkest' : ''
+
   const radioValue = props.radioValue
   const setRadioValue = props.setRadioValue
   const location = props.location
@@ -62,18 +66,23 @@ const NewGameForm = (props) => {
 
   return (
     <div>
-      {/* <NewGameLocation location={selectedLocation}/> */}
       <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
         <Grid.Column>
-          <Segment style={{ padding: '20px', backgroundColor: '#141d26' }}>
-            <Button size='mini'
+          <Segment className={segmentClass}>
+            {/* <Button size='mini'
               onClick={() => props.setFormVisible(false)}
               style={{ border: '0', background: 'transparent', position: 'absolute', right: '0', top: '0' }}
             >
-              <Icon name='close' size='small' inverted />
-            </Button>
+          </Button> */}
+            <Icon
+              name='close'
+              size='large'
+              inverted={props.colorScheme === 'dark'}
+              style={{ position: 'absolute', right: '0', top: '1' }}
+              onClick={() => props.setFormVisible(false)}
+            />
             <Form onSubmit={createNewGame}>
-              <Header as='h2' inverted>
+              <Header as='h2' style={{ color: textColor }}>
                 Start a game!
               </Header>
               {notification !== '' && (
@@ -81,31 +90,29 @@ const NewGameForm = (props) => {
                   {notification}
                 </Message>
               )}
-              <Header as='h4' inverted>Location</Header>
+              <Header as='h4' style={{ color: textColor }}>Location</Header>
               <Form.Group inline>
                 <Form.Radio
-                  style={{ color: 'white' }}
                   value='select'
                   checked={radioValue === 'select'}
                   onChange={() => setRadioValue('select')}
                 />
-                <label style={{ color: 'white' }}>Select from map</label>
+                <label style={{ color: textColor }}>Select from map</label>
                 <Form.Radio
-                  style={{ color: 'white' }}
                   value='curr'
                   checked={radioValue === 'curr'}
                   onChange={() => setRadioValue('curr')}
                 />
-                <label style={{ color: 'white' }}>Use your location</label>
+                <label style={{ color: textColor }}>Use your location</label>
               </Form.Group>
-              <p style={{ color: 'white' }}>lat: {props.newGameLocation.lat.toFixed(4)}</p>
-              <p style={{ color: 'white' }}>long: {props.newGameLocation.lng.toFixed(4)}</p>
+              <p style={{ color: textColor }}>lat: {props.newGameLocation.lat.toFixed(4)}</p>
+              <p style={{ color: textColor }}>long: {props.newGameLocation.lng.toFixed(4)}</p>
               <div className='field'>
-                <Header as='h4' inverted>Duration</Header>
+                <Header as='h4' style={{ color: textColor }}>Duration</Header>
                 <div className='ui fluid input'>
                   <input
                     id='duration'
-                    style={{ color: 'white', backgroundColor: '#243447' }}
+                    className={inputClass}
                     type='number'
                     placeholder='Duration in mins (1-180)'
                     value={duration}
@@ -114,11 +121,11 @@ const NewGameForm = (props) => {
                 </div>
               </div>
               <div className='field'>
-                <Header as='h4' inverted>Description</Header>
+                <Header as='h4' style={{ color: textColor }}>Description</Header>
                 <div className='ui fluid input'>
                   <input
                     id='description'
-                    style={{ color: 'white', backgroundColor: '#243447' }}
+                    className={inputClass}
                     type='text'
                     placeholder='Description (5-140 chars)'
                     value={desc}
@@ -127,11 +134,11 @@ const NewGameForm = (props) => {
                 </div>
               </div>
               <div className='field'>
-                <Header as='h4' inverted>Maximum Players</Header>
+                <Header as='h4' style={{ color: textColor }}>Maximum Players</Header>
                 <div className='ui fluid input'>
                   <input
                     id='participants'
-                    style={{ color: 'white', backgroundColor: '#243447' }}
+                    className={inputClass}
                     type='number'
                     placeholder='Max amount of participants (1-30)'
                     value={maxParticipants}
@@ -153,7 +160,8 @@ const NewGameForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    location: state.location
+    location: state.location,
+    colorScheme: state.colorScheme
   }
 }
 

@@ -10,7 +10,7 @@ import locationReducer from './reducers/locationReducer'
 import colorSchemeReducer from './reducers/colorSchemeReducer'
 
 // used colors:
-// darkes: #141d26
+// darkest: #141d26
 // mid: #1c2836
 // lightest: #243447
 

@@ -11,20 +11,26 @@ const Navigation = (props) => {
     props.changeColor(color)
   }
 
+  const navBarColor = props.colorScheme === 'dark' ? '#141d26' : '#0E6EB8'
+
   return (
-    <Menu inverted style={{ marginBottom: '0' }}>
-      <Menu.Item
-        name='home'
-      >
+    <Menu style={{ backgroundColor: navBarColor }}>
+      <Menu.Item name='home' style={{ color: 'white' }}>
         Home
       </Menu.Item>
       <Menu.Menu position='right'>
-        <Dropdown item text='ogrousu'>
-          <Dropdown.Menu>
+        <Dropdown item style={{ color: 'white' }} text={props.user.username}>
+          <Dropdown.Menu style={{ backgroundColor: navBarColor }}>
             <Dropdown.Item onClick={toggleColor}>
-              {props.colorScheme === 'light' ? 'Use Darkmode' : 'Use lightmode'}
+              <p style={{ color: 'white' }}>
+                {props.colorScheme === 'light' ? 'Use Darkmode' : 'Use lightmode'}
+              </p>
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => props.logOut()}>Logout</Dropdown.Item>
+            <Dropdown.Item onClick={() => props.logOut()} style={{ color: 'white' }}>
+              <p style={{ color: 'white' }}>
+                Logout
+              </p>
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>
@@ -34,7 +40,8 @@ const Navigation = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    colorScheme: state.colorScheme
+    colorScheme: state.colorScheme,
+    user: state.user
   }
 }
 
