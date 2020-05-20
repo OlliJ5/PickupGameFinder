@@ -10,7 +10,6 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState('')
   const [notification, setNotification] = useState('')
 
-  const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
   const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
 
   const handleLogin = async (event) => {
@@ -33,7 +32,7 @@ const LoginForm = (props) => {
     >
       <Header
         as='h2'
-        style={{ color: textColor }}
+        style={{ color: props.textColor }}
       >
         Login
       </Header>

@@ -6,7 +6,6 @@ import { initializeGames } from './reducers/gameReducer'
 import { stayLoggedIn } from './reducers/loginReducer'
 import { changeLocation } from './reducers/locationReducer'
 import { changeColor } from './reducers/colorSchemeReducer'
-import { Container } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
@@ -50,9 +49,7 @@ const App = (props) => {
   if (props.user === null) {
     return (
       <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
-        <Container>
-          <FrontPage colorScheme={props.colorScheme} />
-        </Container>
+        <FrontPage colorScheme={props.colorScheme} />
       </div>
     )
   }
