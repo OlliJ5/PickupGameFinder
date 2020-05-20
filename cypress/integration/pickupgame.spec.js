@@ -14,7 +14,7 @@ describe('Pick-up game finder', function () {
 
   it('front page can be opened', function () {
     cy.contains('Pickupgame finder')
-    cy.contains('Find local pickupgames and start balling')
+    cy.contains('Find local pickupgames and start playing!')
   })
 
   it('user can log in', function () {
