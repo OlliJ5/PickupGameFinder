@@ -51,6 +51,7 @@ describe('Pick-up game finder', function () {
     })
 
     it('User can logout', function () {
+      cy.contains('ogrousu').click()
       cy.contains('Logout').click()
 
       cy.contains('Pickupgame finder')
