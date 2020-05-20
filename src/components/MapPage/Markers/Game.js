@@ -3,7 +3,6 @@ import { Marker } from 'react-map-gl'
 import bball from '../../../resources/bball.svg'
 
 const Game = ({ cluster, zoom }) => {
-  //console.log('gamessa', cluster)
   const game = cluster.properties
   return (
 

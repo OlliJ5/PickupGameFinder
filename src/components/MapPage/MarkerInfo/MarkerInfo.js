@@ -2,9 +2,7 @@ import React from 'react'
 import GameInfo from './GameInfo'
 import ClusterInfo from './ClusterInfo'
 
-const MarkerInfo = ({ selectedCluster, prevSelected, setSelected, setPrevSelected, joinGame, supercluster }) => {
-  //console.log('edellinen', prevSelected)
-  //console.log('nyt', selectedCluster)
+const MarkerInfo = ({ selectedCluster, prevSelected, setSelected, setPrevSelected, joinGame, supercluster, colorScheme }) => {
   if (selectedCluster.properties.cluster) {
     return (
       <ClusterInfo
@@ -12,6 +10,7 @@ const MarkerInfo = ({ selectedCluster, prevSelected, setSelected, setPrevSelecte
         supercluster={supercluster}
         setSelected={setSelected}
         setPrevSelected={setPrevSelected}
+        colorScheme={colorScheme}
       />
     )
   } else {
@@ -22,6 +21,7 @@ const MarkerInfo = ({ selectedCluster, prevSelected, setSelected, setPrevSelecte
         prevSelected={prevSelected}
         setPrevSelected={setPrevSelected}
         joinGame={joinGame}
+        colorScheme={colorScheme}
       />
     )
   }

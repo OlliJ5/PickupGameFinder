@@ -1,7 +1,17 @@
 import React from 'react'
 import { Modal, Icon, Header, List, Divider, Button } from 'semantic-ui-react'
 
-const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGame }) => {
+const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGame, colorScheme }) => {
+
+  const style = {
+    textColor: colorScheme === 'dark' ? 'white' : 'black',
+    backgroundColor: colorScheme === 'dark' ? '#141d26' : '',
+    inverted: colorScheme === 'dark'
+  }
+
+  const showPrevIcon = prevSelected !== null ? true : false
+  const date = gameInfo.endTime.slice(0, 10)
+  const time = gameInfo.endTime.slice(11, 16)
 
   const goBack = () => {
     setSelected(prevSelected)
@@ -12,35 +22,30 @@ const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGa
     setSelected(null)
   }
 
-  const showPrevIcon = prevSelected !== null ? true : false
-
-  //console.log('info', gameInfo)
-  const date = gameInfo.endTime.slice(0, 10)
-  const time = gameInfo.endTime.slice(11, 16)
   return (
     <Modal defaultOpen={true} onClose={close} closeOnDimmerClick={false} closeIcon>
-      <Modal.Header>
+      <Modal.Header style={{ backgroundColor: style.backgroundColor }}>
         {showPrevIcon && (
-          <Icon link name='arrow left' onClick={goBack} />
+          <Icon inverted={style.inverted} link name='arrow left' onClick={goBack} />
         )}
       </Modal.Header>
-      <Modal.Content>
+      <Modal.Content style={{ backgroundColor: style.backgroundColor }}>
         <Button floated='right' primary onClick={() => joinGame(gameInfo.id)}>
           Join
         </Button>
         <Modal.Description>
-          <Header>Game by {gameInfo.owner.username}</Header>
-          <p>{gameInfo.desc}</p>
-          <p>Participants: ({gameInfo.participants.length}/{gameInfo.maxParticipants})</p>
+          <Header style={{ color: style.textColor }}>Game by {gameInfo.owner.username}</Header>
+          <p style={{ color: style.textColor }}>{gameInfo.desc}</p>
+          <p style={{ color: style.textColor }}>Participants: ({gameInfo.participants.length}/{gameInfo.maxParticipants})</p>
           <List bulleted>
             {gameInfo.participants.map(participant =>
-              <List.Item key={participant.id}>
+              <List.Item key={participant.id} style={{ color: style.textColor }}>
                 {participant.username}
               </List.Item>
             )}
           </List>
           <Divider />
-          <p>Game ends at: {date} {time} GMT</p>
+          <p style={{ color: style.textColor }}>Game ends at: {date} {time} GMT</p>
         </Modal.Description>
       </Modal.Content>
     </Modal>

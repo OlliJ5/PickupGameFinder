@@ -143,6 +143,7 @@ const Map = (props) => {
             setPrevSelected={setPrevSelected}
             joinGame={joinGame}
             supercluster={supercluster}
+            colorScheme={props.colorScheme}
           />
         )}
       </ReactMapGL>
