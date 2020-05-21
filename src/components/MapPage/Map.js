@@ -11,6 +11,7 @@ import NewGameLocation from './Markers/NewGameLocation'
 import NoLocation from './NoLocation'
 import { toast } from 'react-toastify'
 import { addPlayer } from '../../reducers/gameReducer'
+import { Responsive, Grid, Button } from 'semantic-ui-react'
 
 const Map = (props) => {
   const [viewport, setViewport] = useState({})
@@ -88,13 +89,13 @@ const Map = (props) => {
   }
 
   const mapClick = (click) => {
-    if (radioValue === 'select') {
+    if (radioValue === 'select' && formVisible) {
       setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
     }
   }
 
   const getCursorStyle = ({ isDragging }) => {
-    if (radioValue === 'select') {
+    if (radioValue === 'select' && formVisible) {
       return 'crosshair'
     }
     return isDragging ? 'grabbing' : 'grab'
@@ -108,45 +109,69 @@ const Map = (props) => {
 
   return (
     <div>
-      <NewGameForm
-        latestClick={latestClick}
-        setLatestClick={setLatestClick}
-        formVisible={formVisible}
-        setFormVisible={setFormVisible}
-        newGameLocation={newGameLocation}
-        setNewGameLocation={setNewGameLocation}
-        radioValue={radioValue}
-        setRadioValue={setRadioValue}
-      />
-      <ReactMapGL
-        getCursor={getCursorStyle}
-        maxZoom={15}
-        ref={mapRef}
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle={mapStyle}
-        onViewportChange={viewport => {
-          setViewport(viewport)
-        }}
-        onClick={mapClick}
-      >
-        <Navigation />
+      <Responsive minWidth={768}>
+        {!formVisible && (
+          <Button
+            primary
+            style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
+            onClick={() => setFormVisible(true)}
+          >
+            New Game
+          </Button>
+        )}
         {formVisible && (
-          <NewGameLocation location={newGameLocation} />
+          <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
+            <Grid.Column>
+              <NewGameForm
+                latestClick={latestClick}
+                setLatestClick={setLatestClick}
+                setFormVisible={setFormVisible}
+                newGameLocation={newGameLocation}
+                setNewGameLocation={setNewGameLocation}
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+              />
+            </Grid.Column>
+          </Grid>
         )}
-        <Markers clusters={clusters} zoom={zoom} />
-        {selected && (
-          <MarkerInfo
-            selectedCluster={selected}
-            prevSelected={prevSelected}
-            setSelected={setSelected}
-            setPrevSelected={setPrevSelected}
-            joinGame={joinGame}
-            supercluster={supercluster}
-            colorScheme={props.colorScheme}
-          />
-        )}
-      </ReactMapGL>
+        <ReactMapGL
+          getCursor={getCursorStyle}
+          maxZoom={15}
+          ref={mapRef}
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          mapStyle={mapStyle}
+          onViewportChange={viewport => {
+            setViewport(viewport)
+          }}
+          onClick={mapClick}
+        >
+          <Navigation />
+          {formVisible && (
+            <NewGameLocation location={newGameLocation} />
+          )}
+          <Markers clusters={clusters} zoom={zoom} />
+          {selected && (
+            <MarkerInfo
+              selectedCluster={selected}
+              prevSelected={prevSelected}
+              setSelected={setSelected}
+              setPrevSelected={setPrevSelected}
+              joinGame={joinGame}
+              supercluster={supercluster}
+              colorScheme={props.colorScheme}
+            />
+          )}
+        </ReactMapGL>
+      </Responsive>
+      <Responsive maxWidth={767}>
+        {/*mappi segmentin sisään, jos formi auki? sillai et ruutu jakautuu puoliks. formin gridi turha??*/}
+        {/* {formVisible && (
+        <Segment>
+        </Segment>
+        )} */}
+        <h2>pieni näyttö</h2>
+      </Responsive>
     </div>
   )
 }

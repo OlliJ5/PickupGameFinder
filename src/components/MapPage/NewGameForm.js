@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createGame } from '../../reducers/gameReducer'
-import { Grid, Segment, Form, Header, Button, Message, Icon } from 'semantic-ui-react'
+import { Segment, Form, Header, Button, Message, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 
 const NewGameForm = (props) => {
@@ -52,108 +52,98 @@ const NewGameForm = (props) => {
     }
   }
 
-  if (!props.formVisible) {
-    return (
-      <Button
-        primary
-        style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
-        onClick={() => props.setFormVisible(true)}
-      >
-        New Game
-      </Button>
-    )
-  }
+  // if (!props.formVisible) {
+  //   return (
+  //     <Button
+  //       primary
+  //       style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
+  //       onClick={() => props.setFormVisible(true)}
+  //     >
+  //       New Game
+  //     </Button>
+  //   )
+  // }
 
   return (
     <div>
-      <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
-        <Grid.Column>
-          <Segment className={segmentClass}>
-            {/* <Button size='mini'
-              onClick={() => props.setFormVisible(false)}
-              style={{ border: '0', background: 'transparent', position: 'absolute', right: '0', top: '0' }}
-            >
-          </Button> */}
-            <Icon
-              name='close'
-              size='large'
-              inverted={props.colorScheme === 'dark'}
-              style={{ position: 'absolute', right: '0', top: '1' }}
-              onClick={() => props.setFormVisible(false)}
+      <Segment className={segmentClass}>
+        <Icon
+          name='close'
+          size='large'
+          inverted={props.colorScheme === 'dark'}
+          style={{ position: 'absolute', right: '0', top: '1' }}
+          onClick={() => props.setFormVisible(false)}
+        />
+        <Form onSubmit={createNewGame}>
+          <Header as='h2' style={{ color: textColor }}>
+            Start a game!
+          </Header>
+          {notification !== '' && (
+            <Message>
+              {notification}
+            </Message>
+          )}
+          <Header as='h4' style={{ color: textColor }}>Location</Header>
+          <Form.Group inline>
+            <Form.Radio
+              value='select'
+              checked={radioValue === 'select'}
+              onChange={() => setRadioValue('select')}
             />
-            <Form onSubmit={createNewGame}>
-              <Header as='h2' style={{ color: textColor }}>
-                Start a game!
-              </Header>
-              {notification !== '' && (
-                <Message>
-                  {notification}
-                </Message>
-              )}
-              <Header as='h4' style={{ color: textColor }}>Location</Header>
-              <Form.Group inline>
-                <Form.Radio
-                  value='select'
-                  checked={radioValue === 'select'}
-                  onChange={() => setRadioValue('select')}
-                />
-                <label style={{ color: textColor }}>Select from map</label>
-                <Form.Radio
-                  value='curr'
-                  checked={radioValue === 'curr'}
-                  onChange={() => setRadioValue('curr')}
-                />
-                <label style={{ color: textColor }}>Use your location</label>
-              </Form.Group>
-              <p style={{ color: textColor }}>lat: {props.newGameLocation.lat.toFixed(4)}</p>
-              <p style={{ color: textColor }}>long: {props.newGameLocation.lng.toFixed(4)}</p>
-              <div className='field'>
-                <Header as='h4' style={{ color: textColor }}>Duration</Header>
-                <div className='ui fluid input'>
-                  <input
-                    id='duration'
-                    className={inputClass}
-                    type='number'
-                    placeholder='Duration in mins (1-180)'
-                    value={duration}
-                    onChange={({ target }) => setDuration(target.value)}
-                  />
-                </div>
-              </div>
-              <div className='field'>
-                <Header as='h4' style={{ color: textColor }}>Description</Header>
-                <div className='ui fluid input'>
-                  <input
-                    id='description'
-                    className={inputClass}
-                    type='text'
-                    placeholder='Description (5-140 chars)'
-                    value={desc}
-                    onChange={({ target }) => setDesc(target.value)}
-                  />
-                </div>
-              </div>
-              <div className='field'>
-                <Header as='h4' style={{ color: textColor }}>Maximum Players</Header>
-                <div className='ui fluid input'>
-                  <input
-                    id='participants'
-                    className={inputClass}
-                    type='number'
-                    placeholder='Max amount of participants (1-30)'
-                    value={maxParticipants}
-                    onChange={({ target }) => setmaxParticipants(target.value)}
-                  />
-                </div>
-              </div>
-              <Button color='blue' fluid size='large' id='gamecreation-button'>
-                Create a game
-              </Button>
-            </Form>
-          </Segment>
-        </Grid.Column>
-      </Grid>
-
+            <label style={{ color: textColor }}>Select from map</label>
+            <Form.Radio
+              value='curr'
+              checked={radioValue === 'curr'}
+              onChange={() => setRadioValue('curr')}
+            />
+            <label style={{ color: textColor }}>Use your location</label>
+          </Form.Group>
+          <p style={{ color: textColor }}>lat: {props.newGameLocation.lat.toFixed(4)}</p>
+          <p style={{ color: textColor }}>long: {props.newGameLocation.lng.toFixed(4)}</p>
+          <div className='field'>
+            <Header as='h4' style={{ color: textColor }}>Duration</Header>
+            <div className='ui fluid input'>
+              <input
+                id='duration'
+                className={inputClass}
+                type='number'
+                placeholder='Duration in mins (1-180)'
+                value={duration}
+                onChange={({ target }) => setDuration(target.value)}
+              />
+            </div>
+          </div>
+          <div className='field'>
+            <Header as='h4' style={{ color: textColor }}>Description</Header>
+            <div className='ui fluid input'>
+              <input
+                id='description'
+                className={inputClass}
+                type='text'
+                placeholder='Description (5-140 chars)'
+                value={desc}
+                onChange={({ target }) => setDesc(target.value)}
+              />
+            </div>
+          </div>
+          <div className='field'>
+            <Header as='h4' style={{ color: textColor }}>Maximum Players</Header>
+            <div className='ui fluid input'>
+              <input
+                id='participants'
+                className={inputClass}
+                type='number'
+                placeholder='Max amount of participants (1-30)'
+                value={maxParticipants}
+                onChange={({ target }) => setmaxParticipants(target.value)}
+              />
+            </div>
+          </div>
+          <Button color='blue' fluid size='large' id='gamecreation-button'>
+            Create a game
+          </Button>
+        </Form>
+      </Segment>
     </div>
   )
 }
