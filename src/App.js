@@ -9,6 +9,7 @@ import { changeColor } from './reducers/colorSchemeReducer'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
+import Intro from './components/Intro'
 
 toast.configure({
   autoClose: 3500,
@@ -55,6 +56,7 @@ const App = (props) => {
   }
   return (
     <div>
+      <Intro />
       <Map />
     </div>
   )
