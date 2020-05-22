@@ -44,7 +44,7 @@ const Map = (props) => {
     points: props.points,
     zoom: viewport.zoom,
     bounds: mapBounds,
-    options: { radius: 100, maxZoom: 15 }
+    options: { radius: 30, maxZoom: 15 }
   })
 
   const joinGame = async (game) => {
@@ -71,7 +71,8 @@ const Map = (props) => {
   }
 
   const zoom = (cluster) => {
-    //if no id, we are zooming to a single game
+    //if no id, we are zooming fully to a single game, otherwise we are zooming
+    //until the cluster would break into multiple games or full zoom if they are too close to separate
     const zoomLevel = !cluster.id ? 15 : Math.min(supercluster.getClusterExpansionZoom(cluster.id), 15)
     const [longitude, latitude] = cluster.geometry.coordinates
     setSelected(cluster)
