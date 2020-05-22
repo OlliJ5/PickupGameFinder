@@ -90,6 +90,7 @@ const Map = (props) => {
   }
 
   const mapClick = (click) => {
+    console.log('klik')
     if (radioValue === 'select' && formVisible) {
       setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
     }
@@ -167,6 +168,13 @@ const Map = (props) => {
         </ReactMapGL>
       </Responsive>
 
+
+
+
+
+
+
+
       <Responsive maxWidth={767}>
         {!formVisible && (
           <Button
@@ -178,6 +186,23 @@ const Map = (props) => {
           </Button>
         )
         }
+
+        {formVisible && (
+          <div style={{ position: 'fixed', bottom: '0', width: '100%', maxHeight: '50vh', overflow: 'auto', zIndex: '9' }}>
+            <NewGameForm
+              latestClick={latestClick}
+              setLatestClick={setLatestClick}
+              setFormVisible={setFormVisible}
+              newGameLocation={newGameLocation}
+              setNewGameLocation={setNewGameLocation}
+              radioValue={radioValue}
+              setRadioValue={setRadioValue}
+              viewport={viewport}
+              setViewport={setViewport}
+            />
+          </div>
+        )}
+
         <ReactMapGL
           getCursor={getCursorStyle}
           maxZoom={15}
@@ -205,22 +230,6 @@ const Map = (props) => {
               supercluster={supercluster}
               colorScheme={props.colorScheme}
             />
-          )}
-          {formVisible && (
-            <div style={{ position: 'fixed', bottom: '0', width: '100%', maxHeight: '50vh', overflow: 'auto', zIndex: 9 }}>
-              <NewGameForm
-                latestClick={latestClick}
-                setLatestClick={setLatestClick}
-                setFormVisible={setFormVisible}
-                newGameLocation={newGameLocation}
-                setNewGameLocation={setNewGameLocation}
-                radioValue={radioValue}
-                setRadioValue={setRadioValue}
-                viewport={viewport}
-                setViewport={setViewport}
-              />
-
-            </div>
           )}
         </ReactMapGL>
       </Responsive>
