@@ -118,7 +118,8 @@ const Map = (props) => {
           >
             New Game
           </Button>
-        )}
+        )
+        }
         {formVisible && (
           <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
             <Grid.Column>
@@ -164,15 +165,65 @@ const Map = (props) => {
           )}
         </ReactMapGL>
       </Responsive>
+
       <Responsive maxWidth={767}>
-        {/*mappi segmentin sisään, jos formi auki? sillai et ruutu jakautuu puoliks. formin gridi turha??*/}
-        {/* {formVisible && (
-        <Segment>
-        </Segment>
-        )} */}
-        <h2>pieni näyttö</h2>
+        {!formVisible && (
+          <Button
+            primary
+            style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
+            onClick={() => { setFormVisible(true); setViewport({ ...viewport, height: '50vh' }) }}
+          >
+            New Game
+          </Button>
+        )
+        }
+        <ReactMapGL
+          getCursor={getCursorStyle}
+          maxZoom={15}
+          ref={mapRef}
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          mapStyle={mapStyle}
+          onViewportChange={viewport => {
+            setViewport(viewport)
+          }}
+          onClick={mapClick}
+        >
+          <Navigation />
+          {formVisible && (
+            <NewGameLocation location={newGameLocation} />
+          )}
+          <Markers clusters={clusters} zoom={zoom} />
+          {selected && (
+            <MarkerInfo
+              selectedCluster={selected}
+              prevSelected={prevSelected}
+              setSelected={setSelected}
+              setPrevSelected={setPrevSelected}
+              joinGame={joinGame}
+              supercluster={supercluster}
+              colorScheme={props.colorScheme}
+            />
+          )}
+          {formVisible && (
+            <div style={{ position: 'fixed', bottom: '0', width: '100%', maxHeight: '50vh', overflow: 'auto', zIndex: 9 }}>
+              <NewGameForm
+                latestClick={latestClick}
+                setLatestClick={setLatestClick}
+                setFormVisible={setFormVisible}
+                newGameLocation={newGameLocation}
+                setNewGameLocation={setNewGameLocation}
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                viewport={viewport}
+                setViewport={setViewport}
+              />
+
+            </div>
+          )}
+        </ReactMapGL>
       </Responsive>
-    </div>
+    </div >
   )
 }
 
