@@ -90,7 +90,6 @@ const Map = (props) => {
   }
 
   const mapClick = (click) => {
-    console.log('klik')
     if (radioValue === 'select' && formVisible) {
       setLatestClick({ lat: click.lngLat[1], lng: click.lngLat[0] })
     }
@@ -103,6 +102,15 @@ const Map = (props) => {
     return isDragging ? 'grabbing' : 'grab'
   }
 
+  const openForm = () => {
+    if (window.screen.width > 767) {
+      setFormVisible(true)
+    } else {
+      setFormVisible(true)
+      setViewport({ ...viewport, height: '50vh' })
+    }
+  }
+
   if (props.location === null) {
     return (
       <NoLocation />
@@ -111,20 +119,36 @@ const Map = (props) => {
 
   return (
     <div>
-      <Responsive minWidth={768}>
-        {!formVisible && (
-          <Button
-            primary
-            style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
-            onClick={() => setFormVisible(true)}
-          >
-            New Game
-          </Button>
-        )
-        }
-        {formVisible && (
-          <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
-            <Grid.Column>
+      {!formVisible && (
+        <Button
+          primary
+          style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
+          onClick={openForm}
+        >
+          New Game
+        </Button>
+      )
+      }
+      {formVisible && (
+        <div>
+          <Responsive minWidth={768}>
+            <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
+              <Grid.Column>
+                <NewGameForm
+                  latestClick={latestClick}
+                  setLatestClick={setLatestClick}
+                  setFormVisible={setFormVisible}
+                  newGameLocation={newGameLocation}
+                  setNewGameLocation={setNewGameLocation}
+                  radioValue={radioValue}
+                  setRadioValue={setRadioValue}
+                />
+              </Grid.Column>
+            </Grid>
+          </Responsive>
+
+          <Responsive maxWidth={767}>
+            <div style={{ position: 'fixed', bottom: '0', width: '100%', maxHeight: '50vh', overflow: 'auto', zIndex: '9' }}>
               <NewGameForm
                 latestClick={latestClick}
                 setLatestClick={setLatestClick}
@@ -133,106 +157,43 @@ const Map = (props) => {
                 setNewGameLocation={setNewGameLocation}
                 radioValue={radioValue}
                 setRadioValue={setRadioValue}
+                viewport={viewport}
+                setViewport={setViewport}
               />
-            </Grid.Column>
-          </Grid>
-        )}
-        <ReactMapGL
-          getCursor={getCursorStyle}
-          maxZoom={15}
-          ref={mapRef}
-          {...viewport}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle={mapStyle}
-          onViewportChange={viewport => {
-            setViewport(viewport)
-          }}
-          onClick={mapClick}
-        >
-          <Navigation />
-          {formVisible && (
-            <NewGameLocation location={newGameLocation} />
-          )}
-          <Markers clusters={clusters} zoom={zoom} />
-          {selected && (
-            <MarkerInfo
-              selectedCluster={selected}
-              prevSelected={prevSelected}
-              setSelected={setSelected}
-              setPrevSelected={setPrevSelected}
-              joinGame={joinGame}
-              supercluster={supercluster}
-              colorScheme={props.colorScheme}
-            />
-          )}
-        </ReactMapGL>
-      </Responsive>
+            </div>
+          </Responsive>
+        </div>
+      )}
 
-
-
-
-
-
-
-
-      <Responsive maxWidth={767}>
-        {!formVisible && (
-          <Button
-            primary
-            style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
-            onClick={() => { setFormVisible(true); setViewport({ ...viewport, height: '50vh' }) }}
-          >
-            New Game
-          </Button>
-        )
-        }
-
+      <ReactMapGL
+        getCursor={getCursorStyle}
+        maxZoom={15}
+        ref={mapRef}
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle={mapStyle}
+        onViewportChange={viewport => {
+          setViewport(viewport)
+        }}
+        onClick={mapClick}
+      >
+        <Navigation />
         {formVisible && (
-          <div style={{ position: 'fixed', bottom: '0', width: '100%', maxHeight: '50vh', overflow: 'auto', zIndex: '9' }}>
-            <NewGameForm
-              latestClick={latestClick}
-              setLatestClick={setLatestClick}
-              setFormVisible={setFormVisible}
-              newGameLocation={newGameLocation}
-              setNewGameLocation={setNewGameLocation}
-              radioValue={radioValue}
-              setRadioValue={setRadioValue}
-              viewport={viewport}
-              setViewport={setViewport}
-            />
-          </div>
+          <NewGameLocation location={newGameLocation} />
         )}
-
-        <ReactMapGL
-          getCursor={getCursorStyle}
-          maxZoom={15}
-          ref={mapRef}
-          {...viewport}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle={mapStyle}
-          onViewportChange={viewport => {
-            setViewport(viewport)
-          }}
-          onClick={mapClick}
-        >
-          <Navigation />
-          {formVisible && (
-            <NewGameLocation location={newGameLocation} />
-          )}
-          <Markers clusters={clusters} zoom={zoom} />
-          {selected && (
-            <MarkerInfo
-              selectedCluster={selected}
-              prevSelected={prevSelected}
-              setSelected={setSelected}
-              setPrevSelected={setPrevSelected}
-              joinGame={joinGame}
-              supercluster={supercluster}
-              colorScheme={props.colorScheme}
-            />
-          )}
-        </ReactMapGL>
-      </Responsive>
+        <Markers clusters={clusters} zoom={zoom} />
+        {selected && (
+          <MarkerInfo
+            selectedCluster={selected}
+            prevSelected={prevSelected}
+            setSelected={setSelected}
+            setPrevSelected={setPrevSelected}
+            joinGame={joinGame}
+            supercluster={supercluster}
+            colorScheme={props.colorScheme}
+          />
+        )}
+      </ReactMapGL>
     </div >
   )
 }
