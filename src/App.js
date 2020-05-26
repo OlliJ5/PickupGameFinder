@@ -55,7 +55,7 @@ const App = (props) => {
     )
   }
   return (
-    <div>
+    <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
       <Intro />
       <Map />
     </div>

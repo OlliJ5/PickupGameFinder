@@ -1,13 +1,12 @@
 import React from 'react'
 import { WithStore, Slider, Slide, ButtonNext } from 'pure-react-carousel'
-import { Image, Header, Icon } from 'semantic-ui-react'
+import { Image, Header, Icon, Button } from 'semantic-ui-react'
 import intro1 from '../resources/intro/creategames.png'
 import intro2 from '../resources/intro/createdgame.png'
 import intro3 from '../resources/intro/joingames.png'
 
 class CarouselLarge extends React.Component {
   render() {
-    console.log('step', this.props.step)
     return (
       <div>
         <Slider>
@@ -24,10 +23,20 @@ class CarouselLarge extends React.Component {
             <Image wrapped src={intro3} />
           </Slide>
         </Slider>
-        <div style={{ textAlign: 'center' }}>
-          <ButtonNext className='ui massive icon circular primary button'>
-            <Icon name='arrow right' />
-          </ButtonNext>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          {this.props.current < 2 && (
+            <ButtonNext className='ui massive icon circular basic inverted button'>
+              <Icon name='arrow right' />
+            </ButtonNext>
+          )}
+          {this.props.current === 2 && (
+            <Button
+              className='ui massive icon green basic circular inverted'
+              onClick={this.props.closeModal}
+            >
+              <Icon name='check' />
+            </Button>
+          )}
         </div>
       </div>
     )
@@ -35,5 +44,5 @@ class CarouselLarge extends React.Component {
 }
 
 export default WithStore(CarouselLarge, state => ({
-  step: state.step
+  current: state.currentSlide
 }))
