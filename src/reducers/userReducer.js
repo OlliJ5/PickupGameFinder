@@ -1,8 +1,9 @@
 import loginService from '../services/login'
 import gameService from '../services/games'
 import playerService from '../services/players'
+import userService from '../services/users'
 
-const loginReducer = (state = null, action) => {
+const userReducer = (state = null, action) => {
   switch (action.type) {
     case 'LOGIN':
       return action.user
@@ -10,6 +11,8 @@ const loginReducer = (state = null, action) => {
       return action.user
     case 'LOGOUT':
       return null
+    case 'DISABLE_INTRO':
+      return { ...state, showIntro: false }
     default:
       return state
   }
@@ -22,6 +25,7 @@ export const login = (username, password) => {
       window.localStorage.setItem('loggedInUser', JSON.stringify(user))
       gameService.setToken(user.token)
       playerService.setToken(user.token)
+      userService.setToken(user.token)
       dispatch({
         type: 'LOGIN',
         user
@@ -45,6 +49,7 @@ export const stayLoggedIn = (user) => {
   return async dispatch => {
     gameService.setToken(user.token)
     playerService.setToken(user.token)
+    userService.setToken(user.token)
     dispatch({
       type: 'STAY_LOGGED_IN',
       user
@@ -52,4 +57,18 @@ export const stayLoggedIn = (user) => {
   }
 }
 
-export default loginReducer
+export const disableIntro = (user) => {
+  return async dispatch => {
+    try {
+      const updatedUser = await userService.update({ ...user, showIntro: false })
+      window.localStorage.setItem('loggedInUser', JSON.stringify(updatedUser))
+      dispatch({
+        type: 'DISABLE_INTRO'
+      })
+    } catch (exception) {
+      return exception.response
+    }
+  }
+}
+
+export default userReducer

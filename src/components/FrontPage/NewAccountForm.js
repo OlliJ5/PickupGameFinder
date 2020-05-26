@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import userService from '../../services/users'
 import { connect } from 'react-redux'
-import { login } from '../../reducers/loginReducer'
+import { login } from '../../reducers/userReducer'
 import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 

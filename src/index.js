@@ -5,7 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import gameReducer from './reducers/gameReducer'
-import loginReducer from './reducers/loginReducer'
+import userReducer from './reducers/userReducer'
 import locationReducer from './reducers/locationReducer'
 import colorSchemeReducer from './reducers/colorSchemeReducer'
 
@@ -16,7 +16,7 @@ import colorSchemeReducer from './reducers/colorSchemeReducer'
 
 const reducer = combineReducers({
   games: gameReducer,
-  user: loginReducer,
+  user: userReducer,
   location: locationReducer,
   colorScheme: colorSchemeReducer
 })

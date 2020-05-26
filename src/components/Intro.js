@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
 import { CarouselProvider } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import CarouselLarge from './CarouselLarge'
+import { disableIntro } from '../reducers/userReducer'
 
-const Intro = () => {
+const Intro = ({ user, disableIntro }) => {
   const [open, setOpen] = useState(true)
+
+  const closeModal = async () => {
+    setOpen(false)
+    disableIntro(user)
+  }
 
   return (
     <Modal
@@ -19,10 +26,16 @@ const Intro = () => {
         naturalSlideHeight={0.6}
         totalSlides={3}
       >
-        <CarouselLarge closeModal={() => setOpen(false)} />
+        <CarouselLarge closeModal={closeModal} />
       </CarouselProvider>
     </Modal>
   )
 }
 
-export default Intro
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, { disableIntro })(Intro)

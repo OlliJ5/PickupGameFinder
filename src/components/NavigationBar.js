@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Menu, Dropdown } from 'semantic-ui-react'
-import { logOut } from '../reducers/loginReducer'
+import { logOut } from '../reducers/userReducer'
 import { changeColor } from '../reducers/colorSchemeReducer'
 
 const Navigation = (props) => {

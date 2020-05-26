@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FrontPage from './components/FrontPage/FrontPage'
 import Map from './components/MapPage/Map'
 import { initializeGames } from './reducers/gameReducer'
-import { stayLoggedIn } from './reducers/loginReducer'
+import { stayLoggedIn } from './reducers/userReducer'
 import { changeLocation } from './reducers/locationReducer'
 import { changeColor } from './reducers/colorSchemeReducer'
 import { toast } from 'react-toastify'
@@ -21,6 +21,8 @@ const App = (props) => {
   const keepUserLogged = props.stayLoggedIn
   const setLocation = props.changeLocation
   const changeColor = props.changeColor
+
+  console.log('useri', props.user)
 
   useEffect(() => {
     initGames()
@@ -56,8 +58,12 @@ const App = (props) => {
   }
   return (
     <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
-      <Intro />
-      <Map />
+      {props.user.showIntro && (
+        <Intro />
+      )}
+      {!props.user.showIntro && (
+        <Map />
+      )}
     </div>
   )
 }
