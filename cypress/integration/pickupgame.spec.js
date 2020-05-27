@@ -1,3 +1,5 @@
+import { fakeLocation } from '../support/commands'
+
 describe('Pick-up game finder', function () {
   beforeEach(function () {
     cy.request('POST', 'http://localhost:6969/api/testing/reset')
@@ -9,7 +11,7 @@ describe('Pick-up game finder', function () {
     }
     cy.request('POST', 'http://localhost:6969/api/users/', user)
 
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000', fakeLocation(48, 2))
   })
 
   it('front page can be opened', function () {
@@ -25,19 +27,26 @@ describe('Pick-up game finder', function () {
     cy.contains('Welcome ogrousu')
   })
 
-  it('A user can be created', function () {
+  it('A user can be created and intro is shown', function () {
     cy.get('#username').type('ollij')
     cy.get('#name').type('Olli Rousu')
     cy.get('#password').type('hypersalainen')
     cy.get('#accountCreation-button').click()
 
     cy.contains('Welcome ollij')
+
+    cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+    cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+    cy.get('.ui.massive.icon.green.basic.circular.inverted').click()
+
+    cy.contains('Home')
   })
 
 
   describe('When logged in', function () {
     beforeEach(function () {
       cy.login({ username: 'ogrousu', password: 'supersalainen' })
+      cy.watchIntro()
     })
 
     it('A new game can be created', function () {

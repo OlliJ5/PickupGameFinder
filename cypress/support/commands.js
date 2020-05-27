@@ -1,4 +1,4 @@
-function fakeLocation(latitude, longitude) {
+export function fakeLocation(latitude, longitude) {
   return {
     onBeforeLoad(win) {
       cy.stub(win.navigator.geolocation, 'getCurrentPosition', (cb, err) => {
@@ -26,4 +26,10 @@ Cypress.Commands.add('mockGeolocation', (latitude = 60.192059, longitude = 24.94
       return callback({ coords: { latitude, longitude } })
     })
   })
+})
+
+Cypress.Commands.add('watchIntro', () => {
+  cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+  cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+  cy.get('.ui.massive.icon.green.basic.circular.inverted').click()
 })
