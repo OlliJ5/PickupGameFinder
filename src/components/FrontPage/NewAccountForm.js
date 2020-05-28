@@ -1,39 +1,43 @@
-import React, { useState } from 'react'
+import React from 'react'
 import userService from '../../services/users'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/userReducer'
-import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react'
+import { Grid, Segment, Button, Header } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import { Formik, useField, Form } from 'formik'
+import * as yup from 'yup'
+
+const TextInput = ({ label, textColor, inputClass, ...props }) => {
+  const [field, meta] = useField(props)
+  return (
+    <div className='field'>
+      <label htmlFor={props.id || props.name} style={{ color: textColor }}>{label}</label>
+      <div className='fluid ui input'>
+        <input className={inputClass} {...field} {...props} />
+      </div>
+      {meta.touched && meta.error ? (
+        <div style={{ fontSize: '12px', color: 'red', marginTop: '0.25 rem' }}>{meta.error}</div>
+      ) : ''}
+    </div>
+  )
+}
 
 const NewAccountForm = (props) => {
-  const [newUsername, setNewUsername] = useState('')
-  const [newName, setNewName] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [notification, setNotification] = useState('')
-
   const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
   const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
   const segmentClass = props.colorScheme === 'dark' ? 'segmentDark' : ''
 
-  const createAccount = async (event) => {
-    event.preventDefault()
+  const createAccount = async (values, { setSubmitting }) => {
     try {
-      const newUser = {
-        username: newUsername,
-        name: newName,
-        password: newPassword
-      }
+      const newUser = { ...values }
       await userService.create(newUser)
-      setNewUsername('')
-      setNewName('')
-      setNewPassword('')
-      setNotification('')
       props.login(newUser.username, newUser.password)
       toast.info(`Welcome ${newUser.username}`, {
         position: toast.POSITION.TOP_CENTER
       })
+      setSubmitting(false)
     } catch (exception) {
-      setNotification(exception.response.data.error)
+      console.log('error occured', exception)
     }
   }
 
@@ -41,61 +45,72 @@ const NewAccountForm = (props) => {
     <Grid>
       <Grid.Column>
         <Segment className={segmentClass}>
-          <Form onSubmit={createAccount}>
-            <Header as='h2' style={{ color: textColor }}>
-              Sign up
-            </Header>
-            {notification !== '' && (
-              <Message>
-                {notification}
-              </Message>
-            )}
-            <div className='field'>
-              <label style={{ color: textColor }}>Username</label>
-              <div className='ui fluid input'>
-                <input
-                  className={inputClass}
-                  id='username'
-                  type='text'
+          <Header as='h2' style={{ color: textColor }}>
+            Sign up
+          </Header>
+          <Formik
+            initialValues={{ username: '', name: '', password: '' }}
+            validationSchema={
+              yup.object({
+                username: yup.string()
+                  .min(3, 'Must be at least 3 characters')
+                  .max(15, 'Must be less than 15 characters')
+                  .required(),
+                name: yup.string()
+                  .min(2, 'Must be at least 2 characters')
+                  .max(30, 'Must be less than 30 characters')
+                  .required(),
+                password: yup.string()
+                  .min(5, 'Must be at least 5 characters')
+                  .required()
+              })
+            }
+            onSubmit={createAccount}
+          >
+            {props => (
+              <Form className='ui form'>
+                {console.log('propsit', props.isSubmitting)}
+                <TextInput
+                  label='Username'
+                  name='username'
                   placeholder='Username (3-15 characters)'
-                  value={newUsername}
-                  onChange={({ target }) => setNewUsername(target.value)}
-                />
-              </div>
-            </div>
-            <div className='field'>
-              <label style={{ color: textColor }}>Name</label>
-              <div className='ui fluid input'>
-                <input
-                  className={inputClass}
-                  id='name'
                   type='text'
+                  inputClass={inputClass}
+                  textColor={textColor}
+                />
+                <TextInput
+                  label='Name'
+                  name='name'
                   placeholder='Name (2-30 characters)'
-                  value={newName}
-                  onChange={({ target }) => setNewName(target.value)}
+                  type='text'
+                  inputClass={inputClass}
+                  textColor={textColor}
                 />
-              </div>
-            </div>
-            <div className='field'>
-              <label style={{ color: textColor }}>Password</label>
-              <div className='ui fluid input'>
-                <input
-                  className={inputClass}
-                  id='password'
-                  type='password'
+                <TextInput
+                  label='Password'
+                  name='password'
                   placeholder='Password (min. 5 characters)'
-                  value={newPassword}
-                  onChange={({ target }) => setNewPassword(target.value)}
+                  type='password'
+                  inputClass={inputClass}
+                  textColor={textColor}
                 />
-              </div>
-            </div>
-            <Button color='blue' fluid size='large' id='accountCreation-button'>
-              Sign up
-            </Button>
-          </Form>
+                <Button
+                  type='submit'
+                  primary
+                  fluid
+                  loading={props.isSubmitting ? true : false}
+                  disabled={props.isSubmitting ? true : false}
+                  size='large'
+                  id='accountCreation-button'
+                >
+                  Sign up
+                </Button>
+              </Form>
+            )}
+          </Formik>
         </Segment>
       </Grid.Column>
-    </Grid>
+    </Grid >
   )
 }
 

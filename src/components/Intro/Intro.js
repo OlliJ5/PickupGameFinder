@@ -4,7 +4,7 @@ import { Modal } from 'semantic-ui-react'
 import { CarouselProvider } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import CarouselLarge from './CarouselLarge'
-import { disableIntro } from '../reducers/userReducer'
+import { disableIntro } from '../../reducers/userReducer'
 
 const Intro = ({ user, disableIntro }) => {
   const [open, setOpen] = useState(true)

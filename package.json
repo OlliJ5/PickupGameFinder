@@ -5,6 +5,7 @@
   "homepage": "https://OlliJ5.github.io/PickupGameFinder",
   "dependencies": {
     "axios": "^0.19.0",
+    "formik": "^2.1.4",
     "gh-pages": "^2.2.0",
     "pure-react-carousel": "^1.27.1",
     "react": "^16.9.0",
@@ -17,7 +18,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.1",
     "supercluster": "^7.0.0",
-    "use-supercluster": "^0.2.5"
+    "use-supercluster": "^0.2.5",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "predeploy": "npm run build",

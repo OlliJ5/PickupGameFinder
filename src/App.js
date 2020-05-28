@@ -9,7 +9,7 @@ import { changeColor } from './reducers/colorSchemeReducer'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
-import Intro from './components/Intro'
+import Intro from './components/Intro/Intro'
 
 toast.configure({
   autoClose: 3500,
@@ -21,8 +21,6 @@ const App = (props) => {
   const keepUserLogged = props.stayLoggedIn
   const setLocation = props.changeLocation
   const changeColor = props.changeColor
-
-  console.log('useri', props.user)
 
   useEffect(() => {
     initGames()

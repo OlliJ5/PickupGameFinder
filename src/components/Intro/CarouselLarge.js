@@ -1,10 +1,10 @@
 import React from 'react'
 import { WithStore, Slider, Slide, ButtonNext } from 'pure-react-carousel'
 import { Image, Icon, Button } from 'semantic-ui-react'
-import welcome from '../resources/intro/welcome.png'
-import findGames from '../resources/intro/findGames.png'
-import joinGame from '../resources/intro/joinGame.png'
-import createGame from '../resources/intro/createGame.png'
+import welcome from '../../resources/intro/welcome.png'
+import findGames from '../../resources/intro/findGames.png'
+import joinGame from '../../resources/intro/joinGame.png'
+import createGame from '../../resources/intro/createGame.png'
 
 class CarouselLarge extends React.Component {
   render() {
