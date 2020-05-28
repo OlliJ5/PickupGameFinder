@@ -31,5 +31,6 @@ Cypress.Commands.add('mockGeolocation', (latitude = 60.192059, longitude = 24.94
 Cypress.Commands.add('watchIntro', () => {
   cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
   cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+  cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
   cy.get('.ui.massive.icon.green.basic.circular.inverted').click()
 })

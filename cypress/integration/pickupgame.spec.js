@@ -37,6 +37,7 @@ describe('Pick-up game finder', function () {
 
     cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
     cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
+    cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
     cy.get('.ui.massive.icon.green.basic.circular.inverted').click()
 
     cy.contains('Home')

@@ -24,7 +24,7 @@ const Intro = ({ user, disableIntro }) => {
       <CarouselProvider
         naturalSlideWidth={1}
         naturalSlideHeight={0.6}
-        totalSlides={3}
+        totalSlides={4}
       >
         <CarouselLarge closeModal={closeModal} />
       </CarouselProvider>
