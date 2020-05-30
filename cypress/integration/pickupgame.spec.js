@@ -54,7 +54,7 @@ describe('Pick-up game finder', function () {
       cy.contains('New Game').click()
       cy.get('#duration').type(2)
       cy.get('#description').type('Come 1v1 me')
-      cy.get('#participants').type(2)
+      cy.get('#participants').clear().type(2)
       cy.get('#gamecreation-button').click()
 
       cy.contains('Created a game for 2 players!')

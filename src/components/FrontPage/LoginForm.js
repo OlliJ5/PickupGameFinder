@@ -44,6 +44,7 @@ const LoginForm = (props) => {
               type='text'
               inputClass={inputClass}
               textColor='white'
+              id='login-username'
             />
             <TextInput
               name='password'
@@ -51,6 +52,7 @@ const LoginForm = (props) => {
               type='password'
               inputClass={inputClass}
               textColor='white'
+              id='login-password'
             />
             <Button
               type='submit'

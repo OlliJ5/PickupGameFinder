@@ -64,6 +64,7 @@ const NewAccountForm = (props) => {
                   type='text'
                   inputClass={inputClass}
                   textColor={textColor}
+                  id='username'
                 />
                 <TextInput
                   label='Name'
@@ -72,6 +73,7 @@ const NewAccountForm = (props) => {
                   type='text'
                   inputClass={inputClass}
                   textColor={textColor}
+                  id='name'
                 />
                 <TextInput
                   label='Password'
@@ -80,6 +82,7 @@ const NewAccountForm = (props) => {
                   type='password'
                   inputClass={inputClass}
                   textColor={textColor}
+                  id='password'
                 />
                 <Button
                   type='submit'

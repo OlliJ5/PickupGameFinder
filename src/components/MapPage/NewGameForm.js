@@ -58,13 +58,13 @@ const NewGameForm = (props) => {
 
   return (
     <Segment className={segmentClass}>
-      <Icon
-        name='close'
-        size='large'
-        inverted={props.colorScheme === 'dark'}
-        style={{ position: 'absolute', right: '0', top: '1' }}
-        onClick={closeForm}
-      />
+      <div style={{ position: 'absolute', right: '10px', top: '10px', zIndex: '10' }} onClick={closeForm}>
+        <Icon
+          name='close'
+          size='large'
+          inverted={props.colorScheme === 'dark'}
+        />
+      </div>
       <Formik
         initialValues={{ duration: '', description: '', participants: 10 }}
         validationSchema={
@@ -116,6 +116,7 @@ const NewGameForm = (props) => {
               type='number'
               inputClass={inputClass}
               textColor={textColor}
+              id='duration'
             />
             <TextInput
               label='Description'
@@ -124,6 +125,7 @@ const NewGameForm = (props) => {
               type='text'
               inputClass={inputClass}
               textColor={textColor}
+              id='description'
             />
             <TextInput
               label='Maximum players'
@@ -132,6 +134,7 @@ const NewGameForm = (props) => {
               type='number'
               inputClass={inputClass}
               textColor={textColor}
+              id='participants'
             />
             <Button
               type='submit'
