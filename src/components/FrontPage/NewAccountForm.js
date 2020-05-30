@@ -42,11 +42,11 @@ const NewAccountForm = (props) => {
               yup.object({
                 username: yup.string()
                   .min(3, 'Must be at least 3 characters')
-                  .max(15, 'Must be less than 15 characters')
+                  .max(15, 'Must be 15 characters or less')
                   .required(),
                 name: yup.string()
                   .min(2, 'Must be at least 2 characters')
-                  .max(30, 'Must be less than 30 characters')
+                  .max(30, 'Must be 30 characters or less')
                   .required(),
                 password: yup.string()
                   .min(5, 'Must be at least 5 characters')
