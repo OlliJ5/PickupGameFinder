@@ -4,30 +4,16 @@ import { connect } from 'react-redux'
 import { login } from '../../reducers/userReducer'
 import { Grid, Segment, Button, Header } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
-import { Formik, useField, Form } from 'formik'
+import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-
-const TextInput = ({ label, textColor, inputClass, ...props }) => {
-  const [field, meta] = useField(props)
-  return (
-    <div className='field'>
-      <label htmlFor={props.id || props.name} style={{ color: textColor }}>{label}</label>
-      <div className='fluid ui input'>
-        <input className={inputClass} {...field} {...props} />
-      </div>
-      {meta.touched && meta.error ? (
-        <div style={{ fontSize: '12px', color: 'red', marginTop: '0.25 rem' }}>{meta.error}</div>
-      ) : ''}
-    </div>
-  )
-}
+import { TextInput } from '../FormField'
 
 const NewAccountForm = (props) => {
   const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
   const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
   const segmentClass = props.colorScheme === 'dark' ? 'segmentDark' : ''
 
-  const createAccount = async (values, { setSubmitting }) => {
+  const createAccount = async (values, { setSubmitting, setFieldError }) => {
     try {
       const newUser = { ...values }
       await userService.create(newUser)
@@ -37,7 +23,9 @@ const NewAccountForm = (props) => {
       })
       setSubmitting(false)
     } catch (exception) {
-      console.log('error occured', exception)
+      if (exception.response.data.error.includes('unique')) {
+        setFieldError('username', 'Username already taken')
+      }
     }
   }
 
@@ -69,7 +57,6 @@ const NewAccountForm = (props) => {
           >
             {props => (
               <Form className='ui form'>
-                {console.log('propsit', props.isSubmitting)}
                 <TextInput
                   label='Username'
                   name='username'
@@ -98,8 +85,8 @@ const NewAccountForm = (props) => {
                   type='submit'
                   primary
                   fluid
-                  loading={props.isSubmitting ? true : false}
-                  disabled={props.isSubmitting ? true : false}
+                  loading={props.isSubmitting}
+                  disabled={props.isSubmitting}
                   size='large'
                   id='accountCreation-button'
                 >

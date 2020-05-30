@@ -1,90 +1,74 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/userReducer'
-import { Button, Form, Message, Header } from 'semantic-ui-react'
+import { Button, Message, Header, Form as SemanticForm } from 'semantic-ui-react'
+import { Formik, Form } from 'formik'
 import { toast } from 'react-toastify'
+import { TextInput } from '../FormField'
 
 
 const LoginForm = (props) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [notification, setNotification] = useState('')
 
   const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
+  const textColor = props.textColor
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    const exception = await props.login(username, password)
-
+  const handleLogin = async (values) => {
+    const exception = await props.login(values.username, values.password)
     if (exception) {
-      setPassword('')
       setNotification(exception.data.error)
     } else {
-      toast.info(`Welcome ${username}`, {
+      toast.info(`Welcome ${values.username}`, {
         position: toast.POSITION.TOP_CENTER
       })
     }
   }
 
   return (
-    <Form
+    <Formik
+      initialValues={{ username: '', password: '' }}
       onSubmit={handleLogin}
     >
-      <Header
-        as='h2'
-        style={{ color: props.textColor }}
-      >
-        Login
-      </Header>
-      <Form.Group
-        inline
-        widths='equal'
-      >
-        <div
-          className='field'
-        >
-          <div
-            className='ui fluid input'
+      {props => (
+        <Form className='ui form'>
+          <Header
+            as='h2'
+            style={{ color: textColor }}
           >
-            <input
-              className={inputClass}
-              id='login-username'
-              type='text'
+            Login
+          </Header>
+          <SemanticForm.Group inline widths='equal'>
+            <TextInput
+              name='username'
               placeholder='Username'
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
+              type='text'
+              inputClass={inputClass}
+              textColor='white'
             />
-          </div>
-        </div>
-        <div
-          className='field'
-        >
-          <div
-            className='ui fluid input'
-          >
-            <input
-              className={inputClass}
-              id='login-password'
-              type='password'
+            <TextInput
+              name='password'
               placeholder='Password'
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
+              type='password'
+              inputClass={inputClass}
+              textColor='white'
             />
-          </div>
-        </div>
-        <Button
-          color='blue'
-          id='login-button'
-        >
-          Login
-        </Button>
-      </Form.Group>
-      {notification !== '' && (
-        <Message>
-          {notification}
-        </Message>
+            <Button
+              type='submit'
+              primary
+              loading={props.isSubmitting}
+              id='login-button'
+            >
+              Login
+            </Button>
+          </SemanticForm.Group>
+          {notification !== '' && (
+            <Message>
+              {notification}
+            </Message>
+          )}
+        </Form>
       )}
-    </Form>
+    </Formik>
   )
 }
 
