@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Icon, Header, List, Divider, Button } from 'semantic-ui-react'
 
 const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGame, colorScheme }) => {
+  const [modalOpen, setModalOpen] = useState(true)
 
   const style = {
     textColor: colorScheme === 'dark' ? 'white' : 'black',
@@ -18,12 +19,13 @@ const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGa
   }
 
   const close = () => {
+    setModalOpen(false)
     setPrevSelected(null)
     setSelected(null)
   }
 
   return (
-    <Modal defaultOpen={true} onClose={close} closeOnDimmerClick={false} closeIcon>
+    <Modal open={modalOpen} onClose={close}>
       <Modal.Header style={{ backgroundColor: style.backgroundColor }}>
         {showPrevIcon && (
           <Icon inverted={style.inverted} link name='arrow left' onClick={goBack} />

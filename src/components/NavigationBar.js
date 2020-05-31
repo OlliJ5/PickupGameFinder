@@ -14,7 +14,7 @@ const Navigation = (props) => {
   const navBarColor = props.colorScheme === 'dark' ? '#141d26' : '#0E6EB8'
 
   return (
-    <Menu style={{ backgroundColor: navBarColor }}>
+    <Menu borderless size='large' style={{ backgroundColor: navBarColor }}>
       <Menu.Item name='home' style={{ color: 'white' }}>
         Home
       </Menu.Item>

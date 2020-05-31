@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Card } from 'semantic-ui-react'
 
 const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected, colorScheme }) => {
+  const [modalOpen, setModalOpen] = useState(true)
   const games = supercluster.getLeaves(clusterInfo.id)
 
   const style = {
@@ -11,12 +12,13 @@ const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected, 
   }
 
   const close = () => {
+    setModalOpen(false)
     setPrevSelected(null)
     setSelected(null)
   }
 
   return (
-    <Modal defaultOpen={true} onClose={close} closeOnDimmerClick={false} closeIcon>
+    <Modal open={modalOpen} onClose={close}>
       <Modal.Header style={{ backgroundColor: style.backgroundColor, color: style.textColor }}>Games in this location</Modal.Header>
       <Modal.Content style={{ backgroundColor: style.backgroundColor }}>
         {games.map((game, i) =>
