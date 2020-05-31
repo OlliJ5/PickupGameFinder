@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 import Intro from './components/Intro/Intro'
+import Profile from './components/Profile/Profile'
 
 toast.configure({
   autoClose: 3500,
@@ -55,14 +56,15 @@ const App = (props) => {
     )
   }
   return (
-    <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
-      {props.user.showIntro && (
-        <Intro />
-      )}
-      {!props.user.showIntro && (
-        <Map />
-      )}
-    </div>
+    // <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
+    //   {props.user.showIntro && (
+    //     <Intro />
+    //   )}
+    //   {!props.user.showIntro && (
+    //     <Map />
+    //   )}
+    // </div>
+    <Profile />
   )
 }
 
