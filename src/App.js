@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import FrontPage from './components/FrontPage/FrontPage'
 import Map from './components/MapPage/Map'
 import { initializeGames } from './reducers/gameReducer'
@@ -56,15 +57,23 @@ const App = (props) => {
     )
   }
   return (
-    // <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
-    //   {props.user.showIntro && (
-    //     <Intro />
-    //   )}
-    //   {!props.user.showIntro && (
-    //     <Map />
-    //   )}
-    // </div>
-    <Profile />
+    <Router>
+      <Switch>
+        <Route path='/profile'>
+          <div>
+            <Profile />
+          </div>
+        </Route>
+        <Route path='/home'>
+          {props.user.showIntro && (
+            <Intro />
+          )}
+          {!props.user.showIntro && (
+            <Map />
+          )}
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Menu, Dropdown } from 'semantic-ui-react'
 import { logOut } from '../reducers/userReducer'
 import { changeColor } from '../reducers/colorSchemeReducer'
+import { Link } from 'react-router-dom'
 
 const Navigation = (props) => {
 
@@ -15,16 +16,17 @@ const Navigation = (props) => {
 
   return (
     <Menu borderless size='large' style={{ backgroundColor: navBarColor }}>
-      <Menu.Item name='home' style={{ color: 'white' }}>
-        Home
+      <Menu.Item>
+        <Link to='/home' style={{ color: 'white' }}>Home</Link>
       </Menu.Item>
       <Menu.Menu position='right'>
         <Dropdown item style={{ color: 'white' }} text={props.user.username}>
           <Dropdown.Menu style={{ backgroundColor: navBarColor }}>
-            <Dropdown.Item onClick={toggleColor}>
-              <p style={{ color: 'white' }}>
+            <Dropdown.Item>
+              {/* <p style={{ color: 'white' }}>
                 {props.colorScheme === 'light' ? 'Use Darkmode' : 'Use lightmode'}
-              </p>
+              </p> */}
+              <Link to='profile' style={{ color: 'white' }}>Profile</Link>
             </Dropdown.Item>
             <Dropdown.Item onClick={() => props.logOut()} style={{ color: 'white' }}>
               <p style={{ color: 'white' }}>

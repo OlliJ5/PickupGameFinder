@@ -1,41 +1,64 @@
-import React from 'react'
-import { Container, Image, Segment, Grid, Menu, Card, Header } from 'semantic-ui-react'
-import kobe from '../../resources/kobe.jpg'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { Container, Image, Segment, Grid, Menu, Card, Header, Button, Divider } from 'semantic-ui-react'
+import profilepic from '../../resources/placeholderprofilepic.png'
+import NavigationBar from '../NavigationBar'
 
-const Profile = () => {
+const Profile = ({ user }) => {
+  const [active, setActive] = useState('created')
 
-  console.log('kuva', kobe.height)
+  console.log('user', user)
   return (
-    <Container text style={{ marginTop: '5em' }}>
-      <Segment>
-        <Grid columns={3}>
-          <Grid.Row stretched>
-            <Grid.Column>
-              <Image src={kobe} size='small' />
-            </Grid.Column>
-            <Grid.Column>
-              <Header size='large' style={{ position: 'absolute', bottom: '0px' }}>
-                Ogrousu
-              </Header>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-        <Menu pointing secondary>
-          <Menu.Item name='Created games' />
-          <Menu.Item name='Game history' />
-          <Menu.Item position='right' name='Settings' />
-        </Menu>
-        <Card fluid>
-          <Card.Content>
-            <Card.Header>
-              peli
-            </Card.Header>
-          </Card.Content>
-        </Card>
-      </Segment>
+    <div>
+      <NavigationBar />
+      <Container text style={{ marginTop: '5em' }}>
+        <Segment>
+          <Grid columns={3}>
+            <Grid.Row>
+              <Grid.Column>
+                <Image src={profilepic} circular size='small' />
+              </Grid.Column>
+              <Grid.Column>
+                <Header size='large' style={{ position: 'absolute', bottom: '0px' }}>
+                  {user.username}
+                </Header>
+              </Grid.Column>
+              <Grid.Column textAlign='right'>
+                <Button icon='setting'/>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <Divider />
+          <Menu pointing secondary>
+            <Menu.Item
+              name='Created games'
+              active={active === 'created'}
+              onClick={() => setActive('created')}
+            />
+            <Menu.Item
+              name='Game history'
+              active={active === 'history'}
+              onClick={() => setActive('history')}
+            />
+          </Menu>
+          <Card fluid>
+            <Card.Content>
+              <Card.Header>
+                peli
+              </Card.Header>
+            </Card.Content>
+          </Card>
+        </Segment>
+      </Container>
 
-    </Container>
+    </div>
   )
 }
 
-export default Profile
+const mapStateToPorps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToPorps)(Profile)
