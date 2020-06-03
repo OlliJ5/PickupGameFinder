@@ -23,7 +23,13 @@ const create = async (game) => {
   return response.data
 }
 
+const getByUser = async(id) => {
+  const response = await axios.get(`${baseUrl}${apiUrl}/user/${id}`)
+  return response.data
+}
+
 export default {
   setToken,
-  create
+  create,
+  getByUser
 }

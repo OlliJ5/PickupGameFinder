@@ -27,8 +27,14 @@ const create = async (newGame) => {
   return response.data
 }
 
+const getByOwner = async (id) => {
+  const response = await axios.get(`${baseUrl}${apiUrl}/owner/${id}`)
+  return response.data
+}
+
 export default {
   getAllActive,
   create,
+  getByOwner,
   setToken
 }

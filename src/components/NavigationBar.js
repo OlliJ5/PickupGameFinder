@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 
 const Navigation = (props) => {
 
-  const toggleColor = () => {
-    const color = props.colorScheme === 'light' ? 'dark' : 'light'
-    props.changeColor(color)
-  }
+  // const toggleColor = () => {
+  //   const color = props.colorScheme === 'light' ? 'dark' : 'light'
+  //   props.changeColor(color)
+  // }
 
   const navBarColor = props.colorScheme === 'dark' ? '#141d26' : '#0E6EB8'
 
