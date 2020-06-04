@@ -6,7 +6,7 @@ import kobe from '../../resources/kobe.jpg'
 
 const FrontPage = ({ colorScheme }) => {
   const textColor = colorScheme === 'dark' ? 'white' : 'black'
-  const segmentClass = colorScheme === 'dark' ? 'segmentDark' : ''
+  const segmentClass = colorScheme === 'dark' ? 'segmentDarkest' : ''
 
   return (
     <div>

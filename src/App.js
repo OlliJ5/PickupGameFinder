@@ -23,6 +23,7 @@ const App = (props) => {
   const keepUserLogged = props.stayLoggedIn
   const setLocation = props.changeLocation
   const changeColor = props.changeColor
+  const colorScheme = props.colorScheme
 
   useEffect(() => {
     initGames()
@@ -49,9 +50,17 @@ const App = (props) => {
     }
   }, [changeColor])
 
+  useEffect(() => {
+    if (colorScheme === 'dark') {
+      document.body.classList.add('bodyDark')
+    } else if (colorScheme === 'light') {
+      document.body.classList.remove('bodyDark')
+    }
+  }, [colorScheme])
+
   if (props.user === null) {
     return (
-      <div className={props.colorScheme === 'dark' ? 'bodyDark' : 'bodyLight'}>
+      <div>
         <FrontPage colorScheme={props.colorScheme} />
       </div>
     )

@@ -7,8 +7,7 @@ const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected, 
 
   const style = {
     textColor: colorScheme === 'dark' ? 'white' : 'black',
-    backgroundColor: colorScheme === 'dark' ? '#141d26' : '',
-    cardColor: colorScheme === 'dark' ? '#1c2836' : ''
+    backgroundColor: colorScheme === 'dark' ? '#192430' : '',
   }
 
   const close = () => {
@@ -22,7 +21,7 @@ const ClusterInfo = ({ clusterInfo, supercluster, setSelected, setPrevSelected, 
       <Modal.Header style={{ backgroundColor: style.backgroundColor, color: style.textColor }}>Games in this location</Modal.Header>
       <Modal.Content style={{ backgroundColor: style.backgroundColor }}>
         {games.map((game, i) =>
-          <Card style={{ backgroundColor: style.cardColor }} fluid onClick={() => { setPrevSelected(clusterInfo); setSelected(game) }} key={game.properties.id}>
+          <Card style={{ backgroundColor: style.backgroundColor }} fluid onClick={() => { setPrevSelected(clusterInfo); setSelected(game) }} key={game.properties.id}>
             <Card.Content>
               <Card.Header style={{ color: style.textColor }}>
                 Game {i}

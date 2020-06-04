@@ -122,7 +122,7 @@ const Map = (props) => {
       {!formVisible && (
         <Button
           primary
-          style={{ position: 'absolute', top: '50px', right: '10px', zIndex: '9' }}
+          style={{ position: 'absolute', top: '70px', right: '10px', zIndex: '9' }}
           onClick={openForm}
         >
           New Game
@@ -132,7 +132,7 @@ const Map = (props) => {
       {formVisible && (
         <div>
           <Responsive minWidth={768}>
-            <Grid style={{ position: 'absolute', top: '0', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
+            <Grid style={{ position: 'absolute', top: '15px', right: '0', marginTop: '35px', marginRight: '10px', zIndex: '9' }}>
               <Grid.Column>
                 <NewGameForm
                   latestClick={latestClick}

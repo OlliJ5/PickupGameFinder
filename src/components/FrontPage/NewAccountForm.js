@@ -11,7 +11,7 @@ import { TextInput } from '../FormField'
 const NewAccountForm = (props) => {
   const textColor = props.colorScheme === 'dark' ? 'white' : 'black'
   const inputClass = props.colorScheme === 'dark' ? 'inputDark' : ''
-  const segmentClass = props.colorScheme === 'dark' ? 'segmentDark' : ''
+  const segmentClass = props.colorScheme === 'dark' ? 'segmentDarkest' : ''
 
   const createAccount = async (values, { setSubmitting, setFieldError }) => {
     try {

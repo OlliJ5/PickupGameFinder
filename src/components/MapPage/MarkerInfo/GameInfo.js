@@ -6,7 +6,7 @@ const GameInfo = ({ gameInfo, setSelected, prevSelected, setPrevSelected, joinGa
 
   const style = {
     textColor: colorScheme === 'dark' ? 'white' : 'black',
-    backgroundColor: colorScheme === 'dark' ? '#141d26' : '',
+    backgroundColor: colorScheme === 'dark' ? '#192430' : '',
     inverted: colorScheme === 'dark'
   }
 

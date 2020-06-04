@@ -10,8 +10,8 @@ import locationReducer from './reducers/locationReducer'
 import colorSchemeReducer from './reducers/colorSchemeReducer'
 
 // used colors:
-// darkest: #141d26
-// mid: #1c2836
+// darkest: #1c2836
+// mid: #192430
 // lightest: #243447
 
 const reducer = combineReducers({

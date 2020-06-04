@@ -13,6 +13,8 @@ const userReducer = (state = null, action) => {
       return null
     case 'DISABLE_INTRO':
       return { ...state, showIntro: false }
+    case '':
+      return action.updatedUser
     default:
       return state
   }
@@ -64,6 +66,25 @@ export const disableIntro = (user) => {
       window.localStorage.setItem('loggedInUser', JSON.stringify(updatedUser))
       dispatch({
         type: 'DISABLE_INTRO'
+      })
+    } catch (exception) {
+      return exception.response
+    }
+  }
+}
+
+export const updateUser = (userUpdatedInfo) => {
+  return async dispatch => {
+    try {
+      const updatedUser = await userService.update(userUpdatedInfo)
+      console.log('päivitetty', updatedUser)
+      window.localStorage.setItem('loggedInUser', JSON.stringify(updatedUser))
+      gameService.setToken(updatedUser.token)
+      playerService.setToken(updatedUser.token)
+      userService.setToken(updatedUser.token)
+      dispatch({
+        type: 'UPDATE_USER',
+        updatedUser
       })
     } catch (exception) {
       return exception.response
