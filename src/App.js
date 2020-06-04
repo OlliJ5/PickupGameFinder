@@ -73,7 +73,7 @@ const App = (props) => {
             <Profile />
           </div>
         </Route>
-        <Route path='/home'>
+        <Route path=''>
           {props.user.showIntro && (
             <Intro />
           )}
