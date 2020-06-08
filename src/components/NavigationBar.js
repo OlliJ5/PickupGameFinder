@@ -16,7 +16,7 @@ const Navigation = (props) => {
         <Dropdown item style={{ color: 'white' }} text={props.user.username}>
           <Dropdown.Menu style={{ backgroundColor: navBarColor }}>
             <Dropdown.Item>
-              <Link to='profile' style={{ color: 'white' }}>Profile</Link>
+              <Link to='/profile' style={{ color: 'white' }}>Profile</Link>
             </Dropdown.Item>
             <Dropdown.Item onClick={() => props.logOut()} style={{ color: 'white' }}>
               <p style={{ color: 'white' }}>

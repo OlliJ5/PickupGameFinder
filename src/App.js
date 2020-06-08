@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import FrontPage from './components/FrontPage/FrontPage'
 import Map from './components/MapPage/Map'
 import { initializeGames } from './reducers/gameReducer'
@@ -66,14 +66,14 @@ const App = (props) => {
     )
   }
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename='/'>
       <Switch>
-        <Route path={process.env.PUBLIC_URL + '/profile'}>
+        <Route path='/profile'>
           <div>
             <Profile />
           </div>
         </Route>
-        <Route path={process.env.PUBLIC_URL}>
+        <Route path='/'>
           {props.user.showIntro && (
             <Intro />
           )}
