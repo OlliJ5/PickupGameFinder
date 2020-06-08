@@ -60,26 +60,21 @@ const App = (props) => {
 
   if (props.user === null) {
     return (
-      <div>
-        <FrontPage colorScheme={props.colorScheme} />
-      </div>
+      <FrontPage colorScheme={props.colorScheme} />
+    )
+  } else if (props.user.showIntro) {
+    return (
+      <Intro />
     )
   }
   return (
     <Router basename='/'>
       <Switch>
         <Route path='/profile'>
-          <div>
-            <Profile />
-          </div>
+          <Profile />
         </Route>
         <Route path='/'>
-          {props.user.showIntro && (
-            <Intro />
-          )}
-          {!props.user.showIntro && (
-            <Map />
-          )}
+          <Map />
         </Route>
       </Switch>
     </Router>
