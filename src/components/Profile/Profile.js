@@ -53,6 +53,7 @@ const Profile = ({ user, colorScheme, changeColor }) => {
                   toggle
                   checked={colorScheme === 'dark'}
                   onChange={toggleColor}
+                  id='color-toggle'
                 />
               </Grid.Column>
             </Grid.Row>

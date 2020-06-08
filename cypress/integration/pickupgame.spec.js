@@ -60,11 +60,38 @@ describe('Pick-up game finder', function () {
       cy.contains('Created a game for 2 players!')
     })
 
+    it('User can view their profile and toggle to darkmode', function () {
+      cy.contains('ogrousu').click()
+      cy.contains('Profile').click()
+      cy.contains('Game History').click()
+      cy.contains('Created Games')
+      cy.get('#color-toggle').click({ force: true })
+      cy.get('body').should('have.class', 'bodyDark')
+      cy.contains('Home').click()
+    })
+
     it('User can logout', function () {
       cy.contains('ogrousu').click()
       cy.contains('Logout').click()
 
       cy.contains('Pickupgame finder')
     })
+
+    describe('And a game has been created', function () {
+      it('User can join a game', function () {
+        cy.addGame()
+        cy.login({ username: 'ogrousu', password: 'supersalainen' })
+        cy.visit('http://localhost:3000', fakeLocation(48, 2))
+
+        cy.get('#game').click()
+        cy.contains('Join').click()
+
+        cy.contains('Joined')
+      })
+
+
+    })
+
+
   })
 })

@@ -34,3 +34,38 @@ Cypress.Commands.add('watchIntro', () => {
   cy.get('.ui.massive.icon.circular.basic.inverted.button').click()
   cy.get('.ui.massive.icon.green.basic.circular.inverted').click()
 })
+
+Cypress.Commands.add('addGame', () => {
+  const user = {
+    username: 'WillSmith',
+    name: 'Will Smith',
+    password: 'siikret'
+  }
+
+  cy.request('POST', 'http://localhost:6969/api/users/', user)
+  cy.request('POST', 'http://localhost:6969/api/login', {
+    username: user.username, password: user.password
+  }).then(({ body }) => {
+    console.log('body', body)
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:6969/api/games',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${body.token}`
+      },
+      body: {
+        'durationMins': 3,
+        'location': {
+          'lat': 48,
+          'lng': 2
+        },
+        'desc': 'Chillin out maxin relaxin all cool and all shootin some b- ball outside of the school',
+        'maxParticipants': 3
+      }
+    }
+
+    )
+  })
+
+})
