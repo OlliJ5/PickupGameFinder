@@ -10,7 +10,7 @@ const Navigation = (props) => {
   return (
     <Menu borderless size='large' style={{ backgroundColor: navBarColor }}>
       <Menu.Item>
-        <Link to='/home' style={{ color: 'white' }}>Home</Link>
+        <Link to='/' style={{ color: 'white' }}>Home</Link>
       </Menu.Item>
       <Menu.Menu position='right'>
         <Dropdown item style={{ color: 'white' }} text={props.user.username}>

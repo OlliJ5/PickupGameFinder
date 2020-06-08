@@ -66,7 +66,7 @@ const App = (props) => {
     )
   }
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route path='/profile'>
           <div>
