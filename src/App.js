@@ -68,12 +68,12 @@ const App = (props) => {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
-        <Route path='/profile'>
+        <Route path={process.env.PUBLIC_URL + '/profile'}>
           <div>
             <Profile />
           </div>
         </Route>
-        <Route path=''>
+        <Route path={process.env.PUBLIC_URL}>
           {props.user.showIntro && (
             <Intro />
           )}
