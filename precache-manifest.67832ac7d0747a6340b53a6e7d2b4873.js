@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b6e15d3645027bcd1d75476b40d3dfb6",
+    "revision": "0c55c12d933b95a500ecc3485936bff7",
     "url": "/PickupGameFinder/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PickupGameFinder/static/css/2.53dadc43.chunk.css"
   },
   {
-    "revision": "8aa07ab840c371e61be2",
+    "revision": "af195858a6eb3c8b1f3a",
     "url": "/PickupGameFinder/static/css/main.54041fa0.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PickupGameFinder/static/js/2.f3e1118e.chunk.js"
   },
   {
-    "revision": "8aa07ab840c371e61be2",
-    "url": "/PickupGameFinder/static/js/main.f927f47b.chunk.js"
+    "revision": "af195858a6eb3c8b1f3a",
+    "url": "/PickupGameFinder/static/js/main.84cdae91.chunk.js"
   },
   {
     "revision": "aa86e759a70ea07656c3",
