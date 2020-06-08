@@ -65,9 +65,13 @@ describe('Pick-up game finder', function () {
       cy.contains('Profile').click()
       cy.contains('Game History').click()
       cy.contains('Created Games')
-      cy.get('#color-toggle').click({ force: true })
+      cy.get('.toggle').click()
       cy.get('body').should('have.class', 'bodyDark')
       cy.contains('Home').click()
+      cy.contains('ogrousu').click()
+      cy.contains('Profile').click()
+      cy.get('.toggle').click()
+      cy.get('body').should('not.have.class', 'bodyDark')
     })
 
     it('User can logout', function () {
